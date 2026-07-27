@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paradoxical Man Vol. 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #121110;
+    --bg-soft:   #1a1817;
+    --card:      #1d1b19;
+    --card-2:    #211f1c;
+    --line:      #2c2925;
+    --gold:      #C9A227;
+    --gold-soft: #e0c37e;
+    --maroon:    #B0413C;
+    --text:      #F4EFE4;
+    --muted:     #8f8a80;
+    --muted-2:   #6d685f;
+    --green:     #7fae6b;
+    --radius:    14px;
+    --shadow:    0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: radial-gradient(1200px 700px at 80% -10%, #1c1a17 0%, var(--bg) 55%);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .n780 { max-width: 780px; margin: 0 auto; }
+
+  section { padding: 26px 0; }
+
+  .announce {
+    background: rgba(201, 162, 39, .1);
+    border-bottom: 1px solid rgba(201, 162, 39, .2);
+    text-align: center;
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--gold-soft);
+    padding: 9px 18px;
+    line-height: 1.5;
+  }
+
+  b, strong { font-weight: 600; color: var(--gold-soft); }
+
+  /* ---------- Section heading ---------- */
+  .sec-head {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 1.35rem; font-weight: 700; letter-spacing: .02em;
+    margin-bottom: 30px;
+  }
+  .sec-head::before {
+    content: ""; width: 5px; height: 22px; border-radius: 3px;
+    background: linear-gradient(var(--gold), var(--gold-soft)); flex: 0 0 auto;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-primary {
+    display: block; width: 100%; max-width: 400px;
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110;
+    font-weight: 700; font-size: 1.02rem; text-align: center; text-decoration: none;
+    padding: 17px 28px; border-radius: 12px;
+    box-shadow: 0 0 45px rgba(201, 162, 39, .22);
+    transition: .18s;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 60px rgba(201, 162, 39, .32); }
+  .btn-secondary {
+    display: inline-block; margin-top: 14px;
+    color: var(--muted); font-size: .85rem; font-weight: 500; text-decoration: none;
+    padding: 9px 18px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--bg-soft); transition: .18s;
+  }
+  .btn-secondary:hover { color: var(--text); border-color: #3a3630; }
+  .micro { font-size: .8rem; color: var(--muted); margin-top: 14px; line-height: 1.6; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 40px 0 26px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; }
+  .cover-frame { position: relative; max-width: 330px; margin: 0 auto; }
+  .cover-frame::before {
+    content: ""; position: absolute; inset: 8%;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(176, 65, 60, .4), transparent 65%),
+      radial-gradient(circle at 75% 25%, rgba(201, 162, 39, .25), transparent 65%);
+    filter: blur(42px); z-index: 0;
+  }
+  .cover-frame img {
+    position: relative; z-index: 1; width: 100%; display: block;
+    border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow);
+  }
+  .hero h1 {
+    font-size: 2.1rem; font-weight: 900; line-height: 1.22;
+    letter-spacing: -.01em; margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero p { margin-bottom: 18px; color: #d8d3c8; font-size: .95rem; }
+  .hero .cta-block { margin-top: 30px; text-align: center; }
+  .hero .btn-primary { margin: 0 auto; }
+
+  /* ---------- Video overview ---------- */
+  .vid { padding: 0 0 26px; }
+  .video-embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    box-shadow: var(--shadow), 0 0 50px rgba(201, 162, 39, .08);
+    background: var(--card);
+  }
+  .video-embed iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .video-embed.facade { cursor: pointer; }
+  .video-embed.facade img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .play-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 74px; height: 74px; border-radius: 50%;
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    display: grid; place-items: center;
+    box-shadow: 0 0 45px rgba(201, 162, 39, .5);
+    transition: .18s;
+  }
+  .video-embed.facade:hover .play-btn { transform: translate(-50%, -50%) scale(1.08); }
+  .play-btn::after {
+    content: "";
+    border-left: 24px solid #121110;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    margin-left: 6px;
+  }
+
+  /* ---------- Testimonials ---------- */
+  .t-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .t-card {
+    background: linear-gradient(160deg, var(--card-2), var(--card));
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; position: relative; overflow: hidden; transition: .18s;
+  }
+  .t-card::after {
+    content: ""; position: absolute; top: -30px; right: -30px;
+    width: 100px; height: 100px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,162,39,.13), transparent 70%);
+  }
+  .t-card:hover { border-color: #3a3630; transform: translateY(-2px); }
+  .t-name { font-weight: 700; font-size: 1rem; color: var(--gold-soft); }
+  .t-role { color: var(--muted); font-size: .8rem; margin: 2px 0 10px; }
+  .t-chip {
+    display: inline-block; font-size: .68rem; font-weight: 500;
+    letter-spacing: .4px; text-transform: uppercase;
+    color: var(--gold-soft); background: rgba(201,162,39,.1);
+    border-radius: 6px; padding: 3px 9px; margin-bottom: 14px;
+  }
+  .t-text { font-size: .88rem; color: #d8d3c8; font-weight: 400; }
+  .t-text p + p { margin-top: 10px; }
+
+  /* ---------- Section 3: benefits ---------- */
+  .lead { color: #d8d3c8; margin-bottom: 18px; font-size: .95rem; }
+  .lead .caps { color: var(--gold); font-weight: 700; }
+  .benefit-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 40px; }
+  .benefit {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px; transition: .18s;
+  }
+  .benefit:hover { border-color: #3a3630; transform: translateY(-2px); }
+  .benefit h3 {
+    font-size: 1rem; font-weight: 600; line-height: 1.45; margin-bottom: 10px;
+    padding-left: 18px; position: relative;
+  }
+  .benefit h3::before {
+    content: "◆"; position: absolute; left: 0; top: 2px;
+    color: var(--gold); font-size: .65rem;
+  }
+  .benefit p { color: var(--muted); font-size: .88rem; }
+  .honest-block {
+    border: 1px solid rgba(176, 65, 60, .55); background: rgba(176, 65, 60, .07);
+    border-radius: var(--radius); padding: 26px; margin-top: 36px;
+    color: #d8d3c8; font-size: .92rem;
+  }
+  .honest-block b { color: var(--text); font-weight: 700; }
+
+  /* ---------- CTA blocks ---------- */
+  .cta-mid { text-align: center; }
+  .cta-mid .btn-primary, .final .btn-primary { margin-left: auto; margin-right: auto; }
+
+  /* ---------- Deliverables ---------- */
+  .get-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .get-card {
+    background: linear-gradient(160deg, var(--card-2), var(--card));
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; font-size: .9rem; font-weight: 500;
+    display: flex; align-items: center; gap: 13px; transition: .18s;
+  }
+  .get-card:hover { border-color: #3a3630; transform: translateY(-2px); }
+  .get-card .ico { color: var(--green); font-size: .7rem; }
+
+  /* ---------- Curriculum ---------- */
+  .module-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 34px; }
+  .module-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px;
+  }
+  .module-card h3 {
+    font-size: 1.12rem; font-weight: 700; color: var(--gold); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .module-card h3::before {
+    content: ""; width: 4px; height: 16px; border-radius: 2px; background: var(--gold);
+    flex: 0 0 auto;
+  }
+  .video { padding: 11px 0; border-bottom: 1px dashed var(--line); }
+  .video:last-child { border-bottom: none; padding-bottom: 0; }
+  .video:first-of-type { padding-top: 0; }
+  .v-title { font-weight: 600; font-size: .92rem; color: var(--text); }
+  .v-dur {
+    font-weight: 400; font-size: .74rem; color: var(--muted);
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 999px; padding: 1px 9px; margin-left: 7px;
+    white-space: nowrap; vertical-align: middle;
+  }
+  .v-desc { display: block; font-size: .82rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
+
+  /* ---------- Discord ---------- */
+  .panel {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .d-points { list-style: none; margin: 22px 0; }
+  .d-points li {
+    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
+    position: relative; font-size: .92rem; color: #d8d3c8;
+  }
+  .d-points li:last-child { border-bottom: none; }
+  .d-points li::before {
+    content: "◆"; position: absolute; left: 0; top: 13px;
+    color: var(--gold); font-size: .65rem;
+  }
+  .closer { color: var(--muted); font-size: .9rem; }
+
+  /* ---------- Why different ---------- */
+  .why p { margin-bottom: 18px; color: #d8d3c8; font-size: .95rem; }
+  .embodied {
+    font-size: 1.25rem; font-weight: 700; color: var(--gold);
+    margin: 30px 0; letter-spacing: .01em;
+  }
+  .why-list { list-style: none; margin-bottom: 26px; }
+  .why-list li {
+    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
+    position: relative; font-size: .92rem; color: #d8d3c8;
+  }
+  .why-list li:last-child { border-bottom: none; }
+  .why-list li::before {
+    content: "◆"; position: absolute; left: 0; top: 13px;
+    color: var(--gold); font-size: .65rem;
+  }
+
+  /* ---------- Not for you ---------- */
+  .notfor {
+    border: 1px solid rgba(176, 65, 60, .45); background: rgba(176, 65, 60, .05);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .notfor-list { list-style: none; margin-bottom: 22px; }
+  .notfor-list li {
+    padding: 10px 0 10px 22px; border-bottom: 1px dashed rgba(176, 65, 60, .25);
+    position: relative; font-size: .92rem; color: #d8d3c8;
+  }
+  .notfor-list li:last-child { border-bottom: none; }
+  .notfor-list li::before {
+    content: "◆"; position: absolute; left: 0; top: 13px;
+    color: var(--maroon); font-size: .65rem;
+  }
+  .notfor-closer { font-weight: 700; color: var(--text); }
+
+  /* ---------- FAQ ---------- */
+  .faq-item {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; transition: .18s;
+  }
+  .faq-item:hover { border-color: #3a3630; }
+  .faq-q { font-weight: 600; font-size: .95rem; margin-bottom: 8px; }
+  .faq-a { color: var(--muted); font-size: .88rem; font-weight: 400; }
+  .faq-a b { color: var(--gold-soft); font-weight: 600; }
+
+  /* ---------- Final ---------- */
+  .final { text-align: center; padding-bottom: 110px; }
+  .final h2 { font-size: 1.8rem; font-weight: 900; line-height: 1.25; margin-bottom: 26px; }
+  .final p { text-align: left; color: #d8d3c8; margin-bottom: 18px; font-size: .95rem; }
+  .final .choice-two { font-weight: 600; color: var(--gold-soft); }
+  .final .cta-block { margin-top: 36px; }
+
+  /* ---------- Desktop ---------- */
+  @media (min-width: 860px) {
+    body { font-size: 17px; }
+    section { padding: 38px 0; }
+    .hero { padding: 52px 0 38px; }
+    .hero-grid { grid-template-columns: 360px 1fr; gap: 64px; }
+    .hero-grid.no-cover { grid-template-columns: 1fr; }
+    .hero-grid.no-cover > div { max-width: 760px; margin: 0 auto; }
+    .cover-frame { max-width: none; margin: 0; }
+    .hero h1 { font-size: 2.7rem; }
+    .sec-head { font-size: 1.55rem; }
+    .t-grid { grid-template-columns: 1fr 1fr; }
+    .benefit-grid { grid-template-columns: 1fr 1fr; }
+    .get-grid { grid-template-columns: repeat(3, 1fr); }
+    .module-grid { grid-template-columns: 1fr 1fr; }
+    .module-grid .module-card:first-child { grid-column: 1 / -1; }
+    .final h2 { font-size: 2.3rem; }
+  }
+</style>
+</head>
+<body>
+<div class="announce">Rp299.000 itu harga launch, bukan harga permanen. Begitu materi dan member nambah, harga naik.</div>
+<div class="wrap">
+
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="hero-grid">
+      <div class="cover-frame">
+        <img src="cover.jpg" alt="Paradoxical Man Full E-Course" onerror="this.closest('.hero-grid').classList.add('no-cover'); this.parentElement.style.display='none'">
+      </div>
+      <div>
+        <h1>Cara jadi cowo yang <em>dikejar</em>, bukan yang ngejar.</h1>
+        <p>TAPI ini BUKAN cara gampang dan instan. Ini bukan "cara jadi alpha dalam 30 hari", bukan tips nge-rizz cewe. Kalo lu cari itu, ada jutaan konten di luar sana, dan menurut gw mayoritas isinya cetek. Izin.</p>
+        <p>Gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng.</p>
+        <p>Ini cara bangun tamannya: mulai dari tau lu lagi ada di titik mana dan apa yang sebenernya bikin lu stuck, sampe lu punya <b>arah hidup yang jelas</b>, <b>disiplin yang jalan otomatis</b>, dan <b>kedalaman emosi tanpa jadi lemah</b>. Dikejar banyak cewe? Itu efek samping yang susah dihindari kalo lu udah nyampe titik itu.</p>
+        <div class="cta-block">
+          <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp299.000</a>
+          <a class="btn-secondary" href="http://lynk.id/nychothesis/zkmqzr2k63kr/checkout">Gw ambil PDF gratisnya dulu</a>
+          <p class="micro">Ga ada pickup lines, ga ada tips ngerayu. Mulai dari nol? Modul 1 emang buat itu. 16 video + workbook + Discord khusus buyer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO OVERVIEW -->
+  <section class="vid">
+    <div class="n780">
+      <div class="video-embed facade" id="vid-facade" role="button" tabindex="0" aria-label="Putar video overview">
+        <img src="https://img.youtube.com/vi/kxZI9Iit_Yc/maxresdefault.jpg" alt="Overview Paradoxical Man Vol. 1">
+        <div class="play-btn"></div>
+      </div>
+      <script>
+        (function () {
+          var f = document.getElementById('vid-facade');
+          function play() {
+            f.classList.remove('facade');
+            f.innerHTML = '<iframe src="https://www.youtube.com/embed/kxZI9Iit_Yc?autoplay=1&rel=0" title="Overview Paradoxical Man Vol. 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+          }
+          f.addEventListener('click', play, { once: true });
+          f.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+          }, { once: true });
+        })();
+      </script>
+    </div>
+  </section>
+
+  <!-- 2. TESTIMONI -->
+  <section>
+    <h2 class="sec-head">Kata mereka yang udah masuk</h2>
+    <div class="t-grid">
+
+      <div class="t-card">
+        <div class="t-name">Marcella Ismanto, CHt</div>
+        <div class="t-role">Certified Hypnotherapist, @cellaish</div>
+        <span class="t-chip">160K followers on Instagram</span>
+        <div class="t-text">
+          <p>Wow! Aku yakin ini yang pertama di Indonesia, program yang mengupas bagaimana caranya menjadi laki-laki yang kuat, utuh, dan tentunya, paradoks. Maksudnya, bagaimana menjadi pria yang bisa build dan create big things di dunia, tapi di saat yang sama tetap punya koneksi intim sama dunia batinnya sendiri. Jujur, ini tipe pasangan idaman semua wanita yang sekarang tuh bener-bener langka. Program ini keren banget!</p>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-name">Edward Santoso</div>
+        <div class="t-role">Founder @the7percent.co</div>
+        <span class="t-chip">278K followers on Instagram</span>
+        <div class="t-text">
+          <p>Saya sudah baca lebih dari 200 buku. Sebagian dari porsi tersebut saya dedikasikan pada buku-buku yang membahas filosofi, maskulinitas dan stoisisme atau sikap hidup. Bagaimanapun, saya merasa course ini akan sangat menghemat waktu jikalau saya menemukannya lebih cepat. Selain penyampaiannya yang terstruktur dan jelas, materi juga didasarkan pada ilmu yang teruji.</p>
+          <p><b>Nicho, naikin harganya. Value is too damn high.</b></p>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-name">Christian Harjanto</div>
+        <div class="t-role">AI Business Partner</div>
+        <div class="t-text">
+          <p>GILA DAGING ABIZZ, awalnya gw kira cmn bahas cowo in general tapi disini dibahas sampe dalem banget. Jujur change my prespective a lot di tengah dunia yang penuh tipuan ini, jadi lebih sadar apa yang membuat kita di kontrol pdhl gw kira g ngaruh ternyata ngaruh banget dan apa yang bisa kita kontrol. G sampe situ, gw merasa terguided buat take real actionable step yang langsung bisa gw praktekin. Otw menuju paradoxical man!</p>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-name">Justin Vanes</div>
+        <div class="t-role">Faculty of Electrical Engineering</div>
+        <div class="t-text">
+          <p>Gw adalah tipe orang yang sangat suka untuk belajar dari buku self improvement, dan kebanyakan buku hanya mengajarkan pola pikirnya tanpa ada plan yang jelas. Menurut gw pribadi, kelebihan dari course ini bukan hanya menjelaskan konsep utama tetapi juga dalam course kita diberikan plan plan untuk menjalankan apa yang sudah diajarkan and that's what I need.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. ABIS 4 MODUL INI, APA YANG BEDA -->
+  <section>
+    <div class="n780">
+    <h2 class="sec-head">Abis 4 modul ini, apa yang beda</h2>
+      <p class="lead">Lu udah nonton ratusan konten soal ini. Lu nyimpen, lu catet, lu ngangguk-ngangguk. Terus tiga minggu lagi, hidup lu balik ke pola yang sama persis.</p>
+      <p class="lead">Itu namanya coli otak: yang nambah cuma informasi, bukan perilaku. Yang lu ga punya bukan pengetahuan, melainkan <span class="caps">SISTEM</span> yang tetep jalan pas lu ga mood, dan <span class="caps">KOMUNITAS</span> yang jadi accountability partner lu, orang-orang yang tau lu lagi ngerjain apa dan nanya pas lu ilang.</p>
+    </div>
+
+    <div class="benefit-grid">
+      <div class="benefit">
+        <h3>Sistem yang bikin lu disiplin tanpa ngandelin willpower.</h3>
+        <p>Willpower bisa abis. Sistem engga. Lu bakal ngerti, dari studi dan dari pengalaman gw sendiri, apa yang beneran ngebedain cowo yang nyampe ke goal-nya dari yang muter di tempat, dan kenapa itu bukan soal seberapa keras lu maksa diri sendiri.</p>
+      </div>
+      <div class="benefit">
+        <h3>Seni in-touch sama emosi lu tanpa jadi lemah.</h3>
+        <p>Cowo yang emosional sering dicap lemah, dan kalo ga ngerti cara handle-nya, emang bisa beneran jadi lemah. Makanya ini penting: gimana lu bisa empatik, dalem, lembut, DAN tetep kuat di saat yang sama, tanpa harus sok-sokan ga punya emosi. Kedengerannya kontradiksi, padahal ada cara, filosofi, dan akar fundamentalnya kenapa itu mungkin.</p>
+      </div>
+      <div class="benefit">
+        <h3>Berdamai sama luka lu, biar lu berhenti dikontrol sama dia.</h3>
+        <p>Banyak keputusan lu digerakin luka lama yang lu ga sadar ada. Pas itu beres, lu gerak bukan karena dendam atau pengen ngebuktiin sesuatu ke orang, melainkan karena visi yang lebih gede dari diri lu sendiri. Lu tau mau ke mana lima tahun lagi, dan lu jalan ke situ dengan tenang.</p>
+      </div>
+      <div class="benefit">
+        <h3>Cewe: efek samping, bukan tujuan.</h3>
+        <p>Gw ga bilang ngejar cewe itu salah. Ga ada yang salah dari itu. Tapi pas lu udah tau tujuan hidup lu yang lebih gede dan lu fokus ngerjain itu, yang kejadian beda: cewe jadi pengen ikut masuk ke journey lu. Bukan lu yang narik dia ke hidup lu, melainkan hidup lu yang jadi tempat yang orang pengen ada di dalemnya.</p>
+      </div>
+    </div>
+
+    <div class="honest-block">
+      <p><b>Yang gw GA janjiin:</b> lu bakal punya pacar dalam tiga bulan. Ga ada yang bisa janjiin itu dengan jujur, karena itu ngelibatin manusia lain yang punya kehendak sendiri. Siapapun yang berani janjiin itu ke lu, lagi jualan sesuatu yang dia sendiri ga pegang.</p>
+    </div>
+  </section>
+
+  <!-- 4. CTA TENGAH -->
+  <section class="cta-mid">
+    <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp299.000</a>
+    <p class="micro">Video course. Akses seumur hidup.</p>
+  </section>
+
+  <!-- 5. YANG LU DAPET -->
+  <section>
+    <h2 class="sec-head">Yang lu dapet</h2>
+    <div class="get-grid">
+      <div class="get-card"><span class="ico">◆</span> 16 video, 4 jam materi</div>
+      <div class="get-card"><span class="ico">◆</span> Breakdown mind map di tiap video</div>
+      <div class="get-card"><span class="ico">◆</span> 5 PDF: 3 workbook transformasi + 2 bonus</div>
+      <div class="get-card"><span class="ico">◆</span> Komunitas Discord khusus buyer</div>
+      <div class="get-card"><span class="ico">◆</span> Akses seumur hidup</div>
+    </div>
+  </section>
+
+  <!-- 6. ISINYA -->
+  <section>
+    <h2 class="sec-head">Isinya</h2>
+    <p class="lead">4 modul, urutannya sengaja. Lu ga bisa bangun visi hidup di atas <b>pondasi yang belum kelar</b>, dan lu ga bisa benerin pondasi kalo lu belum tau <b>apa yang rusak</b>.</p>
+
+    <div class="module-grid">
+      <div class="module-card">
+        <h3>Pendahuluan</h3>
+        <div class="video">
+          <span class="v-title">Coli Otak<span class="v-dur">09:49</span></span>
+          <span class="v-desc">Banyak belajar, tapi ga ada yang berubah.</span>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <h3>Modul 1: Diagnosis</h3>
+        <div class="video">
+          <span class="v-title">Modern Dating Crisis<span class="v-dur">20:50</span></span>
+          <span class="v-desc">Akar dari gender war yang ga ada yang akuin.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Jebakan Dopamin Digital<span class="v-dur">15:09</span></span>
+          <span class="v-desc">PMO, scrolling, games, dan apa yang terjadi ke otak lu.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Cowok Red Pill &amp; Blue Pill<span class="v-dur">16:13</span></span>
+          <span class="v-desc">Dua narasi maskulinitas populer, dua-duanya sesat.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">4 Jalan Hidup Cowok<span class="v-dur">09:40</span></span>
+          <span class="v-desc">Lu di jalur yang mana selama ini?</span>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <h3>Modul 2: Sistem &amp; Pondasi</h3>
+        <div class="video">
+          <span class="v-title">Cara Benerin Otak Lu<span class="v-dur">24:00</span></span>
+          <span class="v-desc">Reset otak yang udah terjebak dopamin digital.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Sistem Hidup Cowok Kokoh<span class="v-dur">16:31</span></span>
+          <span class="v-desc">5 pilar yang bikin konsistensi jadi otomatis, bukan karena willpower.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Halo Effect<span class="v-dur">17:07</span></span>
+          <span class="v-desc">Fisik dan aura sebagai bagian dari keutuhan lu.</span>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <h3>Modul 3: Inner Work</h3>
+        <div class="video">
+          <span class="v-title">Cowok dan Emosinya<span class="v-dur">18:33</span></span>
+          <span class="v-desc">Lu ga pernah diajarin cara ngadepin perasaan lu.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Shadow Work<span class="v-dur">21:03</span></span>
+          <span class="v-desc">Sisi gelap yang diam-diam ngendaliin hidup lu.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Sublimation<span class="v-dur">11:01</span></span>
+          <span class="v-desc">Luka, dendam, iri hati jadi transformasi.</span>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <h3>Modul 4: Visi &amp; Tujuan Hidup</h3>
+        <div class="video">
+          <span class="v-title">Visi Hidup &gt; Cewek<span class="v-dur">16:22</span></span>
+          <span class="v-desc">Cowok bervisi genuine adalah yang paling menarik.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Menemukan Misi<span class="v-dur">11:07</span></span>
+          <span class="v-desc">Lebih dalam dari sekadar "passion".</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Paradoxical Man Integration<span class="v-dur">21:45</span></span>
+          <span class="v-desc">Beast + Monk dalam 1 jiwa yang utuh.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Surat Penutup<span class="v-dur">02:26</span></span>
+          <span class="v-desc">Dari gw, untuk lu yang sampai sejauh ini.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DISCORD KHUSUS BUYER -->
+  <section>
+    <div class="n780">
+    <h2 class="sec-head">Discord khusus buyer</h2>
+    <div class="panel">
+      <p class="lead">Mayoritas orang yang beli course online <b>ga pernah kelar</b>. Kalo lu pernah, lu tau rasanya. Ruangan ini ada persis buat ngelawan angka itu.</p>
+      <ul class="d-points">
+        <li>Isinya cowo-cowo yang lagi ngejalanin proses yang sama, di titik yang beda-beda. Lu bisa nanya, posting progres, dan liat orang lain lagi mentok di mana.</li>
+        <li>Gampang bohongin diri sendiri. <b>Susah bohongin orang yang tau lu lagi ngerjain apa.</b></li>
+      </ul>
+      <p class="closer">Gw jujur: ini bukan layanan coaching, dan gw ga janjiin gw standby 24 jam. Ini ruangan. Yang bikin dia hidup atau mati itu orang-orang di dalemnya, termasuk lu.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- 8. KENAPA GW BEDA -->
+  <section class="why">
+    <div class="n780">
+    <h2 class="sec-head">Kenapa gw beda dari konten maskulinitas lain</h2>
+      <p>Framework ini bukan hasil ngerangkum textbook, dan bukan juga hasil ngarang sendiri.</p>
+      <p>Gw bedah studi lintas disiplin: <b>evolutionary psychology, antropologi, neuroscience, filsafat</b>. Gw kurasi mana yang solid, dan gw buang yang rontok pas diuji ulang, walaupun itu bikin konten gw kurang sexy. Terus gw satuin sama pengalaman hidup gw sendiri, yang tanpa sadar gw refine bertahun-tahun sebelum gw tau ada nama ilmiahnya.</p>
+      <p class="embodied">Embodied knowledge, not just theories.</p>
+      <p>Artinya buat lu:</p>
+      <ul class="why-list">
+        <li>Lu ga bakal dikasih klaim yang sumbernya ga bisa ditunjukin. Ada referensinya, dan gw pengen lu cek.</li>
+        <li>Lu ga bakal disuapin "fakta" populer yang udah rontok pas diuji ulang. Contohnya efek Dunning-Kruger, yang ternyata lebih ke artefak statistik daripada temuan solid. Konten sejenis masih pake itu. Gw engga.</li>
+        <li>Lu bakal tau mana yang data, mana yang lensa berpikir, mana yang opini gw. Yang belum settled, gw bilang belum settled.</li>
+        <li>Lu dapet konteks Indonesia. Bukan terjemahan mentah konten Barat.</li>
+      </ul>
+      <p class="closer">Gw ga jualan "kebenaran yang disembunyiin". Itu jualannya kubu sebelah. Gw kasih lu mekanismenya, sumbernya, dan batasnya. Sisanya lu yang mikir.</p>
+    </div>
+  </section>
+
+  <!-- 9. INI BUKAN BUAT LU KALO -->
+  <section>
+    <div class="n780">
+    <h2 class="sec-head">Ini bukan buat lu kalo:</h2>
+    <div class="notfor">
+      <ul class="notfor-list">
+        <li>Lu nyari cara cepet. Ini bukan itu, dan ga akan pernah jadi itu.</li>
+        <li>Lu mau nonton doang terus ngerasa cukup. Itu coli otak versi bayar, dan lu cuma buang 299 ribu.</li>
+        <li>Lu ga siap nulis jawaban jujur soal diri lu sendiri.</li>
+        <li>Lu mau ada yang mengkonfirmasi bahwa semua ini salah orang lain.</li>
+      </ul>
+      <p class="notfor-closer">Kalo empat-empatnya ga kena, lu udah siap.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ -->
+  <section>
+    <div class="n780">
+    <h2 class="sec-head">FAQ</h2>
+      <div class="faq-item">
+        <p class="faq-q">Gw kayaknya "fine-fine aja", bukan yang "broken" banget. Ini tetep relevan?</p>
+        <p class="faq-a">Justru ini buat lu. Yang berasa "fine-fine aja" itu sering kali kondisi yang psikolog sebut <b>languishing</b>: ga depresi, tapi juga ga thriving. Stuck secara diam-diam, tanpa krisis yang jelas buat maksa lu berubah. Lu bisa jalanin sepuluh tahun kayak gini dan ga ada satupun alarm yang bunyi.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Gw udah pernah beli course dan ga pernah kelar. Kenapa yang ini beda?</p>
+        <p class="faq-a">Jujur, ga ada jaminan. Tapi dua hal yang biasanya bikin orang ga kelar: ga ada yang tau dia berhenti, dan materinya ngajarin "apa" tanpa "gimana pas lagi ga mood". Dua-duanya yang gw urus, lewat <b>Discord</b> dan <b>Modul 2</b>. Sisanya di lu.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Gw belum baca ebook-nya. Bisa langsung ambil course?</p>
+        <p class="faq-a">Bisa. Modul Diagnosis udah mencakup pondasi yang lu butuhin.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Gw beneran mulai dari nol. Cocok ga?</p>
+        <p class="faq-a">Cocok. Modul 1 emang didesain buat itu. Yang bahaya justru yang berasa udah ngerti terus loncat ke modul akhir.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q">Formatnya apa?</p>
+        <p class="faq-a">Video course, plus 5 PDF workbook. Akses seumur hidup.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. CTA PENUTUP -->
+  <section class="final">
+    <div class="narrow">
+      <h2>Lu punya dua pilihan sekarang.</h2>
+      <p>Satu: lu tutup halaman ini, lu simpen niatnya, dan tiga minggu lagi lu balik ke pola yang sama. Bukan karena lu jahat sama diri lu sendiri, melainkan karena tanpa sistem, itu emang default-nya.</p>
+      <p class="choice-two">Dua: lu mulai bangun tamannya.</p>
+      <div class="cta-block">
+        <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp299.000</a>
+        <a class="btn-secondary" href="http://lynk.id/nychothesis/zkmqzr2k63kr/checkout">Gw ambil PDF gratisnya dulu</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
