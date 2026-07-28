@@ -101,7 +101,8 @@
   }
   .cover-frame img {
     position: relative; z-index: 1; width: 100%; display: block;
-    border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow);
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
   }
   .hero h1 {
     font-size: 2.1rem; font-weight: 900; line-height: 1.22;
@@ -151,6 +152,19 @@
     border-bottom: 14px solid transparent;
     margin-left: 6px;
   }
+
+  /* ---------- Pain checklist ---------- */
+  .pain-points { list-style: none; }
+  .pain-points li {
+    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
+    position: relative; font-size: .92rem; color: #d8d3c8;
+  }
+  .pain-points li:last-child { border-bottom: none; }
+  .pain-points li::before {
+    content: "◆"; position: absolute; left: 0; top: 13px;
+    color: var(--maroon); font-size: .65rem;
+  }
+  .pain-closer { color: var(--gold-soft); font-weight: 600; margin-top: 18px; font-size: .92rem; }
 
   /* ---------- Testimonials ---------- */
   .t-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
@@ -294,6 +308,18 @@
   }
   .v-desc { display: block; font-size: .82rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
 
+  /* ---------- Mind map strip ---------- */
+  .mm-strip { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 28px 0 6px; }
+  .mm-item {
+    position: relative; aspect-ratio: 3 / 2; overflow: hidden;
+    border-radius: 12px; border: 1px solid var(--line); background: var(--card);
+  }
+  .mm-item img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    transform: scale(1.32); display: block;
+  }
+  .mm-caption { font-size: .8rem; color: var(--muted); margin-bottom: 22px; }
+
   /* ---------- Discord ---------- */
   .panel {
     background: var(--card); border: 1px solid var(--line);
@@ -409,6 +435,7 @@
     .hero h1 { font-size: 2.7rem; }
     .sec-head { font-size: 1.55rem; }
     .t-grid { grid-template-columns: 1fr 1fr; }
+    .mm-strip { grid-template-columns: repeat(3, 1fr); }
     .benefit-grid { grid-template-columns: 1fr 1fr; }
     .get-grid { grid-template-columns: repeat(3, 1fr); }
     .module-grid { grid-template-columns: 1fr 1fr; }
@@ -425,7 +452,7 @@
   <section class="hero">
     <div class="hero-grid">
       <div class="cover-frame">
-        <img src="cover.jpg" alt="Paradoxical Man Full E-Course" onerror="this.closest('.hero-grid').classList.add('no-cover'); this.parentElement.style.display='none'">
+        <img src="assets/hero-silhouette.png" alt="Paradoxical Man" onerror="this.closest('.hero-grid').classList.add('no-cover'); this.parentElement.style.display='none'">
       </div>
       <div>
         <h1>Framework lengkap buat jadi cowo yang <em>dikejar</em>, bukan yang ngejar.</h1>
@@ -437,6 +464,23 @@
           <a class="btn-secondary" href="http://lynk.id/nychothesis/zkmqzr2k63kr/checkout">Gw ambil PDF gratisnya dulu</a>
           <p class="micro">Ga ada pickup lines, ga ada tips ngerayu. Mulai dari nol? Modul 1 emang buat itu. 16 video + workbook + Discord khusus member.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN CHECKLIST -->
+  <section>
+    <div class="n780">
+      <h2 class="sec-head">Relate ga?</h2>
+      <div class="panel">
+        <ul class="pain-points">
+          <li>Cewe yang lu suka jalan sama cowo lain, dan lu cuma bisa mikir "coba dulu gw berani".</li>
+          <li>Chat lu dibales seadanya, padahal lu mikirin balesannya setengah jam.</li>
+          <li>Lu selalu jadi "temen yang baik". Ga pernah jadi pilihan.</li>
+          <li>Makin banyak nonton konten dating, makin pinter teorinya, makin ga ngapa-ngapain.</li>
+          <li>Semangat berubah tiga hari, abis itu balik ke porn dan scrolling lagi.</li>
+        </ul>
+        <p class="pain-closer">Kalo minimal dua kena, halaman ini buat lu.</p>
       </div>
     </div>
   </section>
@@ -543,11 +587,11 @@
   <section class="cta-mid">
     <div class="n780">
       <div class="offer-box">
-        <div class="offer-row"><span>16 video + mind map breakdown, 4 jam materi</span><span class="val">Rp799.000</span></div>
-        <div class="offer-row"><span>3 workbook transformasi</span><span class="val">Rp299.000</span></div>
-        <div class="offer-row"><span>2 bonus PDF</span><span class="val">Rp149.000</span></div>
-        <div class="offer-row"><span>Komunitas Discord khusus member</span><span class="val">Rp249.000</span></div>
-        <div class="offer-price"><span class="strike">Rp1.496.000</span>Rp299.000</div>
+        <div class="offer-row"><span>16 video + mind map breakdown, 4 jam materi</span><span class="val">Rp1.799.000</span></div>
+        <div class="offer-row"><span>3 workbook transformasi</span><span class="val">Rp549.000</span></div>
+        <div class="offer-row"><span>2 bonus PDF</span><span class="val">Rp249.000</span></div>
+        <div class="offer-row"><span>Komunitas Discord khusus member</span><span class="val">Rp399.000</span></div>
+        <div class="offer-price"><span class="strike">Rp2.996.000</span>Rp299.000</div>
       </div>
       <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp299.000</a>
       <p class="micro">Video course. Akses seumur hidup.</p>
@@ -570,6 +614,13 @@
   <section>
     <h2 class="sec-head">Isinya</h2>
     <p class="lead">4 modul, urutannya sengaja. Lu ga bisa bangun visi hidup di atas <b>pondasi yang belum kelar</b>, dan lu ga bisa benerin pondasi kalo lu belum tau <b>apa yang rusak</b>.</p>
+
+    <div class="mm-strip">
+      <div class="mm-item"><img src="assets/mindmap-1.jpg" alt="Mind map Modern Dating Crisis" loading="lazy"></div>
+      <div class="mm-item"><img src="assets/mindmap-2.jpg" alt="Mind map Dopamine Trap" loading="lazy"></div>
+      <div class="mm-item"><img src="assets/mindmap-3.jpg" alt="Mind map 4 Archetypes" loading="lazy"></div>
+    </div>
+    <p class="mm-caption">Mind map asli dari dalem course. Tiap video dibedah kayak gini.</p>
 
     <div class="module-grid">
       <div class="module-card" data-num="00">
@@ -771,7 +822,7 @@
 </div>
 
 <div class="sticky-cta" id="sticky-cta">
-  <div class="sticky-price"><span class="old">Rp1.496.000</span><span class="now">Rp299.000</span></div>
+  <div class="sticky-price"><span class="old">Rp2.996.000</span><span class="now">Rp299.000</span></div>
   <a class="sticky-btn" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya</a>
 </div>
 <script>
