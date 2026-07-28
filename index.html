@@ -307,11 +307,21 @@
   /* ---------- FAQ ---------- */
   .faq-item {
     background: var(--card); border: 1px solid var(--line);
-    border-radius: 12px; padding: 22px 24px; margin-bottom: 14px; transition: .18s;
+    border-radius: 12px; margin-bottom: 14px; transition: .18s;
   }
   .faq-item:hover { border-color: #3a3630; }
-  .faq-q { font-weight: 600; font-size: .95rem; margin-bottom: 8px; }
-  .faq-a { color: var(--muted); font-size: .88rem; font-weight: 400; }
+  .faq-q {
+    font-weight: 600; font-size: .95rem; cursor: pointer;
+    list-style: none; padding: 18px 22px;
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after {
+    content: "+"; color: var(--gold); font-size: 1.3rem; font-weight: 400;
+    flex: 0 0 auto; line-height: 1; transition: .18s;
+  }
+  .faq-item[open] .faq-q::after { content: "\2212"; }
+  .faq-a { color: var(--muted); font-size: .88rem; font-weight: 400; padding: 0 22px 18px; }
   .faq-a b { color: var(--gold-soft); font-weight: 600; }
 
   /* ---------- Final ---------- */
@@ -638,26 +648,26 @@
   <section>
     <div class="n780">
     <h2 class="sec-head">FAQ</h2>
-      <div class="faq-item">
-        <p class="faq-q">Gw kayaknya "fine-fine aja", bukan yang "broken" banget. Ini tetep relevan?</p>
+      <details class="faq-item">
+        <summary class="faq-q">Gw kayaknya "fine-fine aja", bukan yang "broken" banget. Ini tetep relevan?</summary>
         <p class="faq-a">Justru ini buat lu. Yang berasa "fine-fine aja" itu sering kali kondisi yang psikolog sebut <b>languishing</b>: ga depresi, tapi juga ga thriving. Stuck secara diam-diam, tanpa krisis yang jelas buat maksa lu berubah. Lu bisa jalanin sepuluh tahun kayak gini dan ga ada satupun alarm yang bunyi.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Gw udah pernah beli course dan ga pernah kelar. Kenapa yang ini beda?</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Gw udah pernah beli course dan ga pernah kelar. Kenapa yang ini beda?</summary>
         <p class="faq-a">Jujur, ga ada jaminan. Tapi dua hal yang biasanya bikin orang ga kelar: ga ada yang tau dia berhenti, dan materinya ngajarin "apa" tanpa "gimana pas lagi ga mood". Dua-duanya yang gw urus, lewat <b>Discord</b> dan <b>Modul 2</b>. Sisanya di lu.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Gw belum baca ebook-nya. Bisa langsung ambil course?</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Gw belum baca ebook-nya. Bisa langsung ambil course?</summary>
         <p class="faq-a">Bisa. Modul Diagnosis udah mencakup pondasi yang lu butuhin.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Gw beneran mulai dari nol. Cocok ga?</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Gw beneran mulai dari nol. Cocok ga?</summary>
         <p class="faq-a">Cocok. Modul 1 emang didesain buat itu. Yang bahaya justru yang berasa udah ngerti terus loncat ke modul akhir.</p>
-      </div>
-      <div class="faq-item">
-        <p class="faq-q">Formatnya apa?</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Formatnya apa?</summary>
         <p class="faq-a">Video course, plus 5 PDF workbook. Akses seumur hidup.</p>
-      </div>
+      </details>
     </div>
   </section>
 
