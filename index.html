@@ -54,6 +54,21 @@
     padding: 9px 18px;
     line-height: 1.5;
   }
+  .announce-oto {
+    background: rgba(176, 65, 60, .13);
+    border-bottom-color: rgba(176, 65, 60, .45);
+    color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; flex-wrap: wrap; padding: 11px 18px;
+  }
+  .announce-oto .ann-lbl {
+    color: var(--maroon); font-weight: 600; font-size: .72rem;
+    letter-spacing: 1.2px; text-transform: uppercase;
+  }
+  .announce-oto .clock {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1.25rem; color: var(--text); line-height: 1;
+  }
 
   b, strong { font-weight: 600; color: var(--gold-soft); }
 
@@ -452,7 +467,7 @@
 </style>
 </head>
 <body>
-<div class="announce">Rp299.000 itu harga launch, bukan harga permanen. Begitu materi dan member nambah, harga naik.</div>
+<div class="announce" id="announce">Rp299.000 itu harga launch, bukan harga permanen. Begitu materi dan member nambah, harga naik.</div>
 <div class="wrap">
 
   <!-- 1. HERO -->
@@ -835,6 +850,64 @@
     window.addEventListener('scroll', function () {
       bar.classList.toggle('show', window.scrollY > 700);
     }, { passive: true });
+  })();
+
+  (function () {
+    var HARGA_OTO   = 'Rp249.000';
+    var RIBU_OTO    = '249 ribu';
+    var CHECKOUT_OTO = 'http://lynk.id/nychothesis/z6o2z34zn9vo/checkout';
+    var MENIT = 60;
+    var KEY = 'pm_oto_deadline';
+
+    if (!/[?&]oto=/.test(window.location.search)) return;
+
+    var deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
+    if (deadline === -1) { window.location.replace('index.html'); return; }
+    if (!deadline || isNaN(deadline)) {
+      deadline = Date.now() + MENIT * 60 * 1000;
+      localStorage.setItem(KEY, String(deadline));
+    }
+
+    var ann = document.getElementById('announce');
+    ann.className = 'announce announce-oto';
+    ann.innerHTML = '<span class="ann-lbl">Harga khusus buat lu, cuma sampai</span>' +
+                    '<span class="clock" id="clock">--:--</span>';
+
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    var nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (node) {
+      if (node.nodeValue.indexOf('Rp299.000') > -1) {
+        node.nodeValue = node.nodeValue.split('Rp299.000').join(HARGA_OTO);
+      }
+      if (node.nodeValue.indexOf('299 ribu') > -1) {
+        node.nodeValue = node.nodeValue.split('299 ribu').join(RIBU_OTO);
+      }
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('a[href*="z6o2z34zn9vo"]'), function (a) {
+      a.href = CHECKOUT_OTO;
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="optin.html"]'), function (a) {
+      a.href = 'thanks.html';
+      a.textContent = 'Ga dulu, kirim PDF gratisnya aja';
+    });
+
+    var el = document.getElementById('clock');
+    function pad(x) { return x < 10 ? '0' + x : String(x); }
+    function tick() {
+      var sisa = deadline - Date.now();
+      if (sisa <= 0) {
+        localStorage.setItem(KEY, '-1');
+        window.location.replace('index.html');
+        return;
+      }
+      var d = Math.floor(sisa / 1000);
+      el.textContent = pad(Math.floor(d / 60)) + ':' + pad(d % 60);
+    }
+    tick();
+    setInterval(tick, 1000);
   })();
 </script>
 </body>
