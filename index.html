@@ -168,6 +168,22 @@
     margin-left: 6px;
   }
 
+  /* ---------- Daftar isi ---------- */
+  .toc { padding: 0 0 26px; }
+  .toc-lbl {
+    font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted-2); margin-bottom: 12px;
+  }
+  .toc-row { display: flex; flex-wrap: wrap; gap: 9px; }
+  .toc-row a {
+    font-size: .82rem; font-weight: 500; text-decoration: none;
+    color: var(--muted); background: var(--bg-soft);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 7px 15px; transition: .18s;
+  }
+  .toc-row a:hover { color: var(--text); border-color: var(--gold); }
+  .sec-head { scroll-margin-top: 24px; }
+
   /* ---------- Pain checklist ---------- */
   .pain-points { list-style: none; }
   .pain-points li {
@@ -486,10 +502,26 @@
           </div>
         </div>
         <div class="cta-block">
-          <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp299.000</a>
+          <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
           <a class="btn-secondary" href="optin.html">Gw ambil PDF gratisnya dulu</a>
           <p class="micro">Mulai dari nol? Modul 1 emang buat itu. 16 video + workbook + Discord khusus member.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAFTAR ISI -->
+  <section class="toc">
+    <div class="n780">
+      <p class="toc-lbl">Lompat ke bagian</p>
+      <div class="toc-row">
+        <a href="#testimoni">Kata mereka</a>
+        <a href="#hasil">Apa yang beda</a>
+        <a href="#dapet">Yang lu dapet</a>
+        <a href="#isinya">Isi 4 modulnya</a>
+        <a href="#discord">Discord</a>
+        <a href="#beda">Kenapa gw beda</a>
+        <a href="#faq">FAQ</a>
       </div>
     </div>
   </section>
@@ -538,7 +570,7 @@
 
   <!-- 2. TESTIMONI -->
   <section>
-    <h2 class="sec-head">Kata mereka yang udah masuk</h2>
+    <h2 class="sec-head" id="testimoni">Kata mereka yang udah masuk</h2>
     <div class="t-grid">
 
       <div class="t-card">
@@ -582,18 +614,18 @@
   <!-- 3. ABIS 4 MODUL INI, APA YANG BEDA -->
   <section>
     <div class="n780">
-    <h2 class="sec-head">Abis 4 modul ini, apa yang beda</h2>
-      <p class="lead">Lu udah nonton ratusan konten soal ini. Lu nyimpen, lu catet, lu ngangguk-ngangguk. Terus tiga minggu lagi, hidup lu balik ke pola yang sama persis.</p>
+    <h2 class="sec-head" id="hasil">Abis 4 modul ini, apa yang beda</h2>
+      <p class="lead">Lu udah nonton ratusan konten soal ini. Lu simpen, lu catet, lu ngangguk-ngangguk. Terus tiga minggu lagi, hidup lu balik ke pola yang sama persis.</p>
       <p class="lead">Itu namanya coli otak: yang nambah cuma informasi, bukan perilaku. Yang lu ga punya bukan pengetahuan, melainkan <span class="caps">SISTEM</span> yang tetep jalan pas lu ga mood, dan <span class="caps">KOMUNITAS</span> yang jadi accountability partner lu, orang-orang yang tau lu lagi ngerjain apa dan nanya pas lu ilang.</p>
     </div>
 
     <div class="benefit-grid">
       <div class="benefit">
         <h3>Sistem yang bikin lu disiplin tanpa ngandelin willpower.</h3>
-        <p>Willpower bisa abis. Sistem engga. Lu bakal ngerti, dari studi dan dari pengalaman gw sendiri, apa yang beneran ngebedain cowo yang nyampe ke goal-nya dari yang muter di tempat, dan kenapa itu bukan soal seberapa keras lu maksa diri sendiri.</p>
+        <p>Willpower bisa abis. Sistem engga. Lu bakal ngerti, dari studi dan dari pengalaman gw sendiri, apa yang beneran ngebedain cowo yang nyampe ke goal-nya dibandingkan yang muter di tempat, dan kenapa itu bukan soal seberapa keras lu maksa diri sendiri.</p>
       </div>
       <div class="benefit">
-        <h3>Seni in-touch sama emosi lu tanpa jadi lemah.</h3>
+        <h3>Seni in-touch sama emosi lu tanpa menjadi lemah.</h3>
         <p>Cowo yang emosional sering dicap lemah, dan kalo ga ngerti cara handle-nya, emang bisa beneran jadi lemah. Makanya ini penting: gimana lu bisa empatik, dalem, lembut, DAN tetep kuat di saat yang sama, tanpa harus sok-sokan ga punya emosi. Kedengerannya kontradiksi, padahal ada cara, filosofi, dan akar fundamentalnya kenapa itu mungkin.</p>
       </div>
       <div class="benefit">
@@ -602,7 +634,7 @@
       </div>
       <div class="benefit">
         <h3>Cewe: efek samping, bukan tujuan.</h3>
-        <p>Gw ga bilang ngejar cewe itu salah. Ga ada yang salah dari itu. Tapi pas lu udah tau tujuan hidup lu yang lebih gede dan lu fokus ngerjain itu, yang kejadian beda: cewe jadi pengen ikut masuk ke journey lu. Bukan lu yang narik dia ke hidup lu, melainkan hidup lu yang jadi tempat yang orang pengen ada di dalemnya.</p>
+        <p>Gw ga bilang ngejar cewe itu salah. Ga ada yang salah dari itu. Tapi pas lu udah tau tujuan hidup lu yang lebih gede dan lu fokus ngerjain itu, yang terjadi beda: cewe jadi pengen ikut masuk ke journey lu. Bukan lu yang narik dia ke hidup lu, melainkan hidup lu yang jadi tempat yang orang pengen ada di dalemnya.</p>
       </div>
     </div>
 
@@ -621,14 +653,14 @@
         <div class="offer-row"><span>Komunitas Discord khusus member</span><span class="val">Rp500.000</span></div>
         <div class="offer-price"><span class="strike">Rp3.000.000</span>Rp299.000</div>
       </div>
-      <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp299.000</a>
+      <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
       <p class="micro">Video course. Akses seumur hidup.</p>
     </div>
   </section>
 
   <!-- 5. YANG LU DAPET -->
   <section>
-    <h2 class="sec-head">Yang lu dapet</h2>
+    <h2 class="sec-head" id="dapet">Yang lu dapet</h2>
     <div class="get-grid">
       <div class="get-card"><span class="ico">◆</span> 16 video, 4 jam materi</div>
       <div class="get-card"><span class="ico">◆</span> Breakdown mind map di tiap video</div>
@@ -640,7 +672,7 @@
 
   <!-- 6. ISINYA -->
   <section>
-    <h2 class="sec-head">Isinya</h2>
+    <h2 class="sec-head" id="isinya">Isinya</h2>
     <p class="lead">4 modul, urutannya sengaja. Lu ga bisa bangun visi hidup di atas <b>pondasi yang belum kelar</b>, dan lu ga bisa benerin pondasi kalo lu belum tau <b>apa yang rusak</b>.</p>
 
     <div class="mm-strip">
@@ -715,7 +747,7 @@
         <h3>Modul 4: Visi &amp; Tujuan Hidup</h3>
         <div class="video">
           <span class="v-title">Visi Hidup &gt; Cewek<span class="v-dur">16:22</span></span>
-          <span class="v-desc">Cowok bervisi genuine adalah yang paling menarik.</span>
+          <span class="v-desc">Cowo bervisi genuine adalah yang paling menarik.</span>
         </div>
         <div class="video">
           <span class="v-title">Menemukan Misi<span class="v-dur">11:07</span></span>
@@ -736,7 +768,7 @@
   <!-- 7. DISCORD KHUSUS BUYER -->
   <section>
     <div class="n780">
-    <h2 class="sec-head">Discord khusus member</h2>
+    <h2 class="sec-head" id="discord">Discord khusus member</h2>
     <div class="panel discord-panel">
       <p class="lead">Mayoritas orang yang beli course online <b>ga pernah kelar</b>. Kalo lu pernah, lu tau rasanya. Ruangan ini ada persis buat ngelawan angka itu.</p>
       <ul class="d-points">
@@ -751,7 +783,7 @@
   <!-- 8. KENAPA GW BEDA -->
   <section class="why">
     <div class="n780">
-    <h2 class="sec-head">Kenapa gw beda dari yang lain</h2>
+    <h2 class="sec-head" id="beda">Kenapa gw beda dari yang lain</h2>
       <p>Framework ini bukan hasil ngerangkum textbook, dan bukan juga hasil ngarang sendiri.</p>
       <p>Gw bedah studi lintas disiplin: <b>evolutionary psychology, antropologi, neuroscience, filsafat</b>. Gw kurasi mana yang solid, dan gw buang yang rontok pas diuji ulang, walaupun itu bikin konten gw kurang sexy. Terus gw satuin sama pengalaman hidup gw sendiri, yang tanpa sadar gw refine bertahun-tahun sebelum gw tau ada nama ilmiahnya.</p>
       <p class="embodied">Embodied knowledge, not just theories.</p>
@@ -801,7 +833,7 @@
   <!-- 10. FAQ -->
   <section>
     <div class="n780">
-    <h2 class="sec-head">FAQ</h2>
+    <h2 class="sec-head" id="faq">FAQ</h2>
       <details class="faq-item">
         <summary class="faq-q">Gw kayaknya "fine-fine aja", bukan yang "broken" banget. Ini tetep relevan?</summary>
         <p class="faq-a">Justru ini buat lu. Yang berasa "fine-fine aja" itu sering kali kondisi yang psikolog sebut <b>languishing</b>: ga depresi, tapi juga ga thriving. Stuck secara diam-diam, tanpa krisis yang jelas buat maksa lu berubah. Lu bisa jalanin sepuluh tahun kayak gini dan ga ada satupun alarm yang bunyi.</p>
@@ -832,7 +864,7 @@
       <p>Satu: lu tutup halaman ini, lu simpen niatnya, dan tiga minggu lagi lu balik ke pola yang sama. Bukan karena lu jahat sama diri lu sendiri, melainkan karena tanpa sistem, itu emang default-nya.</p>
       <p class="choice-two">Dua: lu mulai bangun tamannya.</p>
       <div class="cta-block">
-        <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp299.000</a>
+        <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
         <a class="btn-secondary" href="optin.html">Gw ambil PDF gratisnya dulu</a>
       </div>
     </div>
@@ -842,7 +874,7 @@
 
 <div class="sticky-cta" id="sticky-cta">
   <div class="sticky-price"><span class="old">Rp3.000.000</span><span class="now">Rp299.000</span></div>
-  <a class="sticky-btn" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya</a>
+  <a class="sticky-btn" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya</a>
 </div>
 <script>
   (function () {
