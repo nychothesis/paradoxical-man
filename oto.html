@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Penawaran sekali ini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="funnel.css">
+<style>
+  .countdown {
+    background: rgba(176, 65, 60, .1);
+    border: 1px solid rgba(176, 65, 60, .5);
+    border-radius: var(--radius);
+    padding: 18px; text-align: center; margin-bottom: 30px;
+  }
+  .countdown .lbl {
+    font-size: .74rem; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--maroon); font-weight: 600;
+  }
+  .countdown .clock {
+    font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2.4rem;
+    color: var(--text); line-height: 1.1; margin-top: 4px;
+  }
+  .price-row {
+    display: flex; align-items: baseline; justify-content: center; gap: 14px;
+    margin: 26px 0 6px;
+  }
+  .price-row .old {
+    font-size: 1.1rem; color: var(--muted); text-decoration: line-through;
+  }
+  .price-row .now {
+    font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 2.4rem;
+    color: var(--gold); line-height: 1;
+  }
+  .voucher {
+    text-align: center; margin: 18px 0 22px;
+    font-size: .86rem; color: var(--muted);
+  }
+  .voucher code {
+    display: inline-block; font-family: 'Poppins', sans-serif; font-weight: 700;
+    font-size: 1.05rem; letter-spacing: 2px; color: var(--gold-soft);
+    background: var(--bg-soft); border: 1px dashed var(--gold);
+    border-radius: 8px; padding: 8px 18px; margin-top: 8px;
+  }
+  .quote {
+    border-left: 3px solid var(--gold); border-radius: 0;
+    padding: 4px 0 4px 16px; margin: 26px 0;
+    font-size: .9rem; color: #d8d3c8;
+  }
+  .quote .who { display: block; color: var(--muted); font-size: .8rem; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="countdown">
+    <div class="lbl">Penawaran ini cuma sekali, buat lu</div>
+    <div class="clock" id="clock">60:00</div>
+  </div>
+
+  <h1>PDF-nya udah di jalan. Tapi bentar, <em>satu hal</em> dulu.</h1>
+  <p class="sub">PDF itu petanya. Yang ngerjain jalannya, itu framework lengkapnya: 16 video, 5 PDF workbook, dan ruangan Discord isi cowo-cowo yang lagi ngejalanin proses yang sama.</p>
+
+  <div class="panel">
+    <ul class="list" style="margin-top: 0;">
+      <li>16 video, 4 jam materi, plus breakdown mind map di tiap video</li>
+      <li>5 PDF: 3 workbook transformasi + 2 bonus</li>
+      <li>Komunitas Discord khusus member</li>
+      <li>Akses seumur hidup</li>
+    </ul>
+    <div class="price-row">
+      <span class="old">Rp299.000</span>
+      <span class="now">Rp249.000</span>
+    </div>
+    <p class="voucher">
+      Pake kode ini pas checkout:
+      <br><code>PETAAWAL</code>
+    </p>
+    <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil Aksesnya, Rp249.000</a>
+    <a class="btn-secondary" href="thanks.html">Ga dulu, kirim PDF gratisnya aja</a>
+  </div>
+
+  <p class="quote">
+    Nicho, naikin harganya. Value is too damn high.
+    <span class="who">Edward Santoso, Founder @the7percent.co (295K followers)</span>
+  </p>
+
+  <p class="micro">Kalo timer di atas abis, halaman ini nutup sendiri dan harganya balik normal. Ga ada versi kedua.</p>
+
+</div>
+
+<script>
+  (function () {
+    var MENIT = 60;
+    var KEY = 'pm_oto_deadline';
+    var el = document.getElementById('clock');
+    var deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
+
+    if (!deadline || isNaN(deadline)) {
+      deadline = new Date().getTime() + MENIT * 60 * 1000;
+      localStorage.setItem(KEY, String(deadline));
+    }
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function tick() {
+      var sisa = deadline - new Date().getTime();
+      if (sisa <= 0) {
+        localStorage.setItem(KEY, '-1');
+        window.location.replace('index.html');
+        return;
+      }
+      var totalDetik = Math.floor(sisa / 1000);
+      el.textContent = pad(Math.floor(totalDetik / 60)) + ':' + pad(totalDetik % 60);
+    }
+
+    if (deadline === -1) { window.location.replace('index.html'); return; }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+</body>
+</html>
