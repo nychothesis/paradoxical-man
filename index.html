@@ -178,7 +178,9 @@
     border: 1px solid var(--line); border-radius: 999px;
     color: var(--text); font-family: inherit; font-size: .8rem; font-weight: 500;
     padding: 9px 15px; cursor: pointer; transition: .18s;
+    opacity: 0; pointer-events: none;
   }
+  .menu-btn.show { opacity: 1; pointer-events: auto; }
   .menu-btn:hover { border-color: var(--gold); }
   .menu-btn .bars { display: inline-flex; flex-direction: column; gap: 3px; }
   .menu-btn .bars i { display: block; width: 15px; height: 2px; border-radius: 2px; background: var(--gold); }
@@ -930,8 +932,10 @@
 
   (function () {
     var bar = document.getElementById('sticky-cta');
+    var mb = document.getElementById('menu-btn');
     window.addEventListener('scroll', function () {
       bar.classList.toggle('show', window.scrollY > 700);
+      mb.classList.toggle('show', window.scrollY > 260);
     }, { passive: true });
   })();
 
