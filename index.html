@@ -168,21 +168,49 @@
     margin-left: 6px;
   }
 
-  /* ---------- Daftar isi ---------- */
-  .toc { padding: 0 0 26px; }
-  .toc-lbl {
-    font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase;
-    color: var(--muted-2); margin-bottom: 12px;
-  }
-  .toc-row { display: flex; flex-wrap: wrap; gap: 9px; }
-  .toc-row a {
-    font-size: .82rem; font-weight: 500; text-decoration: none;
-    color: var(--muted); background: var(--bg-soft);
-    border: 1px solid var(--line); border-radius: 999px;
-    padding: 7px 15px; transition: .18s;
-  }
-  .toc-row a:hover { color: var(--text); border-color: var(--gold); }
+  /* ---------- Menu daftar isi ---------- */
   .sec-head { scroll-margin-top: 24px; }
+  .menu-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 80;
+    display: flex; align-items: center; gap: 9px;
+    background: rgba(26, 24, 23, .94);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid var(--line); border-radius: 999px;
+    color: var(--text); font-family: inherit; font-size: .8rem; font-weight: 500;
+    padding: 9px 15px; cursor: pointer; transition: .18s;
+  }
+  .menu-btn:hover { border-color: var(--gold); }
+  .menu-btn .bars { display: inline-flex; flex-direction: column; gap: 3px; }
+  .menu-btn .bars i { display: block; width: 15px; height: 2px; border-radius: 2px; background: var(--gold); }
+  .menu-panel {
+    position: fixed; inset: 0; z-index: 90; display: none;
+    background: rgba(8, 8, 7, .72);
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  }
+  .menu-panel.open { display: block; }
+  .menu-inner {
+    position: absolute; top: 14px; right: 14px;
+    width: min(300px, calc(100vw - 28px));
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow);
+  }
+  .menu-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 10px 10px; border-bottom: 1px dashed var(--line); margin-bottom: 6px;
+  }
+  .menu-head span {
+    font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted-2);
+  }
+  .menu-head button {
+    background: none; border: 0; color: var(--muted); cursor: pointer;
+    font-size: 1.2rem; line-height: 1; padding: 0 2px;
+  }
+  .menu-head button:hover { color: var(--text); }
+  .menu-inner a {
+    display: block; text-decoration: none; color: #d8d3c8;
+    font-size: .88rem; padding: 10px 14px; border-radius: 9px; transition: .14s;
+  }
+  .menu-inner a:hover { background: var(--bg-soft); color: var(--gold-soft); }
 
   /* ---------- Pain checklist ---------- */
   .pain-points { list-style: none; }
@@ -510,22 +538,6 @@
     </div>
   </section>
 
-  <!-- DAFTAR ISI -->
-  <section class="toc">
-    <div class="n780">
-      <p class="toc-lbl">Lompat ke bagian</p>
-      <div class="toc-row">
-        <a href="#testimoni">Kata mereka</a>
-        <a href="#hasil">Apa yang beda</a>
-        <a href="#dapet">Yang lu dapet</a>
-        <a href="#isinya">Isi 4 modulnya</a>
-        <a href="#discord">Discord</a>
-        <a href="#beda">Kenapa gw beda</a>
-        <a href="#faq">FAQ</a>
-      </div>
-    </div>
-  </section>
-
   <!-- PAIN CHECKLIST -->
   <section>
     <div class="n780">
@@ -644,7 +656,7 @@
   </section>
 
   <!-- 4. CTA TENGAH -->
-  <section class="cta-mid">
+  <section class="cta-mid" id="harga">
     <div class="n780">
       <div class="offer-box">
         <div class="offer-row"><span>16 video + mind map breakdown, 4 jam materi</span><span class="val">Rp1.500.000</span></div>
@@ -772,7 +784,7 @@
     <div class="panel discord-panel">
       <p class="lead">Mayoritas orang yang beli course online <b>ga pernah kelar</b>. Kalo lu pernah, lu tau rasanya. Ruangan ini ada persis buat ngelawan angka itu.</p>
       <ul class="d-points">
-        <li>Isinya cowo-cowo yang lagi ngejalanin proses yang sama, di titik yang beda-beda. Lu bisa nanya, posting progres, dan liat orang lain lagi mentok di mana.</li>
+        <li>Isinya cowo-cowo yang lagi ngejalanin proses yang sama, di titik yang beda-beda. Lu bisa nanya, posting progress, dan liat orang lain lagi mentok di mana.</li>
         <li>Gampang bohongin diri sendiri. <b>Susah bohongin orang yang tau lu lagi ngerjain apa.</b></li>
       </ul>
       <p class="closer">Gw jujur: ini bukan layanan coaching, dan gw ga janjiin gw standby 24 jam. Ini ruangan. Yang bikin dia hidup atau mati itu orang-orang di dalemnya, termasuk lu.</p>
@@ -872,11 +884,49 @@
 
 </div>
 
+<button class="menu-btn" id="menu-btn" aria-label="Buka daftar isi" aria-expanded="false">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  Daftar isi
+</button>
+
+<div class="menu-panel" id="menu-panel">
+  <div class="menu-inner">
+    <div class="menu-head">
+      <span>Lompat ke bagian</span>
+      <button id="menu-close" aria-label="Tutup daftar isi">&times;</button>
+    </div>
+    <a href="#testimoni">Testimoni yang udah masuk</a>
+    <a href="#hasil">Hasil abis 4 modul</a>
+    <a href="#harga">Harga &amp; isi paketnya</a>
+    <a href="#dapet">Yang lu dapet</a>
+    <a href="#isinya">Daftar 16 videonya</a>
+    <a href="#discord">Komunitas Discord</a>
+    <a href="#beda">Kenapa framework ini beda</a>
+    <a href="#faq">Pertanyaan yang sering ditanya</a>
+  </div>
+</div>
+
 <div class="sticky-cta" id="sticky-cta">
   <div class="sticky-price"><span class="old">Rp3.000.000</span><span class="now">Rp299.000</span></div>
   <a class="sticky-btn" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya</a>
 </div>
 <script>
+  (function () {
+    var btn = document.getElementById('menu-btn');
+    var panel = document.getElementById('menu-panel');
+    function buka(v) {
+      panel.classList.toggle('open', v);
+      btn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () { buka(!panel.classList.contains('open')); });
+    document.getElementById('menu-close').addEventListener('click', function () { buka(false); });
+    panel.addEventListener('click', function (e) { if (e.target === panel) buka(false); });
+    Array.prototype.forEach.call(panel.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () { buka(false); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') buka(false); });
+  })();
+
   (function () {
     var bar = document.getElementById('sticky-cta');
     window.addEventListener('scroll', function () {
