@@ -88,6 +88,14 @@ input::placeholder { color: var(--muted-2); }
 
 .micro { font-size: .8rem; color: var(--muted); margin-top: 14px; line-height: 1.6; text-align: center; }
 
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.err {
+  margin-top: 14px; font-size: .85rem; color: #e0908c;
+  background: rgba(176, 65, 60, .1); border: 1px solid rgba(176, 65, 60, .5);
+  border-radius: 10px; padding: 11px 14px; text-align: center;
+}
+button.btn-primary[disabled] { opacity: .6; cursor: default; transform: none; }
+
 .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 34px; }
 .brand svg { width: 34px; height: 34px; flex: 0 0 auto; }
 .brand-name { font-weight: 700; font-size: .98rem; letter-spacing: .5px; }
