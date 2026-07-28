@@ -66,18 +66,18 @@
       btn.textContent = labelAsli;
     }
 
-    // Rapihin nomor jadi format 62xxxxxxxxxx (tanpa +, spasi, strip).
+    // Samain ke format 08xxxxxxxxxx, ngikutin data yang udah ada di list.
     function rapihinNomor(mentah) {
       var s = String(mentah).replace(/[\s\-\.\(\)]/g, '');
       if (s.charAt(0) === '+') s = s.slice(1);
-      if (s.charAt(0) === '0') s = '62' + s.slice(1);
-      else if (s.charAt(0) === '8') s = '62' + s;
+      if (s.slice(0, 2) === '62') s = '0' + s.slice(2);
+      else if (s.charAt(0) === '8') s = '0' + s;
       return s;
     }
 
-    // Nomor HP Indonesia: 62 + 8 + operator + sisanya. Total 11 sampai 14 digit.
+    // Nomor HP Indonesia: 08 + operator + sisanya. Total 10 sampai 13 digit.
     function nomorValid(s) {
-      return /^628[1-9][0-9]{7,10}$/.test(s);
+      return /^08[1-9][0-9]{7,10}$/.test(s);
     }
 
     function emailValid(s) {
@@ -100,7 +100,7 @@
 
       var nomor = rapihinNomor(form.wa.value);
       if (!nomorValid(nomor)) {
-        tampilError('Nomor WhatsApp-nya belum bener. Contoh: 081234567890');
+        tampilError('Nomor WhatsApp-nya belum bener. Contoh: 08123456789');
         return;
       }
       form.wa.value = nomor;
