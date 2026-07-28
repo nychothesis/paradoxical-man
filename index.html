@@ -268,16 +268,24 @@
     font-size: 1.25rem; font-weight: 700; color: var(--gold);
     margin: 30px 0; letter-spacing: .01em;
   }
-  .why-list { list-style: none; margin-bottom: 26px; }
-  .why-list li {
-    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
-    position: relative; font-size: .92rem; color: #d8d3c8;
+  .diff-table {
+    border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 26px;
   }
-  .why-list li:last-child { border-bottom: none; }
-  .why-list li::before {
-    content: "◆"; position: absolute; left: 0; top: 13px;
-    color: var(--gold); font-size: .65rem;
+  .diff-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .diff-row + .diff-row { border-top: 1px dashed var(--line); }
+  .diff-cell { padding: 14px 16px; font-size: .85rem; color: #d8d3c8; }
+  .diff-cell.them {
+    background: rgba(176, 65, 60, .05); color: var(--muted);
+    border-right: 1px dashed var(--line);
   }
+  .diff-cell.me { background: rgba(127, 174, 107, .05); }
+  .diff-head .diff-cell {
+    font-weight: 700; font-size: .72rem; text-transform: uppercase;
+    letter-spacing: 1.5px; padding: 12px 16px;
+  }
+  .diff-head .them { color: var(--maroon); }
+  .diff-head .me { color: var(--green); }
 
   /* ---------- Not for you ---------- */
   .notfor {
@@ -344,7 +352,7 @@
         <img src="cover.jpg" alt="Paradoxical Man Full E-Course" onerror="this.closest('.hero-grid').classList.add('no-cover'); this.parentElement.style.display='none'">
       </div>
       <div>
-        <h1>Cara jadi cowo yang <em>dikejar</em>, bukan yang ngejar.</h1>
+        <h1>Framework lengkap buat jadi cowo yang <em>dikejar</em>, bukan yang ngejar.</h1>
         <p>TAPI ini BUKAN cara gampang dan instan. Ini bukan "cara jadi alpha dalam 30 hari", bukan tips nge-rizz cewe. Kalo lu cari itu, ada jutaan konten di luar sana, dan menurut gw mayoritas isinya cetek. Izin.</p>
         <p>Gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng.</p>
         <p>Ini cara bangun tamannya: mulai dari tau lu lagi ada di titik mana dan apa yang sebenernya bikin lu stuck, sampe lu punya <b>arah hidup yang jelas</b>, <b>disiplin yang jalan otomatis</b>, dan <b>kedalaman emosi tanpa jadi lemah</b>. Dikejar banyak cewe? Itu efek samping yang susah dihindari kalo lu udah nyampe titik itu.</p>
@@ -584,12 +592,28 @@
       <p>Gw bedah studi lintas disiplin: <b>evolutionary psychology, antropologi, neuroscience, filsafat</b>. Gw kurasi mana yang solid, dan gw buang yang rontok pas diuji ulang, walaupun itu bikin konten gw kurang sexy. Terus gw satuin sama pengalaman hidup gw sendiri, yang tanpa sadar gw refine bertahun-tahun sebelum gw tau ada nama ilmiahnya.</p>
       <p class="embodied">Embodied knowledge, not just theories.</p>
       <p>Artinya buat lu:</p>
-      <ul class="why-list">
-        <li>Lu ga bakal dikasih klaim yang sumbernya ga bisa ditunjukin. Ada referensinya, dan gw pengen lu cek.</li>
-        <li>Lu ga bakal disuapin "fakta" populer yang udah rontok pas diuji ulang. Contohnya efek Dunning-Kruger, yang ternyata lebih ke artefak statistik daripada temuan solid. Konten sejenis masih pake itu. Gw engga.</li>
-        <li>Lu bakal tau mana yang data, mana yang lensa berpikir, mana yang opini gw. Yang belum settled, gw bilang belum settled.</li>
-        <li>Lu dapet konteks Indonesia. Bukan terjemahan mentah konten Barat.</li>
-      </ul>
+      <div class="diff-table">
+        <div class="diff-row diff-head">
+          <div class="diff-cell them">Konten sejenis</div>
+          <div class="diff-cell me">Course ini</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Klaim yang sumbernya ga bisa ditunjukin.</div>
+          <div class="diff-cell me">Ada referensinya, dan gw pengen lu cek.</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Masih pake "fakta" populer yang udah rontok pas diuji ulang, contohnya efek Dunning-Kruger, yang ternyata lebih ke artefak statistik daripada temuan solid.</div>
+          <div class="diff-cell me">Yang rontok pas diuji ulang gw buang, walaupun itu bikin kontennya kurang sexy.</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Semua disajiin seolah udah pasti benar.</div>
+          <div class="diff-cell me">Lu bakal tau mana yang data, mana yang lensa berpikir, mana yang opini gw. Yang belum settled, gw bilang belum settled.</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Terjemahan mentah konten Barat.</div>
+          <div class="diff-cell me">Konteks Indonesia.</div>
+        </div>
+      </div>
       <p class="closer">Gw ga jualan "kebenaran yang disembunyiin". Itu jualannya kubu sebelah. Gw kasih lu mekanismenya, sumbernya, dan batasnya. Sisanya lu yang mikir.</p>
     </div>
   </section>
