@@ -102,6 +102,12 @@
     color: #121110; font-weight: 800; font-size: .68rem;
     letter-spacing: 2.2px; text-transform: uppercase; padding: 7px 10px;
   }
+  .voucher .vquota {
+    background: rgba(176, 65, 60, .2);
+    border-bottom: 1px solid rgba(176, 65, 60, .38);
+    color: #e8a29e; font-weight: 700; font-size: .74rem;
+    letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 10px;
+  }
   .voucher .vbody { padding: 15px 16px 16px; }
   .voucher .vprice {
     display: flex; align-items: baseline; justify-content: center;
@@ -1009,6 +1015,10 @@
     var HARGA_ASLI  = 'Rp299.000';
     var RIBU_OTO    = '229 ribu';
     var VOUCHER     = 'PRDX70';
+    // Sisa kuota kode voucher. Angkanya HARUS sama sama kuota beneran yang
+    // diset di lynk.id, dan diupdate manual tiap ada yang beli. Biarin null
+    // kalo kuotanya belum diset di lynk — nanti barisnya ga muncul sama sekali.
+    var SISA_KODE   = null;
     var KODE_PROD   = 'z6o2z34zn9vo';
     var CHECKOUT_OTO = 'http://lynk.id/nychothesis/z6o2z34zn9vo/checkout';
     var MENIT = 60;
@@ -1071,6 +1081,9 @@
         box.className = 'voucher';
         box.innerHTML =
           '<div class="vhead">Potongan ' + HEMAT + ' buat lu</div>' +
+          (SISA_KODE !== null
+            ? '<div class="vquota">Kodenya tinggal ' + SISA_KODE + ' lagi</div>'
+            : '') +
           '<div class="vbody">' +
             '<div class="vprice"><s>' + HARGA_ASLI + '</s>' +
               '<span class="varrow" aria-hidden="true">&rarr;</span>' +
