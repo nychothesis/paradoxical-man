@@ -74,8 +74,9 @@
     font-family: 'Poppins', sans-serif; font-weight: 900;
     font-size: 1.25rem; color: var(--text); line-height: 1;
   }
-  /* Tombol menu digeser ke bawah biar ga nutupin banner sticky */
-  body.oto .menu-btn { top: 62px; }
+  /* Tombol menu digeser ke bawah biar ga nutupin banner sticky.
+     Angkanya diukur dari tinggi banner beneran, lihat geserMenu(). */
+  body.oto .menu-btn { top: calc(var(--oto-banner, 62px) + 10px); }
 
   /* ---------- Kode voucher (cuma muncul di mode OTO) ---------- */
   .vcode {
@@ -90,6 +91,7 @@
     text-transform: uppercase; opacity: .68;
   }
   .vcode:active { transform: scale(.97); }
+  .vcode { white-space: nowrap; }
 
   .voucher {
     max-width: 430px; margin: 16px auto 0; overflow: hidden;
@@ -1048,7 +1050,7 @@
     ann.innerHTML = '<span class="ann-lbl">Potongan <b>' + HEMAT + '</b>, sisa</span>' +
                     '<span class="clock" id="clock">--:--</span>' +
                     '<span class="vcode js-salin" role="button" tabindex="0">' +
-                      '<small>kode</small>' + VOUCHER +
+                      '<small>voucher</small>' + VOUCHER +
                     '</span>';
 
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
@@ -1082,17 +1084,17 @@
         box.innerHTML =
           '<div class="vhead">Potongan ' + HEMAT + ' buat lu</div>' +
           (SISA_KODE !== null
-            ? '<div class="vquota">Kodenya tinggal ' + SISA_KODE + ' lagi</div>'
+            ? '<div class="vquota">Vouchernya tinggal ' + SISA_KODE + ' lagi</div>'
             : '') +
           '<div class="vbody">' +
             '<div class="vprice"><s>' + HARGA_ASLI + '</s>' +
               '<span class="varrow" aria-hidden="true">&rarr;</span>' +
               '<b>' + HARGA_OTO + '</b></div>' +
-            '<p class="vlead">Pakai kode ini pas checkout</p>' +
+            '<p class="vlead">Pakai voucher ini pas checkout</p>' +
             '<span class="kode js-salin" role="button" tabindex="0">' + VOUCHER + '</span>' +
             '<p class="vnote">Di halaman checkout harganya masih ketulis ' + HARGA_ASLI + '. ' +
-            'Masukin kodenya biar turun ' + HEMAT + '. ' +
-            '<b>Klik kodenya buat nyalin.</b></p>' +
+            'Masukin vouchernya biar turun ' + HEMAT + '. ' +
+            '<b>Klik buat nyalin.</b></p>' +
           '</div>';
         a.parentNode.insertBefore(box, a.nextSibling);
       }
@@ -1106,7 +1108,7 @@
       mini.setAttribute('tabindex', '0');
       mini.style.marginTop = '5px';
       mini.style.alignSelf = 'flex-start';
-      mini.innerHTML = '<small>hemat ' + HEMAT_PENDEK + ', kode</small>' + VOUCHER;
+      mini.innerHTML = '<small>voucher</small>' + VOUCHER;
       sp.appendChild(mini);
     }
 
@@ -1140,6 +1142,15 @@
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); salin(el); }
       });
     });
+
+    // Banner-nya bisa patah jadi dua baris di layar sempit, jadi tingginya
+    // diukur langsung terus dipakai buat naro tombol "Daftar isi".
+    function geserMenu() {
+      document.documentElement.style.setProperty(
+        '--oto-banner', Math.round(ann.getBoundingClientRect().height) + 'px');
+    }
+    geserMenu();
+    window.addEventListener('resize', geserMenu);
 
     var el = document.getElementById('clock');
     function pad(x) { return x < 10 ? '0' + x : String(x); }
