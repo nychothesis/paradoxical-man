@@ -27,6 +27,10 @@ body {
   min-height: 100vh;
 }
 
+/* Badan teks pakai Atkinson Hyperlegible, sama kayak homepage. Judul,
+   tombol, sama label tetep Poppins. */
+p, li, dd, blockquote { font-family: 'Atkinson Hyperlegible', sans-serif; }
+
 b, strong { font-weight: 600; color: var(--gold-soft); }
 
 .wrap { max-width: 560px; margin: 0 auto; padding: 56px 22px 80px; }
