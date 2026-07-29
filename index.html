@@ -70,6 +70,25 @@
     font-size: 1.25rem; color: var(--text); line-height: 1;
   }
 
+  /* ---------- Kode voucher (cuma muncul di mode OTO) ---------- */
+  .voucher {
+    max-width: 430px; margin: 15px auto 0;
+    background: rgba(201, 162, 39, .06);
+    border: 1px dashed rgba(201, 162, 39, .5);
+    border-radius: 12px; padding: 14px 16px; text-align: center;
+    font-size: .82rem; line-height: 1.6; color: var(--muted);
+  }
+  .voucher .kode {
+    display: inline-block; margin: 0 0 8px; cursor: pointer;
+    font-weight: 800; font-size: 1.05rem; letter-spacing: 2.5px;
+    color: var(--gold); background: rgba(201, 162, 39, .12);
+    border: 1px solid rgba(201, 162, 39, .45);
+    border-radius: 9px; padding: 8px 16px; transition: .15s;
+  }
+  .voucher .kode:hover { background: rgba(201, 162, 39, .2); }
+  .voucher .kode:active { transform: scale(.97); }
+  .voucher .kode.copied { color: var(--green); border-color: var(--green); }
+
   b, strong { font-weight: 600; color: var(--gold-soft); }
 
   /* ---------- Section heading ---------- */
@@ -941,7 +960,10 @@
 
   (function () {
     var HARGA_OTO   = 'Rp249.000';
+    var HARGA_ASLI  = 'Rp299.000';
     var RIBU_OTO    = '249 ribu';
+    var VOUCHER     = 'PRDX50';
+    var KODE_PROD   = 'z6o2z34zn9vo';
     var CHECKOUT_OTO = 'http://lynk.id/nychothesis/z6o2z34zn9vo/checkout';
     var MENIT = 60;
     var KEY = 'pm_oto_deadline';
@@ -979,6 +1001,53 @@
     Array.prototype.forEach.call(document.querySelectorAll('a[href="optin.html"]'), function (a) {
       a.href = 'thanks.html';
       a.textContent = 'Ga dulu, kirim PDF gratisnya aja';
+    });
+
+    // Kode voucher ditempel di bawah tiap tombol beli. Sengaja jujur soal
+    // harga di kasir, biar orang ga ngerasa dijebak pas nyampe halaman bayar.
+    Array.prototype.forEach.call(
+      document.querySelectorAll('a.btn-primary[href*="' + KODE_PROD + '"]'),
+      function (a) {
+        var box = document.createElement('div');
+        box.className = 'voucher';
+        box.innerHTML =
+          '<span class="kode" role="button" tabindex="0">' + VOUCHER + '</span><br>' +
+          'Di halaman pembayaran harganya masih ' + HARGA_ASLI + '. ' +
+          'Masukin kode ini biar jadi ' + HARGA_OTO + '. ' +
+          '<b>Klik kodenya buat nyalin.</b>';
+        a.parentNode.insertBefore(box, a.nextSibling);
+      }
+    );
+
+    function salin(el) {
+      var asli = el.textContent;
+      function sukses() {
+        el.textContent = 'Tersalin';
+        el.classList.add('copied');
+        setTimeout(function () {
+          el.textContent = asli;
+          el.classList.remove('copied');
+        }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(VOUCHER).then(sukses, function () {});
+        return;
+      }
+      var tmp = document.createElement('textarea');
+      tmp.value = VOUCHER;
+      tmp.style.position = 'fixed';
+      tmp.style.opacity = '0';
+      document.body.appendChild(tmp);
+      tmp.select();
+      try { document.execCommand('copy'); sukses(); } catch (e) {}
+      document.body.removeChild(tmp);
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.voucher .kode'), function (el) {
+      el.addEventListener('click', function () { salin(el); });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); salin(el); }
+      });
     });
 
     var el = document.getElementById('clock');
