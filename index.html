@@ -67,6 +67,9 @@
     color: var(--maroon); font-weight: 600; font-size: .72rem;
     letter-spacing: 1.2px; text-transform: uppercase;
   }
+  .announce-oto .ann-lbl b {
+    color: var(--gold); font-weight: 800; letter-spacing: 1.2px;
+  }
   .announce-oto .clock {
     font-family: 'Poppins', sans-serif; font-weight: 900;
     font-size: 1.25rem; color: var(--text); line-height: 1;
@@ -100,6 +103,22 @@
     letter-spacing: 2.2px; text-transform: uppercase; padding: 7px 10px;
   }
   .voucher .vbody { padding: 15px 16px 16px; }
+  .voucher .vprice {
+    display: flex; align-items: baseline; justify-content: center;
+    gap: 9px; flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .voucher .vprice s {
+    color: var(--muted); font-size: .95rem; text-decoration-thickness: 1.5px;
+  }
+  .voucher .vprice .varrow { color: var(--muted); font-size: .9rem; }
+  .voucher .vprice b {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1.6rem; color: var(--gold); line-height: 1;
+  }
+  .voucher .vlead {
+    font-size: .72rem; font-weight: 600; letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
+  }
   .voucher .kode {
     display: inline-block; cursor: pointer;
     font-family: 'Poppins', sans-serif; font-weight: 900;
@@ -997,6 +1016,14 @@
 
     if (!/[?&]oto=/.test(window.location.search)) return;
 
+    // Besar diskonnya diitung dari dua harga di atas, biar kalo angkanya
+    // diganti, semua tulisan "hemat sekian" ikut bener sendiri.
+    function angka(rp) { return parseInt(String(rp).replace(/\D/g, ''), 10); }
+    function rupiah(n) { return 'Rp' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+    var SELISIH = angka(HARGA_ASLI) - angka(HARGA_OTO);
+    var HEMAT   = rupiah(SELISIH);
+    var HEMAT_PENDEK = Math.round(SELISIH / 1000) + 'rb';
+
     var deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
     if (deadline === -1) { window.location.replace('index.html'); return; }
     if (!deadline || isNaN(deadline)) {
@@ -1008,7 +1035,7 @@
 
     var ann = document.getElementById('announce');
     ann.className = 'announce announce-oto';
-    ann.innerHTML = '<span class="ann-lbl">Harga khusus, sisa</span>' +
+    ann.innerHTML = '<span class="ann-lbl">Potongan <b>' + HEMAT + '</b>, sisa</span>' +
                     '<span class="clock" id="clock">--:--</span>' +
                     '<span class="vcode js-salin" role="button" tabindex="0">' +
                       '<small>kode</small>' + VOUCHER +
@@ -1043,11 +1070,15 @@
         var box = document.createElement('div');
         box.className = 'voucher';
         box.innerHTML =
-          '<div class="vhead">Kode diskon buat lu</div>' +
+          '<div class="vhead">Potongan ' + HEMAT + ' buat lu</div>' +
           '<div class="vbody">' +
+            '<div class="vprice"><s>' + HARGA_ASLI + '</s>' +
+              '<span class="varrow" aria-hidden="true">&rarr;</span>' +
+              '<b>' + HARGA_OTO + '</b></div>' +
+            '<p class="vlead">Pakai kode ini di kasir</p>' +
             '<span class="kode js-salin" role="button" tabindex="0">' + VOUCHER + '</span>' +
-            '<p class="vnote">Di halaman pembayaran harganya masih ' + HARGA_ASLI + '. ' +
-            'Masukin kode ini biar jadi ' + HARGA_OTO + '. ' +
+            '<p class="vnote">Di halaman pembayaran harganya masih ketulis ' + HARGA_ASLI + '. ' +
+            'Masukin kodenya biar turun ' + HEMAT + '. ' +
             '<b>Klik kodenya buat nyalin.</b></p>' +
           '</div>';
         a.parentNode.insertBefore(box, a.nextSibling);
@@ -1062,7 +1093,7 @@
       mini.setAttribute('tabindex', '0');
       mini.style.marginTop = '5px';
       mini.style.alignSelf = 'flex-start';
-      mini.innerHTML = '<small>kode</small>' + VOUCHER;
+      mini.innerHTML = '<small>hemat ' + HEMAT_PENDEK + ', kode</small>' + VOUCHER;
       sp.appendChild(mini);
     }
 
