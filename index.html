@@ -1005,10 +1005,10 @@
   })();
 
   (function () {
-    var HARGA_OTO   = 'Rp249.000';
+    var HARGA_OTO   = 'Rp229.000';
     var HARGA_ASLI  = 'Rp299.000';
-    var RIBU_OTO    = '249 ribu';
-    var VOUCHER     = 'PRDX50';
+    var RIBU_OTO    = '229 ribu';
+    var VOUCHER     = 'PRDX70';
     var KODE_PROD   = 'z6o2z34zn9vo';
     var CHECKOUT_OTO = 'http://lynk.id/nychothesis/z6o2z34zn9vo/checkout';
     var MENIT = 60;
@@ -1063,7 +1063,7 @@
     });
 
     // Kode voucher ditempel di bawah tiap tombol beli. Sengaja jujur soal
-    // harga di kasir, biar orang ga ngerasa dijebak pas nyampe halaman bayar.
+    // harga di halaman checkout, biar orang ga ngerasa dijebak pas mau bayar.
     Array.prototype.forEach.call(
       document.querySelectorAll('a.btn-primary[href*="' + KODE_PROD + '"]'),
       function (a) {
@@ -1075,9 +1075,9 @@
             '<div class="vprice"><s>' + HARGA_ASLI + '</s>' +
               '<span class="varrow" aria-hidden="true">&rarr;</span>' +
               '<b>' + HARGA_OTO + '</b></div>' +
-            '<p class="vlead">Pakai kode ini di kasir</p>' +
+            '<p class="vlead">Pakai kode ini pas checkout</p>' +
             '<span class="kode js-salin" role="button" tabindex="0">' + VOUCHER + '</span>' +
-            '<p class="vnote">Di halaman pembayaran harganya masih ketulis ' + HARGA_ASLI + '. ' +
+            '<p class="vnote">Di halaman checkout harganya masih ketulis ' + HARGA_ASLI + '. ' +
             'Masukin kodenya biar turun ' + HEMAT + '. ' +
             '<b>Klik kodenya buat nyalin.</b></p>' +
           '</div>';
