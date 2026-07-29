@@ -101,6 +101,6 @@ input::placeholder { color: var(--muted-2); }
 button.btn-primary[disabled] { opacity: .6; cursor: default; transform: none; }
 
 .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 34px; }
-.brand svg { width: 34px; height: 34px; flex: 0 0 auto; }
+.brand svg, .brand img { width: 34px; height: 34px; flex: 0 0 auto; }
 .brand-name { font-weight: 700; font-size: .98rem; letter-spacing: .5px; }
 .brand-name span { color: var(--gold); }
