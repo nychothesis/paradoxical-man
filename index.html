@@ -55,11 +55,13 @@
     line-height: 1.5;
   }
   .announce-oto {
-    background: rgba(176, 65, 60, .13);
-    border-bottom-color: rgba(176, 65, 60, .45);
+    position: sticky; top: 0; z-index: 70;
+    background: rgba(30, 20, 19, .96);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(176, 65, 60, .5);
     color: var(--text);
     display: flex; align-items: center; justify-content: center;
-    gap: 12px; flex-wrap: wrap; padding: 11px 18px;
+    gap: 10px 14px; flex-wrap: wrap; padding: 10px 18px;
   }
   .announce-oto .ann-lbl {
     color: var(--maroon); font-weight: 600; font-size: .72rem;
@@ -69,25 +71,50 @@
     font-family: 'Poppins', sans-serif; font-weight: 900;
     font-size: 1.25rem; color: var(--text); line-height: 1;
   }
+  /* Tombol menu digeser ke bawah biar ga nutupin banner sticky */
+  body.oto .menu-btn { top: 62px; }
 
   /* ---------- Kode voucher (cuma muncul di mode OTO) ---------- */
+  .vcode {
+    display: inline-flex; align-items: baseline; gap: 7px; cursor: pointer;
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110; border: 0; border-radius: 8px; padding: 6px 12px;
+    font-family: 'Poppins', sans-serif; font-weight: 800;
+    font-size: .88rem; letter-spacing: 1.8px; transition: .15s;
+  }
+  .vcode small {
+    font-size: .62rem; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; opacity: .68;
+  }
+  .vcode:active { transform: scale(.97); }
+
   .voucher {
-    max-width: 430px; margin: 15px auto 0;
-    background: rgba(201, 162, 39, .06);
-    border: 1px dashed rgba(201, 162, 39, .5);
-    border-radius: 12px; padding: 14px 16px; text-align: center;
-    font-size: .82rem; line-height: 1.6; color: var(--muted);
+    max-width: 430px; margin: 16px auto 0; overflow: hidden;
+    border: 1px solid rgba(201, 162, 39, .55);
+    border-radius: 14px; background: rgba(201, 162, 39, .07);
+    text-align: center;
   }
+  .voucher .vhead {
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110; font-weight: 800; font-size: .68rem;
+    letter-spacing: 2.2px; text-transform: uppercase; padding: 7px 10px;
+  }
+  .voucher .vbody { padding: 15px 16px 16px; }
   .voucher .kode {
-    display: inline-block; margin: 0 0 8px; cursor: pointer;
-    font-weight: 800; font-size: 1.05rem; letter-spacing: 2.5px;
-    color: var(--gold); background: rgba(201, 162, 39, .12);
-    border: 1px solid rgba(201, 162, 39, .45);
-    border-radius: 9px; padding: 8px 16px; transition: .15s;
+    display: inline-block; cursor: pointer;
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1.5rem; letter-spacing: 4px; line-height: 1;
+    color: var(--gold); background: rgba(201, 162, 39, .13);
+    border: 1px dashed rgba(201, 162, 39, .6);
+    border-radius: 10px; padding: 12px 18px; transition: .15s;
   }
-  .voucher .kode:hover { background: rgba(201, 162, 39, .2); }
+  .voucher .kode:hover { background: rgba(201, 162, 39, .22); }
   .voucher .kode:active { transform: scale(.97); }
-  .voucher .kode.copied { color: var(--green); border-color: var(--green); }
+  .voucher .vnote {
+    font-size: .78rem; line-height: 1.6; color: var(--muted); margin-top: 11px;
+  }
+  .kode.copied, .vcode.copied { color: var(--green); border-color: var(--green); }
+  .vcode.copied { background: rgba(127, 174, 107, .2); }
 
   b, strong { font-weight: 600; color: var(--gold-soft); }
 
@@ -977,10 +1004,15 @@
       localStorage.setItem(KEY, String(deadline));
     }
 
+    document.body.classList.add('oto');
+
     var ann = document.getElementById('announce');
     ann.className = 'announce announce-oto';
-    ann.innerHTML = '<span class="ann-lbl">Harga khusus buat lu, cuma sampai</span>' +
-                    '<span class="clock" id="clock">--:--</span>';
+    ann.innerHTML = '<span class="ann-lbl">Harga khusus, sisa</span>' +
+                    '<span class="clock" id="clock">--:--</span>' +
+                    '<span class="vcode js-salin" role="button" tabindex="0">' +
+                      '<small>kode</small>' + VOUCHER +
+                    '</span>';
 
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
     var nodes = [], n;
@@ -1011,21 +1043,36 @@
         var box = document.createElement('div');
         box.className = 'voucher';
         box.innerHTML =
-          '<span class="kode" role="button" tabindex="0">' + VOUCHER + '</span><br>' +
-          'Di halaman pembayaran harganya masih ' + HARGA_ASLI + '. ' +
-          'Masukin kode ini biar jadi ' + HARGA_OTO + '. ' +
-          '<b>Klik kodenya buat nyalin.</b>';
+          '<div class="vhead">Kode diskon buat lu</div>' +
+          '<div class="vbody">' +
+            '<span class="kode js-salin" role="button" tabindex="0">' + VOUCHER + '</span>' +
+            '<p class="vnote">Di halaman pembayaran harganya masih ' + HARGA_ASLI + '. ' +
+            'Masukin kode ini biar jadi ' + HARGA_OTO + '. ' +
+            '<b>Klik kodenya buat nyalin.</b></p>' +
+          '</div>';
         a.parentNode.insertBefore(box, a.nextSibling);
       }
     );
 
+    var sp = document.querySelector('.sticky-price');
+    if (sp) {
+      var mini = document.createElement('span');
+      mini.className = 'vcode js-salin';
+      mini.setAttribute('role', 'button');
+      mini.setAttribute('tabindex', '0');
+      mini.style.marginTop = '5px';
+      mini.style.alignSelf = 'flex-start';
+      mini.innerHTML = '<small>kode</small>' + VOUCHER;
+      sp.appendChild(mini);
+    }
+
     function salin(el) {
-      var asli = el.textContent;
+      var asli = el.innerHTML;
       function sukses() {
         el.textContent = 'Tersalin';
         el.classList.add('copied');
         setTimeout(function () {
-          el.textContent = asli;
+          el.innerHTML = asli;
           el.classList.remove('copied');
         }, 1600);
       }
@@ -1043,7 +1090,7 @@
       document.body.removeChild(tmp);
     }
 
-    Array.prototype.forEach.call(document.querySelectorAll('.voucher .kode'), function (el) {
+    Array.prototype.forEach.call(document.querySelectorAll('.js-salin'), function (el) {
       el.addEventListener('click', function () { salin(el); });
       el.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); salin(el); }
