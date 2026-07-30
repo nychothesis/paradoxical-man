@@ -378,10 +378,16 @@
   .cta-mid { text-align: center; }
   .cta-mid .btn-primary, .final .btn-primary { margin-left: auto; margin-right: auto; }
 
+  /* Kotak harga: kaca buram + garis bergradien. Ini kotak paling menentukan
+     di halaman, jadi dia yang paling pantes keliatan beda dari kotak lain. */
   .offer-box {
-    background: var(--card); border: 1px solid var(--line);
+    background:
+      linear-gradient(180deg, rgba(33,31,28,.86), rgba(29,27,25,.86)) padding-box,
+      linear-gradient(140deg, rgba(224,195,126,.6), rgba(201,162,39,.12) 50%, rgba(201,162,39,.4)) border-box;
+    border: 1px solid transparent;
+    -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
     border-radius: var(--radius); padding: 26px; margin-bottom: 26px;
-    text-align: left;
+    text-align: left; box-shadow: 0 18px 46px rgba(0,0,0,.3);
   }
   .offer-row {
     display: flex; justify-content: space-between; gap: 16px;
@@ -719,6 +725,44 @@
   .diff-row.diff-head .diff-cell::before { content:none; }
   @media (max-width:600px){ .statband { grid-template-columns:repeat(2,1fr); } }
 
+
+  /* ============ AURA: bola cahaya latar ============
+     Ini yang bikin halaman berasa "mahal", bukan animasi scroll. Permukaannya
+     jadi ga pernah warna rata: selalu ada cahaya yang jatuh dari suatu arah.
+
+     Dua hal penting soal cara bikinnya:
+     1. Ga pake filter: blur(). Radial-gradient yang ujungnya transparan udah
+        lembut dari sananya, dan ongkosnya nol. blur() di benda selebar layar
+        itu berat banget di HP.
+     2. Yang dianimasiin cuma transform, dan bolanya position:fixed. Jadi dia
+        digarap kartu grafis dan ga maksa halaman ngitung ulang tata letak.
+     Pelan banget (20-30 detik sekali putaran) biar kerasa "idup" tanpa bikin
+     mata capek atau ngerebut perhatian dari teks. */
+  .aura { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .aura i { position: absolute; display: block; border-radius: 50%; }
+  .aura .a1 {
+    width: 78vw; height: 78vw; max-width: 820px; max-height: 820px;
+    top: -26vw; right: -20vw;
+    background: radial-gradient(circle, rgba(201,162,39,.20), rgba(201,162,39,.06) 45%, transparent 70%);
+    animation: apung-a 24s ease-in-out infinite;
+  }
+  .aura .a2 {
+    width: 66vw; height: 66vw; max-width: 660px; max-height: 660px;
+    bottom: -24vw; left: -20vw;
+    background: radial-gradient(circle, rgba(176,65,60,.13), rgba(176,65,60,.04) 45%, transparent 70%);
+    animation: apung-b 31s ease-in-out infinite;
+  }
+  @keyframes apung-a {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    50%      { transform: translate3d(-4vw, 5vh, 0) scale(1.12); }
+  }
+  @keyframes apung-b {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    50%      { transform: translate3d(5vw, -4vh, 0) scale(1.15); }
+  }
+  /* Isi halaman harus di ATAS aura, makanya dikasih lapis sendiri. */
+  .wrap { position: relative; z-index: 1; }
+
   /* ==================== GERAK ====================
      Sengaja berani, tapi tiga pagar ini ga boleh dilanggar:
      1. JS mati -> semua tetep keliatan.
@@ -791,6 +835,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .aura .a1, .aura .a2 { animation: none; }
     .js-anim .rv, .js-anim .rv.in,
     .js-anim .t-card.rv, .js-anim .benefit.rv, .js-anim .module-card.rv,
     .js-anim .hero-grid > div > *, .js-anim.ready .hero-grid > div > *,
@@ -804,6 +849,8 @@
 </style>
 </head>
 <body>
+<div class="aura" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
+
 <div class="announce" id="announce">Rp299.000 itu harga launch, bukan harga permanen. Begitu materi dan member nambah, harga naik.</div>
 <div class="wrap">
 
