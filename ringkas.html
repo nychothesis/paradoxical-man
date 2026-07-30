@@ -519,6 +519,17 @@
   .ft-row .from { color: var(--muted); text-align: right; }
   .ft-row .arrow { color: var(--gold); }
   .ft-row .to { color: var(--gold-soft); font-weight: 600; }
+  /* Di HP dua kolom itu masing-masing cuma dapet ~150px, jadi tiap sisi
+     patah 2-3 baris dan pasangannya ga kebaca lagi. Ditumpuk aja:
+     baris atas yang dicoret, baris bawah penggantinya. Panahnya
+     dimatiin (kalo dibiarin dia dapet baris kosong sendiri) terus
+     dipindah nempel di depan teks tujuan. */
+  @media (max-width: 560px) {
+    .ft-row { grid-template-columns: 1fr; gap: 3px; padding: 13px 16px; }
+    .ft-row .from { text-align: left; text-decoration: line-through; text-decoration-color: rgba(176,65,60,.6); }
+    .ft-row .arrow { display: none; }
+    .ft-row .to::before { content: "\2192  "; color: var(--gold); font-weight: 700; }
+  }
   .embodied {
     font-size: 1.25rem; font-weight: 700; color: var(--gold);
     margin: 30px 0; letter-spacing: .01em;
