@@ -99,6 +99,22 @@
         return;
       }
 
+      // Jaring pengaman buat autofill yang naro isian di kolom yang salah.
+      // Atribut autocomplete di HTML-nya udah dibenerin, tapi tiap browser
+      // punya tebakan sendiri dan ga ada yang bisa dipaksa 100%. Jadi kalo
+      // kolom Email isinya BUKAN email tapi kolom Nama isinya JUSTRU email,
+      // udah pasti ketuker. Tuker balik diem-diem: orang cuma pengen PDF-nya,
+      // dia ga peduli kotak mana yang bener, dan nyuruh dia benerin sendiri
+      // cuma bikin dia nutup halaman.
+      // Syaratnya sengaja ketat (dua-duanya harus kepenuhan) biar ga ada
+      // isian bener yang malah dituker.
+      var isiNama = form.nama.value.trim();
+      var isiEmail = form.email.value.trim();
+      if (!emailValid(isiEmail) && emailValid(isiNama)) {
+        form.nama.value = isiEmail;
+        form.email.value = isiNama;
+      }
+
       if (!emailValid(form.email.value.trim())) {
         tampilError('Emailnya kayaknya salah ketik. Cek lagi ya.');
         return;
