@@ -456,10 +456,10 @@
     text-transform: uppercase; color: var(--muted-2); flex: none;
   }
   .module-card > summary::after {
-    content: "+"; font-family: 'Poppins', sans-serif; font-weight: 700;
-    color: var(--gold); flex: none; font-size: 1.1rem; line-height: 1;
+    content: "\25BE"; color: var(--gold); flex: none;
+    font-size: .95rem; line-height: 1; transition: transform .18s;
   }
-  .module-card[open] > summary::after { content: "\2013"; }
+  .module-card[open] > summary::after { transform: rotate(180deg); }
   .module-card[open] > summary { margin-bottom: 14px; }
   .v-desc { display: block; font-size: .82rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
 
@@ -649,9 +649,8 @@
         <h1>Framework lengkap buat jadi cowo yang <em>paling susah ditolak</em> cewe.</h1>
         <div class="reframe" style="margin: 34px 0 0;">
           <p class="reframe-title">Ini bukan kumpulan tips dating.</p>
-          <p>Tips chatting, pickup lines, cara keliatan menarik: itu semua <b>makeup</b>. Bagus sampe kena air. Dan yang bikin lu stuck bukan kurang teknik, melainkan pondasi yang belum kelar, dan <b>itu ga bisa ditutup pake teknik</b>.</p>
-          <p>Gw sambungin titik-titiknya dari banyak dimensi ilmu sampe ketemu <b>akar</b> masalahnya, terus gw garap dari akar itu. Bukan dari gejalanya.</p>
-          <p>Analoginya: gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng sendiri. Sisa halaman ini soal cara bangun tamannya.</p>
+          <p>Tips chatting, pickup lines, cara keliatan menarik: itu semua <b>makeup</b>. Bagus sampe kena air. Yang bikin lu stuck bukan kurang teknik, melainkan pondasi yang belum kelar.</p>
+          <p>Gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng sendiri.</p>
           <div class="fromto">
             <div class="ft-row"><span class="from">ngejar kupu-kupu</span><span class="arrow">→</span><span class="to">bangun taman yang indah</span></div>
             <div class="ft-row"><span class="from">nonton ratusan konten</span><span class="arrow">→</span><span class="to">sistem yang berjalan tanpa mengandalkan motivasi</span></div>
@@ -682,8 +681,9 @@
         <ul class="pain-points">
           <li>Cewe yang lu suka jalan sama cowo lain. Lu cuma bisa mikir "coba dulu gw berani".</li>
           <li>Lu selalu jadi "temen yang baik". Ga pernah jadi pilihan.</li>
-          <li>Punya pasangan, tapi ngalah terus biar ga ribut.</li>
-          <li>Lu mendem semua emosi. Sekarang lu ga tau lagi lu ngerasain apa.</li>
+          <li>Punya pasangan, tapi ga pernah ngerasa di-respect. Ngalah terus biar ga ribut.</li>
+          <li>Dari kecil lu diajarin cowo ga boleh lemah, jadi semuanya lu pendem. Sekarang lu ga tau lagi lu ngerasain apa.</li>
+          <li>Lu ga pernah berani ngomongin isi hati lu ke cewe, takut begitu dia liat lu yang sebenernya, dia pergi.</li>
           <li>Hidup keliatan jalan. Tapi ditanya mau ke mana lima tahun lagi, lu ga bisa jawab.</li>
           <li>Ratusan konten dating ditonton. Teorinya jago, hidupnya sama persis.</li>
           <li>Semangat tiga hari, abis itu balik ke porn dan scrolling.</li>
@@ -763,25 +763,25 @@
   <section>
     <div class="n780">
     <h2 class="sec-head" id="hasil">Abis 4 modul ini, apa yang beda</h2>
-      <p class="lead">Lu nonton, lu catet, lu ngangguk. Tiga minggu lagi hidup lu balik ke pola yang sama persis. Itu <b>coli otak</b>: yang nambah cuma informasi, bukan perilaku. Yang belum lu punya itu <span class="caps">SISTEM</span> yang tetep jalan pas lu ga mood, dan <span class="caps">KOMUNITAS</span> yang nanya pas lu ilang.</p>
+      <p class="lead">Lu nonton, lu catet, lu ngangguk. Tiga minggu lagi hidup lu balik ke pola yang sama. Itu <b>coli otak</b>. Yang belum lu punya itu <span class="caps">SISTEM</span> yang jalan pas lu ga mood, dan <span class="caps">KOMUNITAS</span> yang nanya pas lu ilang.</p>
     </div>
 
     <div class="benefit-grid">
       <div class="benefit">
         <h3>Sistem yang bikin lu disiplin tanpa ngandelin willpower.</h3>
-        <p>Willpower bisa abis. Sistem engga. Yang ngebedain cowo yang nyampe dari yang muter di tempat bukan seberapa keras dia maksa diri sendiri.</p>
+        <p>Willpower bisa abis. Sistem engga.</p>
       </div>
       <div class="benefit">
         <h3>Seni in-touch sama emosi lu tanpa menjadi lemah.</h3>
-        <p>Empatik, dalem, lembut, <b>DAN</b> tetep kuat. Kedengeran kontradiksi, padahal ada caranya, dan ada akar fundamentalnya kenapa itu mungkin.</p>
+        <p>Empatik, dalem, lembut, <b>DAN</b> tetep kuat. Kedengeran kontradiksi, padahal ada caranya.</p>
       </div>
       <div class="benefit">
         <h3>Berdamai sama luka lu, biar lu berhenti dikontrol sama dia.</h3>
-        <p>Banyak keputusan lu digerakin luka yang lu ga sadar ada. Pas itu beres, lu gerak karena <b>visi</b>, bukan karena dendam atau pengen ngebuktiin sesuatu.</p>
+        <p>Lu gerak karena <b>visi</b>, bukan karena dendam.</p>
       </div>
       <div class="benefit">
         <h3>Cewe: efek samping, bukan tujuan.</h3>
-        <p>Ngejar cewe ga salah. Tapi pas lu fokus ke tujuan yang lebih gede, yang kejadian beda: <b>hidup lu jadi tempat yang orang pengen ada di dalemnya.</b></p>
+        <p><b>Hidup lu jadi tempat yang orang pengen ada di dalemnya.</b></p>
       </div>
     </div>
 
@@ -904,10 +904,9 @@
     <div class="panel discord-panel">
       <p class="lead">Mayoritas orang yang beli course online <b>ga pernah kelar</b>. Ruangan ini ada buat ngelawan angka itu.</p>
       <ul class="d-points">
-        <li>Isinya cowo-cowo yang lagi ngejalanin proses yang sama di titik beda-beda. Lu bisa nanya, posting progress, dan liat orang lain mentok di mana.</li>
         <li>Gampang bohongin diri sendiri. <b>Susah bohongin orang yang tau lu lagi ngerjain apa.</b></li>
       </ul>
-      <p class="closer">Gw jujur: ini bukan layanan coaching, dan gw ga janjiin gw standby 24 jam. Ini ruangan. Yang bikin dia hidup atau mati itu orang-orang di dalemnya, termasuk lu.</p>
+      <p class="closer">Ini bukan coaching, dan gw ga standby 24 jam. Ini ruangan. Yang bikin dia hidup itu orang di dalemnya, termasuk lu.</p>
     </div>
     </div>
   </section>
@@ -929,7 +928,7 @@
           <div class="diff-cell me">Ada referensinya, dan gw pengen lu cek.</div>
         </div>
         <div class="diff-row">
-          <div class="diff-cell them">Masih pake "fakta" populer yang udah rontok pas diuji ulang. Contohnya efek Dunning-Kruger, yang ternyata lebih ke artefak statistik.</div>
+          <div class="diff-cell them">Masih pake "fakta" populer yang udah rontok pas diuji ulang.</div>
           <div class="diff-cell me">Yang rontok pas diuji ulang gw buang, walaupun itu bikin kontennya kurang sexy.</div>
         </div>
         <div class="diff-row">
@@ -941,7 +940,7 @@
           <div class="diff-cell me">Konteks Indonesia.</div>
         </div>
       </div>
-      <p class="closer">Gw ga jualan "kebenaran yang disembunyiin". Itu jualannya kubu sebelah. Gw kasih lu mekanismenya, sumbernya, dan batasnya. Sisanya lu yang mikir.</p>
+      <p class="closer">Gw ga jualan "kebenaran yang disembunyiin". Gw kasih mekanismenya, sumbernya, dan batasnya. Sisanya lu yang mikir.</p>
     </div>
   </section>
 
@@ -951,10 +950,10 @@
     <h2 class="sec-head">Ini bukan buat lu kalo:</h2>
     <div class="notfor">
       <ul class="notfor-list">
-        <li>Lu nyari cara cepet. Ini bukan itu, dan ga akan pernah jadi itu.</li>
-        <li>Lu mau nonton doang terus ngerasa cukup. Tiap modul ada workbook yang harus lu isi dan praktekin. Kalo cuma nonton, itu coli otak versi bayar, dan lu cuma buang 299 ribu.</li>
-        <li>Lu belum siap jujur sama diri sendiri. Workbook-nya bakal nanya hal-hal yang jawabannya ga enak diakuin.</li>
-        <li>Lu nyari pembenaran bahwa ini semua salah cewe, salah zaman, atau salah orang lain. Di sini lu bakal disuruh ngaca dulu.</li>
+        <li>Lu nyari cara cepet.</li>
+        <li>Lu mau nonton doang. Tiap modul ada workbook yang harus dipraktekin. Kalo cuma nonton, itu coli otak versi bayar, dan lu cuma buang 299 ribu.</li>
+        <li>Lu belum siap jujur sama diri sendiri. Workbook-nya nanya hal yang ga enak diakuin.</li>
+        <li>Lu nyari pembenaran bahwa ini salah cewe atau salah zaman. Di sini lu disuruh ngaca dulu.</li>
       </ul>
       <p class="notfor-closer">Kalo empat-empatnya ga kena, lu udah siap.</p>
     </div>
