@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<!-- Dipasang sebelum apa pun kegambar. Kalo ditaro di bawah, isinya sempet
+     keliatan sekejap terus ilang, dan itu keliatan kayak halaman rusak.
+     Kalo JS mati, class ini ga pernah kepasang dan semuanya tampil utuh. -->
+<script>document.documentElement.className += ' js-anim';</script>
 <style>
   :root {
     --bg:        #121110;
@@ -292,17 +296,6 @@
   .menu-inner a:hover { background: var(--bg-soft); color: var(--gold-soft); }
 
   /* ---------- Pain checklist ---------- */
-  .pain-points { list-style: none; }
-  .pain-points li {
-    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
-    position: relative; font-size: .92rem; color: #d8d3c8;
-  }
-  .pain-points li:last-child { border-bottom: none; }
-  .pain-points li::before {
-    content: "◆"; position: absolute; left: 0; top: 13px;
-    color: var(--maroon); font-size: .65rem;
-  }
-  .pain-closer { color: var(--gold-soft); font-weight: 600; margin-top: 18px; font-size: .92rem; }
 
   /* ---------- Testimonials ---------- */
   .t-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
@@ -331,9 +324,34 @@
   .t-text { font-size: .88rem; color: #d8d3c8; font-weight: 400; }
   .t-text p + p { margin-top: 10px; }
 
+  /* Testimoninya panjang-panjang (63-80 kata), dan yang paling nendang justru
+     bagian yang udah ditebelin. Jadi yang tampil duluan cuma sorotannya, teks
+     utuhnya nunggu diklik. Bagian ini jadi kebaca sekali lirik, tapi yang mau
+     mastiin tetep bisa buka lengkapnya. */
+  /* Sengaja BUKAN emas. Nama sama chip di kartu ini udah emas, kalo kutipannya
+     ikut emas jadi tiga benda emas numpuk dan namanya kalah sama kutipan.
+     Nonjolnya dapet dari terang + tebel, warnanya dibiarin netral. */
+  .t-sum { font-size: .95rem; color: var(--text); font-weight: 400; line-height: 1.7; }
+  /* Ada sorotan yang mulainya di tengah kalimat, jadi huruf awalnya kecil dan
+     kebaca kayak potongan nyangkut. Dibesarin lewat CSS doang, kata-katanya
+     ga disentuh, jadi kutipannya tetep persis kayak yang mereka tulis. */
+  .t-sum::first-letter { text-transform: uppercase; }
+  .t-more {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 14px;
+    padding: 0; background: none; border: 0;
+    font-family: 'Poppins', sans-serif; font-size: .77rem; font-weight: 600;
+    color: var(--muted); cursor: pointer; transition: color .18s;
+  }
+  .t-more:hover { color: var(--gold-soft); }
+  .t-more i { font-style: normal; font-size: .9em; transition: transform .18s; }
+  .t-more[aria-expanded="true"] i { transform: rotate(180deg); }
+
   /* ---------- Section 3: benefits ---------- */
   .lead { color: #d8d3c8; margin-bottom: 18px; font-size: .95rem; }
-  .lead .caps { color: var(--gold); font-weight: 700; }
+  /* Emas lembut, bukan emas tua. Di kalimat yang sama ada <b>coli otak</b> yang
+     udah emas lembut, jadi kalo SISTEM/KOMUNITAS pake emas tua, satu kalimat
+     kepecah jadi dua nada emas yang beda tanpa alasan. */
+  .lead .caps { color: var(--gold-soft); font-weight: 700; }
   .benefit-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 40px; }
   .benefit {
     background: rgba(127, 174, 107, .07); border: 1px solid rgba(127, 174, 107, .55);
@@ -519,16 +537,18 @@
   .ft-row .from { color: var(--muted); text-align: right; }
   .ft-row .arrow { color: var(--gold); }
   .ft-row .to { color: var(--gold-soft); font-weight: 600; }
-  /* Di HP dua kolom itu masing-masing cuma dapet ~150px, jadi tiap sisi
-     patah 2-3 baris dan pasangannya ga kebaca lagi. Ditumpuk aja:
-     baris atas yang dicoret, baris bawah penggantinya. Panahnya
-     dimatiin (kalo dibiarin dia dapet baris kosong sendiri) terus
-     dipindah nempel di depan teks tujuan. */
+  /* Di HP tetep DUA KOLOM, ga ditumpuk. Inti tabel ini kan "dari X jadi Y",
+     dan pasangannya paling kebaca kalo sejajar kiri-kanan. Yang dikecilin
+     ukuran hurufnya, bukan susunannya. Boleh patah dua-tiga baris, asal
+     pasangannya tetep sebaris. Ujung atasnya disejajarin (align-items:start)
+     biar pas salah satu sisi lebih panjang, dua-duanya tetep mulai dari
+     tinggi yang sama. */
   @media (max-width: 560px) {
-    .ft-row { grid-template-columns: 1fr; gap: 3px; padding: 13px 16px; }
-    .ft-row .from { text-align: left; text-decoration: line-through; text-decoration-color: rgba(176,65,60,.6); }
-    .ft-row .arrow { display: none; }
-    .ft-row .to::before { content: "\2192  "; color: var(--gold); font-weight: 700; }
+    .ft-row {
+      grid-template-columns: 1fr auto 1.25fr; align-items: start;
+      gap: 8px; padding: 12px 13px; font-size: .74rem; line-height: 1.5;
+    }
+    .ft-row .from { text-decoration: line-through; text-decoration-color: rgba(176,65,60,.6); }
   }
   .embodied {
     font-size: 1.25rem; font-weight: 700; color: var(--gold);
@@ -624,8 +644,12 @@
   }
   /* Pita angka: jeda visual, nol prosa. Gantiin section "Yang lu dapet"
      yang tadinya cuma daftar. Warna ngikutin .get-card yang udah ada. */
+  /* 6 sel, 3 kolom di layar lebar dan 2 kolom di HP. Dua-duanya bagi habis,
+     jadi ga ada sel nyangkut sendirian di baris terakhir. Label komunitas
+     sengaja netral (bukan "Discord"), biar ga perlu diubah kalo platformnya
+     pindah. */
   .statband {
-    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
     border:1px solid var(--line); border-radius:var(--radius);
     overflow:hidden; margin-top:26px;
   }
@@ -633,6 +657,52 @@
   .statband b {
     display:block; font-family:'Poppins',sans-serif; font-weight:700;
     font-size:clamp(1.35rem,3.6vw,1.95rem); color:var(--gold-soft); line-height:1;
+  }
+  /* Angka dibikin gede biar kebaca sekilas. Tapi kalo isinya kata, ukuran
+     segitu jadi mecah dua baris dan tingginya ga sama sama tetangganya.
+     Yang berupa kata dikecilin, tetep sebaris sama yang lain. */
+  .statband b.word { font-size:clamp(.95rem,2.6vw,1.3rem); line-height:1.25; }
+
+  /* ---------- Checklist "Relate ga?" ----------
+     Judulnya nanya, jadi orang dikasih cara buat ngejawab beneran. Tiap poin
+     bisa di-tap, hitungannya idup, dan penutupnya jadi vonis personal.
+     PENTING: yang belum dicentang TETEP terang. Kalo yang default-nya redup,
+     orang yang cuma scroll lewat malah dapet versi paling lemah dari bagian
+     paling nusuk di halaman ini. Yang dicentang naik ke emas, jadi nyentang
+     itu bonus, bukan syarat. */
+  /* Tanpa arahan, kotaknya gampang dikira hiasan dan ga ada yang nge-tap.
+     Satu baris pendek aja, ga usah panjang-panjang. */
+  .pcheck-hint {
+    font-family: 'Poppins', sans-serif; font-size: .74rem; font-weight: 600;
+    letter-spacing: .04em; color: var(--muted-2);
+    margin-bottom: 14px; padding-left: 8px;
+  }
+  .pcheck { list-style: none; display: grid; gap: 2px; }
+  .pcheck button {
+    width: 100%; display: grid; grid-template-columns: 22px 1fr; gap: 12px;
+    align-items: start; text-align: left; background: none; border: 0;
+    padding: 11px 8px; border-radius: 9px; cursor: pointer;
+    font-family: 'Atkinson Hyperlegible', sans-serif; font-size: .9rem;
+    line-height: 1.6; color: #d8d3c8; transition: background .15s, color .15s;
+  }
+  .pcheck button:hover { background: rgba(255,255,255,.03); }
+  .pcheck .bx {
+    width: 20px; height: 20px; border-radius: 5px; border: 1.5px solid #3a3630;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .7rem; color: transparent; margin-top: 3px; transition: .15s;
+  }
+  .pcheck [aria-pressed="true"] { color: var(--gold-soft); }
+  .pcheck [aria-pressed="true"] .bx {
+    background: var(--gold); border-color: var(--gold); color: #191510;
+  }
+  .tally {
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-family: 'Poppins', sans-serif; font-size: .95rem; font-weight: 600;
+  }
+  .tally b { color: var(--gold-soft); font-size: 1.25rem; }
+  .tally span {
+    display: block; font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-size: .86rem; font-weight: 400; color: var(--muted); margin-top: 3px;
   }
   .statband span {
     display:block; font-family:'Poppins',sans-serif; font-size:.64rem;
@@ -646,6 +716,89 @@
   .diff-cell.me::before   { content:"\2713  "; color:var(--gold); font-weight:700; }
   .diff-row.diff-head .diff-cell::before { content:none; }
   @media (max-width:600px){ .statband { grid-template-columns:repeat(2,1fr); } }
+
+  /* ==================== GERAK ====================
+     Sengaja berani, tapi tiga pagar ini ga boleh dilanggar:
+     1. JS mati -> semua tetep keliatan.
+     2. Cuma opacity/transform/filter yang digerakin.
+     3. Yang minta gerakan dikurangin, dapet halaman diem total.
+     Halaman ini jauh lebih panjang dari homepage, jadi geraknya tetep tegas
+     tapi durasinya lebih pendek. Kalo tiap blok masuknya lama, yang discroll
+     lama malah nunggu terus. */
+
+  /* Judul dipecah per kata, tiap kata naik dari balik topeng. */
+  .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; }
+  .js-anim .hero h1 .w > span {
+    display: inline-block; transform: translateY(115%) rotate(4deg);
+  }
+  .js-anim.ready .hero h1 .w > span {
+    transform: none;
+    transition: transform .85s cubic-bezier(.16,.9,.24,1);
+    transition-delay: calc(var(--i, 0) * .055s);
+  }
+
+  .js-anim .hero-grid > div > *:not(h1) {
+    opacity: 0; transform: translateY(26px); filter: blur(8px);
+  }
+  .js-anim.ready .hero-grid > div > *:not(h1) {
+    opacity: 1; transform: none; filter: none;
+    transition: opacity .8s ease, transform .8s cubic-bezier(.16,.9,.24,1),
+                filter .8s ease;
+    transition-delay: .55s;
+  }
+
+  /* Yang muncul pas discroll: naik lebih jauh, miring dikit, buram dulu. */
+  /* CATATAN PENTING soal :not(.in) di bawah ini.
+     Keadaan awal tiap benda ditulis pake selector yang lebih spesifik daripada
+     aturan .rv.in yang ngebalikin ke posisi normal. Di CSS, yang lebih spesifik
+     yang menang, jadi tanpa :not(.in) benda-benda ini KEKUNCI di posisi awal
+     selamanya: kartu nyangkut miring dan numpuk, baris aturan ilang total
+     karena opacity-nya ketahan 0.
+     Makanya tiap keadaan awal dikasih :not(.in). Begitu class .in nempel,
+     aturannya berhenti kena, dan .rv.in bebas ngembaliin ke posisi normal. */
+  .js-anim .rv:not(.in) { opacity: 0; transform: translateY(38px) scale(.97); filter: blur(6px); }
+  .js-anim .rv.in {
+    opacity: 1; transform: none; filter: none;
+    transition: opacity .7s ease, transform .8s cubic-bezier(.16,.9,.24,1),
+                filter .7s ease;
+    transition-delay: var(--d, 0s);
+  }
+  .t-grid, .benefit-grid, .diff-table, .statband { perspective: 1200px; }
+  .js-anim .t-card.rv:not(.in), .js-anim .benefit.rv:not(.in), .js-anim .module-card.rv:not(.in) {
+    transform: translateY(38px) rotateX(8deg) scale(.97);
+    transform-origin: 50% 0%;
+  }
+
+  /* Kilau emas di tombol beli: lebih sering dan lebih tegas. Cuma tombol
+     utama, tombol kedua dibiarin diem biar bedanya makin jelas. */
+  .btn-primary { position: relative; overflow: hidden; }
+  .btn-primary::after {
+    content: ""; position: absolute; top: 0; left: -65%;
+    width: 48%; height: 100%; pointer-events: none;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.58), transparent);
+    transform: skewX(-18deg);
+    animation: kilau 4.4s ease-in-out 1.2s infinite;
+  }
+  @keyframes kilau { 0% { left: -65%; } 26%, 100% { left: 135%; } }
+
+  /* Denyut pelan di bayangan tombol beli, biar dia ga pernah bener-bener diem. */
+  .btn-primary { animation: denyut 3.6s ease-in-out infinite; }
+  @keyframes denyut {
+    0%, 100% { box-shadow: 0 8px 22px rgba(201,162,39,.22); }
+    50%      { box-shadow: 0 12px 34px rgba(201,162,39,.44); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .js-anim .rv, .js-anim .rv.in,
+    .js-anim .t-card.rv, .js-anim .benefit.rv, .js-anim .module-card.rv,
+    .js-anim .hero-grid > div > *, .js-anim.ready .hero-grid > div > *,
+    .js-anim .hero h1 .w > span, .js-anim.ready .hero h1 .w > span {
+      opacity: 1; transform: none; filter: none; transition: none; animation: none;
+    }
+    .btn-primary, .btn-primary::after { animation: none; }
+    .btn-primary::after { display: none; }
+    html { scroll-behavior: auto; }
+  }
 </style>
 </head>
 <body>
@@ -660,7 +813,7 @@
         <h1>Framework lengkap buat jadi cowo yang <em>paling susah ditolak</em> cewe.</h1>
         <div class="reframe" style="margin: 34px 0 0;">
           <p class="reframe-title">Ini bukan kumpulan tips dating.</p>
-          <p>Tips chatting, pickup lines, cara keliatan menarik: itu semua <b>makeup</b>. Bagus sampe kena air. Yang bikin lu stuck bukan kurang teknik, melainkan pondasi yang belum kelar.</p>
+          <p>Tips chatting, pickup lines, cara keliatan menarik: itu semua <b>makeup</b>. Bagus sampe kena air. Teknik apa pun bakal sia-sia, malah bisa bahaya, kalo akar sama pondasinya belum bener. Makanya gw mulai dari bagian yang justru sering di-skip "guru-guru di luar sana".</p>
           <p>Analoginya: gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng sendiri.</p>
           <div class="fromto">
             <div class="ft-row"><span class="from">ngejar kupu-kupu</span><span class="arrow">→</span><span class="to">bangun taman yang indah</span></div>
@@ -676,8 +829,10 @@
         </div>
         <div class="statband">
           <div><b>~4 jam</b><span>Total materi</span></div>
-          <div><b>~15 mnt</b><span>Rata-rata per video</span></div>
+          <div><b>4</b><span>Modul</span></div>
+          <div><b class="word">Mind map</b><span>Breakdown tiap video</span></div>
           <div><b>5</b><span>PDF workbook</span></div>
+          <div><b class="word">Komunitas</b><span>Khusus member</span></div>
           <div><b>&infin;</b><span>Akses seumur hidup</span></div>
         </div>
         <p class="micro">Rata-rata 15 menit per video. Ga ada video 3 menit yang cuma buat manjangin daftar.</p>
@@ -690,19 +845,18 @@
     <div class="n780">
       <h2 class="sec-head">Relate ga?</h2>
       <div class="panel">
-        <ul class="pain-points">
-          <li>Cewe yang lu suka jalan sama cowo lain. Lu cuma bisa mikir "coba dulu gw berani".</li>
-          <li>Lu selalu jadi "temen yang baik". Ga pernah jadi pilihan.</li>
-          <li>Punya pasangan, tapi ga pernah ngerasa di-respect. Ngalah terus biar ga ribut.</li>
-          <li>Dari kecil lu diajarin cowo ga boleh lemah, jadi semuanya lu pendem. Sekarang lu ga tau lagi lu ngerasain apa.</li>
-          <li>Lu ga pernah berani ngomongin isi hati lu ke cewe, takut begitu dia liat lu yang sebenernya, dia pergi.</li>
-          <li>Zaman sekarang ada dua narasi maskulinitas yang bertolak belakang: yang satu bilang cowo harus lembut dan terbuka, yang satu bilang cowo harus kuat dan tahan banting. Lu bingung harus jadi yang mana.</li>
-          <li>Lu udah baik, udah rajin, udah usaha. Tapi di kepala lu tetep ada suara: "yang penting ganteng, ege."</li>
-          <li>Hidup keliatan jalan. Tapi ditanya mau ke mana lima tahun lagi, lu ga bisa jawab.</li>
-          <li>Ratusan konten dating ditonton. Teorinya jago, hidupnya sama persis.</li>
-          <li>Semangat tiga hari, abis itu balik ke porn dan scrolling.</li>
+        <p class="pcheck-hint">Centang yang kena di lu.</p>
+        <ul class="pcheck" id="pcheck">
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu sering dibilang "kamu terlalu baik buat aku". Tapi ga pernah jadi pilihan.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Punya pasangan, tapi ga pernah ngerasa di-respect. Ngalah terus biar ga ribut.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Dari kecil lu diajarin cowo ga boleh lemah, jadi semua emosi lu pendem. Sekarang lu mati secara emosi.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu ga pernah berani ngomongin isi hati lu ke cewe, takut begitu dia liat lu yang sebenernya, dia pergi.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu kesepian. Zaman sekarang bikin orang keliatan makin nyambung, padahal makin terisolasi satu sama lain. Makin lama, ngobrol langsung malah makin susah.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Satu narasi bilang cowo harus lembut dan terbuka, satunya bilang harus kuat dan tahan banting. Lu bingung harus jadi yang mana.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Hidup keliatan jalan, tapi lu ga pernah tau lu dilahirin dan ditempatin di dunia ini buat apa. Visi besarnya ga pernah ketemu.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu struggle sama kecanduan, entah porn, video game, atau scrolling. Dan lu bingung gimana cara berhentinya.</span></button></li>
         </ul>
-        <p class="pain-closer">Kalo minimal dua kena, framework ini buat lu.</p>
+        <p class="tally" id="tally">Kalo minimal dua kena, framework ini buat lu.</p>
       </div>
     </div>
   </section>
@@ -732,7 +886,7 @@
 
   <!-- 2. TESTIMONI -->
   <section>
-    <h2 class="sec-head" id="testimoni">Kata mereka yang udah masuk</h2>
+    <h2 class="sec-head" id="testimoni">Kata mereka yang udah liat isinya</h2>
     <div class="t-grid">
 
       <div class="t-card">
@@ -787,20 +941,20 @@
       </div>
       <div class="benefit">
         <h3>Seni in-touch sama emosi lu tanpa menjadi lemah.</h3>
-        <p>Empatik, dalem, lembut, <b>DAN</b> tetep kuat. Kedengeran kontradiksi, padahal ada caranya.</p>
+        <p>Empatik, dalem, lembut, DAN tetep kuat. Kedengeran kontradiksi, padahal ada caranya.</p>
       </div>
       <div class="benefit">
         <h3>Berdamai sama luka lu, biar lu berhenti dikontrol sama dia.</h3>
-        <p>Lu gerak karena <b>visi</b>, bukan karena dendam.</p>
+        <p>Lu gerak karena visi, bukan karena dendam.</p>
       </div>
       <div class="benefit">
         <h3>Cewe: efek samping, bukan tujuan.</h3>
-        <p><b>Hidup lu jadi tempat yang orang pengen ada di dalemnya.</b></p>
+        <p>Hidup lu jadi journey yang orang pengen masuk ke dalemnya.</p>
       </div>
     </div>
 
     <div class="honest-block">
-      <p><b>Yang gw GA janjiin:</b> lu bakal punya pacar dalam tiga bulan. Ga ada yang bisa janjiin itu dengan jujur, karena itu ngelibatin manusia lain yang punya kehendak sendiri. Siapapun yang berani janjiin itu ke lu, lagi jualan sesuatu yang dia sendiri ga pegang.</p>
+      <p><b>Yang gw GA janjiin:</b> lu bakal punya pacar dalam tiga bulan. Ga ada yang bisa janjiin itu dengan jujur, karena itu ngelibatin manusia lain yang punya kehendak sendiri. Siapapun yang berani janjiin itu ke lu, lagi jualan sesuatu yang dia sendiri ga bisa pastiin.</p>
     </div>
   </section>
 
@@ -987,7 +1141,7 @@
         <p class="faq-a">Jujur, ga ada jaminan. Tapi dua hal yang biasanya bikin orang ga kelar: ga ada yang tau dia berhenti, dan materinya ngajarin "apa" tanpa "gimana pas lagi ga mood". Dua-duanya yang gw urus, lewat <b>Discord</b> dan <b>Modul 2</b>. Sisanya di lu.</p>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Perlu baca ebook-nya dulu ga sebelum masuk?</summary>
+        <summary class="faq-q">Perlu baca PDF gratisnya dulu ga sebelum masuk?</summary>
         <p class="faq-a">Ga perlu. <b>Modul Diagnosis</b> udah mencakup pondasinya, jadi lu bisa langsung mulai dari sini.</p>
       </details>
       <details class="faq-item">
@@ -1027,7 +1181,7 @@
       <span>Lompat ke bagian</span>
       <button id="menu-close" aria-label="Tutup daftar isi">&times;</button>
     </div>
-    <a href="#testimoni">Testimoni yang udah masuk</a>
+    <a href="#testimoni">Testimoni</a>
     <a href="#hasil">Yang berubah abis 4 modul</a>
     <a href="#harga">Harga &amp; isi paketnya</a>
     <a href="#dapet">Yang lu dapet</a>
@@ -1222,6 +1376,150 @@
     }
     tick();
     setInterval(tick, 1000);
+  })();
+</script>
+
+<script>
+  (function () {
+    // Testimoni diringkes: yang tampil cuma bagian yang ditebelin, sisanya di
+    // balik tombol. Ringkasannya dirakit dari <b> yang udah ada, bukan ditulis
+    // ulang di HTML, jadi teksnya tetep satu sumber dan ga mungkin beda.
+    // Kalo JS mati, semua kartu balik tampil utuh kayak sedia kala.
+    var n = 0;
+    Array.prototype.forEach.call(document.querySelectorAll('.t-card'), function (card) {
+      var utuh = card.querySelector('.t-text');
+      if (!utuh) return;
+
+      var potongan = [];
+      Array.prototype.forEach.call(utuh.querySelectorAll('b, strong'), function (b) {
+        var t = b.textContent.replace(/\s+/g, ' ').trim();
+        if (t) potongan.push(t);
+      });
+      // Ga ada yang ditebelin berarti ga ada yang bisa diringkes. Biarin utuh.
+      if (!potongan.length) return;
+
+      n += 1;
+      utuh.id = utuh.id || 't-full-' + n;
+
+      var ringkas = document.createElement('p');
+      ringkas.className = 't-sum';
+      // Antar potongan dikasih elipsis, biar kebaca sebagai kutipan yang
+      // emang dipotong, bukan kalimat yang tiba-tiba loncat.
+      ringkas.textContent = potongan.join(' … ');
+
+      var tombol = document.createElement('button');
+      tombol.type = 'button';
+      tombol.className = 't-more';
+      tombol.setAttribute('aria-expanded', 'false');
+      tombol.setAttribute('aria-controls', utuh.id);
+      tombol.innerHTML = '<span>Baca selengkapnya</span><i>&#9662;</i>';
+
+      utuh.style.display = 'none';
+      utuh.parentNode.insertBefore(ringkas, utuh);
+      card.appendChild(tombol);
+
+      tombol.addEventListener('click', function () {
+        var kebuka = tombol.getAttribute('aria-expanded') === 'true';
+        tombol.setAttribute('aria-expanded', kebuka ? 'false' : 'true');
+        utuh.style.display = kebuka ? 'none' : '';
+        ringkas.style.display = kebuka ? '' : 'none';
+        tombol.querySelector('span').textContent = kebuka ? 'Baca selengkapnya' : 'Tutup';
+      });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    // Checklist "Relate ga?". Kalimat penutupnya cuma berubah jadi hitungan
+    // setelah orang nyentang minimal satu. Sebelum disentuh, dia tetep kalimat
+    // aslinya, jadi yang cuma baca sekilas ga ketinggalan apa-apa.
+    var list = document.getElementById('pcheck');
+    var out  = document.getElementById('tally');
+    if (!list || !out) return;
+
+    var asli = out.textContent;
+    var tombol = list.querySelectorAll('button');
+
+    function hitung() {
+      var kena = list.querySelectorAll('[aria-pressed="true"]').length;
+      if (kena === 0) { out.textContent = asli; return; }
+      out.innerHTML = 'Lu kena <b>' + kena + '</b> dari ' + tombol.length + '.'
+        + '<span>' + (kena < 2
+            ? 'Baru satu. Kalo minimal dua kena, framework ini buat lu.'
+            : 'Minimal dua kena. Framework ini buat lu.') + '</span>';
+    }
+
+    Array.prototype.forEach.call(tombol, function (b) {
+      b.addEventListener('click', function () {
+        b.setAttribute('aria-pressed',
+          b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+        hitung();
+      });
+    });
+  })();
+</script>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+
+    // Judul dipecah jadi kata-kata lewat JS, bukan ditulis manual di HTML,
+    // biar teksnya tetep satu kalimat utuh buat Google sama pembaca layar.
+    // Rekursif, biar <em> yang bikin sebagian kata emas ga ikut kebongkar.
+    var judul = document.querySelector('.hero h1');
+    var urut = 0;
+    function belahKata(induk) {
+      Array.prototype.slice.call(induk.childNodes).forEach(function (node) {
+        if (node.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          node.nodeValue.split(/(\s+)/).forEach(function (potong) {
+            if (!potong) return;
+            if (/^\s+$/.test(potong)) { frag.appendChild(document.createTextNode(' ')); return; }
+            var kotak = document.createElement('span');
+            kotak.className = 'w';
+            var isi = document.createElement('span');
+            isi.textContent = potong;
+            // Tanda baca sendirian ikut giliran kata sebelumnya, biar ga naik
+            // belakangan kayak salah ketik yang nyusul.
+            isi.style.setProperty('--i', /^[.,!?;:'\"]+$/.test(potong)
+              ? Math.max(0, urut - 1) : urut++);
+            kotak.appendChild(isi);
+            frag.appendChild(kotak);
+          });
+          induk.replaceChild(frag, node);
+        } else if (node.nodeType === 1) {
+          belahKata(node);
+        }
+      });
+    }
+    if (judul) belahKata(judul);
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { root.classList.add('ready'); });
+    });
+
+    var target = document.querySelectorAll(
+      '.sec-head, .panel, .t-card, .benefit, .fromto, .statband, .module-card,' +
+      '.diff-row, .faq-item, .offer-box, .honest-block, .get-card, .video');
+    if (!('IntersectionObserver' in window) || !target.length) return;
+
+    // Jeda beruntun cuma di dalem satu rombongan yang muncul barengan.
+    // Kalo pake nomor urut global, blok paling bawah kena jeda berdetik-detik
+    // dan keliatan kayak nge-lag, bukan kayak animasi.
+    var io = new IntersectionObserver(function (entries) {
+      entries.filter(function (e) { return e.isIntersecting; })
+             .forEach(function (e, i) {
+        e.target.style.setProperty('--d', (Math.min(i, 5) * 0.07) + 's');
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -5% 0px' });
+
+    Array.prototype.forEach.call(target, function (el) {
+      el.classList.add('rv');
+      io.observe(el);
+    });
   })();
 </script>
 </body>
