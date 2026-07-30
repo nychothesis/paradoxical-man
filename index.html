@@ -265,12 +265,70 @@
   .menu-btn:hover { border-color: var(--gold); }
   .menu-btn .bars { display: inline-flex; flex-direction: column; gap: 3px; }
   .menu-btn .bars i { display: block; width: 15px; height: 2px; border-radius: 2px; background: var(--gold); }
+  /* ---- Buka-tutup daftar isi ----
+     Dulu cuma display:none ke block, jadi panelnya nongol mendadak kayak
+     alert browser. Sekarang dianimasiin.
+
+     Kenapa pake visibility, bukan display: display ga bisa dianimasiin sama
+     sekali. Triknya, visibility diganti TANPA durasi tapi pake jeda, jadi pas
+     nutup dia baru bener-bener ilang SETELAH memudarnya kelar. Kalo langsung
+     hidden, animasi keluarnya ga akan pernah keliatan. */
   .menu-panel {
-    position: fixed; inset: 0; z-index: 90; display: none;
+    position: fixed; inset: 0; z-index: 90;
     background: rgba(8, 8, 7, .72);
     -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity .26s ease, visibility 0s linear .26s;
   }
-  .menu-panel.open { display: block; }
+  .menu-panel.open {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transition: opacity .26s ease, visibility 0s linear 0s;
+  }
+
+  /* Panelnya tumbuh dari pojok kanan atas, persis dari tempat tombolnya
+     berada. Jadi kebaca "tombol ini yang buka", bukan kotak yang tiba-tiba
+     muncul entah dari mana. */
+  .menu-inner {
+    transform-origin: 100% 0%;
+    transform: translateY(-12px) scale(.92);
+    opacity: 0;
+    transition: transform .36s cubic-bezier(.16,.9,.24,1), opacity .22s ease;
+  }
+  .menu-panel.open .menu-inner { transform: none; opacity: 1; }
+
+  /* Isinya masuk beruntun dari kanan. Jedanya CUMA dipasang pas buka.
+     Pas nutup semuanya pergi barengan, karena nutup yang beruntun berasa
+     lelet: orang udah mutusin pergi, jangan ditahan-tahan. */
+  .menu-inner a {
+    opacity: 0; transform: translateX(16px);
+    transition: opacity .26s ease, transform .3s cubic-bezier(.16,.9,.24,1),
+                background .14s, color .14s;
+  }
+  .menu-panel.open .menu-inner a { opacity: 1; transform: none; }
+  .menu-panel.open .menu-inner a:nth-child(2) { transition-delay: .06s; }
+  .menu-panel.open .menu-inner a:nth-child(3) { transition-delay: .10s; }
+  .menu-panel.open .menu-inner a:nth-child(4) { transition-delay: .14s; }
+  .menu-panel.open .menu-inner a:nth-child(5) { transition-delay: .18s; }
+  .menu-panel.open .menu-inner a:nth-child(6) { transition-delay: .22s; }
+  .menu-panel.open .menu-inner a:nth-child(7) { transition-delay: .26s; }
+  .menu-panel.open .menu-inner a:nth-child(8) { transition-delay: .30s; }
+  .menu-panel.open .menu-inner a:nth-child(9) { transition-delay: .34s; }
+
+  /* Tombol silangnya muter seperempat pas panel kebuka. Kecil, tapi bikin
+     berasa panelnya "nyala", bukan gambar diem. */
+  .menu-head button { transition: color .18s, transform .34s cubic-bezier(.16,.9,.24,1); }
+  .menu-panel.open .menu-head button { transform: rotate(90deg); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-panel, .menu-panel.open,
+    .menu-inner, .menu-panel.open .menu-inner,
+    .menu-inner a, .menu-panel.open .menu-inner a,
+    .menu-panel.open .menu-head button {
+      transition: none; transform: none; opacity: 1;
+    }
+    .menu-panel { opacity: 0; }
+    .menu-panel.open { opacity: 1; }
+  }
   .menu-inner {
     position: absolute; top: 14px; right: 14px;
     width: min(300px, calc(100vw - 28px));
