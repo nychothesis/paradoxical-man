@@ -3,516 +3,1211 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paradoxical Man · versi ringkas (draft)</title>
+<title>RINGKAS · Paradoxical Man</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  /* ============================================================
-     DRAFT — versi ringkas dari index.html. Bukan halaman live.
-     Tujuannya nunjukin IRAMA, bukan ganti copy final.
-     Angka (harga, voucher) sengaja tetep teks HTML, bukan gambar,
-     biar sekali ubah beres. Konsep boleh jadi gambar.
-     ============================================================ */
   :root {
-    --bg:#121110; --bg-soft:#1a1817; --card:#1d1b19; --card-2:#211f1c;
-    --line:#2c2925; --gold:#C9A227; --gold-soft:#e0c37e; --maroon:#B0413C;
-    --text:#F4EFE4; --muted:#8f8a80; --muted-2:#6d685f; --radius:14px;
+    --bg:        #121110;
+    --bg-soft:   #1a1817;
+    --card:      #1d1b19;
+    --card-2:    #211f1c;
+    --line:      #2c2925;
+    --gold:      #C9A227;
+    --gold-soft: #e0c37e;
+    --maroon:    #B0413C;
+    --text:      #F4EFE4;
+    --muted:     #8f8a80;
+    --muted-2:   #6d685f;
+    --green:     #7fae6b;
+    --radius:    14px;
+    --shadow:    0 10px 30px rgba(0,0,0,.35);
   }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  html { scroll-behavior:smooth; }
-  body {
-    font-family:'Poppins',system-ui,sans-serif;
-    background:var(--bg); color:var(--text);
-    font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased;
-  }
-  p,li,dd { font-family:'Atkinson Hyperlegible',sans-serif; }
-  .wrap { max-width:940px; margin:0 auto; padding:0 22px; }
-  .n700 { max-width:700px; }
-  section { padding:64px 0; }
-  a { color:inherit; }
 
-  /* ---- Penanda draft ---- */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: radial-gradient(1200px 700px at 80% -10%, #1c1a17 0%, var(--bg) 55%);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Badan teks pakai Atkinson Hyperlegible, sama kayak homepage. Judul,
+     tombol, sama label tetep Poppins. */
+  p, li, dd, blockquote { font-family: 'Atkinson Hyperlegible', sans-serif; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+  .narrow { max-width: 720px; margin: 0 auto; }
+  .n780 { max-width: 780px; margin: 0 auto; }
+
+  section { padding: 26px 0; }
+
+  .announce {
+    background: rgba(201, 162, 39, .1);
+    border-bottom: 1px solid rgba(201, 162, 39, .2);
+    text-align: center;
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--gold-soft);
+    padding: 9px 18px;
+    line-height: 1.5;
+  }
+  .announce-oto {
+    position: sticky; top: 0; z-index: 70;
+    background: rgba(30, 20, 19, .96);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(176, 65, 60, .5);
+    color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px 14px; flex-wrap: wrap; padding: 10px 18px;
+  }
+  .announce-oto .ann-lbl {
+    color: var(--maroon); font-weight: 600; font-size: .72rem;
+    letter-spacing: 1.2px; text-transform: uppercase;
+  }
+  .announce-oto .ann-lbl b {
+    color: var(--gold); font-weight: 800; letter-spacing: 1.2px;
+  }
+  .announce-oto .clock {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1.25rem; color: var(--text); line-height: 1;
+  }
+  /* Tombol menu digeser ke bawah biar ga nutupin banner sticky.
+     Angkanya diukur dari tinggi banner beneran, lihat geserMenu(). */
+  body.oto .menu-btn { top: calc(var(--oto-banner, 62px) + 10px); }
+
+  /* ---------- Kode voucher (cuma muncul di mode OTO) ---------- */
+  .vcode {
+    display: inline-flex; align-items: baseline; gap: 7px; cursor: pointer;
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110; border: 0; border-radius: 8px; padding: 6px 12px;
+    font-family: 'Poppins', sans-serif; font-weight: 800;
+    font-size: .88rem; letter-spacing: 1.8px; transition: .15s;
+  }
+  .vcode small {
+    font-size: .62rem; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; opacity: .68;
+  }
+  .vcode:active { transform: scale(.97); }
+  .vcode { white-space: nowrap; }
+
+  .voucher {
+    max-width: 430px; margin: 16px auto 0; overflow: hidden;
+    border: 1px solid rgba(201, 162, 39, .55);
+    border-radius: 14px; background: rgba(201, 162, 39, .07);
+    text-align: center;
+  }
+  .voucher .vhead {
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110; font-weight: 800; font-size: .68rem;
+    letter-spacing: 2.2px; text-transform: uppercase; padding: 7px 10px;
+  }
+  .voucher .vquota {
+    background: rgba(176, 65, 60, .2);
+    border-bottom: 1px solid rgba(176, 65, 60, .38);
+    color: #e8a29e; font-weight: 700; font-size: .74rem;
+    letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 10px;
+  }
+  .voucher .vbody { padding: 15px 16px 16px; }
+  .voucher .vprice {
+    display: flex; align-items: baseline; justify-content: center;
+    gap: 9px; flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .voucher .vprice s {
+    color: var(--muted); font-size: .95rem; text-decoration-thickness: 1.5px;
+  }
+  .voucher .vprice .varrow { color: var(--muted); font-size: .9rem; }
+  .voucher .vprice b {
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1.6rem; color: var(--gold); line-height: 1;
+  }
+  .voucher .vlead {
+    font-size: .72rem; font-weight: 600; letter-spacing: 1.4px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 9px;
+  }
+  .voucher .kode {
+    display: inline-block; cursor: pointer;
+    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-size: 1.5rem; letter-spacing: 4px; line-height: 1;
+    color: var(--gold); background: rgba(201, 162, 39, .13);
+    border: 1px dashed rgba(201, 162, 39, .6);
+    border-radius: 10px; padding: 12px 18px; transition: .15s;
+  }
+  .voucher .kode:hover { background: rgba(201, 162, 39, .22); }
+  .voucher .kode:active { transform: scale(.97); }
+  .voucher .vnote {
+    font-size: .78rem; line-height: 1.6; color: var(--muted); margin-top: 11px;
+  }
+  .kode.copied, .vcode.copied { color: var(--green); border-color: var(--green); }
+  .vcode.copied { background: rgba(127, 174, 107, .2); }
+
+  b, strong { font-weight: 600; color: var(--gold-soft); }
+
+  /* ---------- Section heading ---------- */
+  .sec-head {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 1.35rem; font-weight: 700; letter-spacing: .02em;
+    margin-bottom: 30px;
+  }
+  .sec-head::before {
+    content: ""; width: 5px; height: 22px; border-radius: 3px;
+    background: linear-gradient(var(--gold), var(--gold-soft)); flex: 0 0 auto;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-primary {
+    display: block; width: 100%; max-width: 400px;
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110;
+    font-weight: 700; font-size: 1.02rem; text-align: center; text-decoration: none;
+    padding: 17px 28px; border-radius: 12px;
+    box-shadow: 0 0 45px rgba(201, 162, 39, .22);
+    transition: .18s;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 60px rgba(201, 162, 39, .32); }
+  .btn-secondary {
+    display: inline-block; margin-top: 14px;
+    color: var(--muted); font-size: .85rem; font-weight: 500; text-decoration: none;
+    padding: 9px 18px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--bg-soft); transition: .18s;
+  }
+  .btn-secondary:hover { color: var(--text); border-color: #3a3630; }
+  .micro { font-size: .8rem; color: var(--muted); margin-top: 14px; line-height: 1.6; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 40px 0 26px; }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; }
+  .cover-frame { position: relative; max-width: 330px; margin: 0 auto; }
+  .cover-frame::before {
+    content: ""; position: absolute; inset: 8%;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(176, 65, 60, .4), transparent 65%),
+      radial-gradient(circle at 75% 25%, rgba(201, 162, 39, .25), transparent 65%);
+    filter: blur(42px); z-index: 0;
+  }
+  .cover-frame img {
+    position: relative; z-index: 1; width: 100%; display: block;
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  }
+  .hero h1 {
+    font-size: 2.1rem; font-weight: 900; line-height: 1.22;
+    letter-spacing: -.01em; margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero p { margin-bottom: 18px; color: #d8d3c8; font-size: .95rem; }
+  .hero .cta-block { margin-top: 30px; text-align: center; }
+  .hero .btn-primary { margin: 0 auto; }
+
+  /* ---------- Video overview ---------- */
+  .vid { padding: 0 0 26px; }
+  .video-embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    box-shadow: var(--shadow), 0 0 50px rgba(201, 162, 39, .08);
+    background: var(--card);
+  }
+  .video-embed iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+  .video-embed.facade { cursor: pointer; }
+  .video-embed.facade img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .play-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 74px; height: 74px; border-radius: 50%;
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    display: grid; place-items: center;
+    box-shadow: 0 0 45px rgba(201, 162, 39, .5);
+    transition: .18s;
+  }
+  .video-embed.facade:hover .play-btn { transform: translate(-50%, -50%) scale(1.08); }
+  .play-btn::after {
+    content: "";
+    border-left: 24px solid #121110;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    margin-left: 6px;
+  }
+
+  /* ---------- Menu daftar isi ---------- */
+  .sec-head { scroll-margin-top: 24px; }
+  .menu-btn {
+    position: fixed; top: 14px; right: 14px; z-index: 80;
+    display: flex; align-items: center; gap: 9px;
+    background: rgba(26, 24, 23, .94);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid var(--line); border-radius: 999px;
+    color: var(--text); font-family: inherit; font-size: .8rem; font-weight: 500;
+    padding: 9px 15px; cursor: pointer; transition: .18s;
+    opacity: 0; pointer-events: none;
+  }
+  .menu-btn.show { opacity: 1; pointer-events: auto; }
+  .menu-btn:hover { border-color: var(--gold); }
+  .menu-btn .bars { display: inline-flex; flex-direction: column; gap: 3px; }
+  .menu-btn .bars i { display: block; width: 15px; height: 2px; border-radius: 2px; background: var(--gold); }
+  .menu-panel {
+    position: fixed; inset: 0; z-index: 90; display: none;
+    background: rgba(8, 8, 7, .72);
+    -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  }
+  .menu-panel.open { display: block; }
+  .menu-inner {
+    position: absolute; top: 14px; right: 14px;
+    width: min(300px, calc(100vw - 28px));
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 10px; box-shadow: var(--shadow);
+  }
+  .menu-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 10px 10px; border-bottom: 1px dashed var(--line); margin-bottom: 6px;
+  }
+  .menu-head span {
+    font-size: .7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted-2);
+  }
+  .menu-head button {
+    background: none; border: 0; color: var(--muted); cursor: pointer;
+    font-size: 1.2rem; line-height: 1; padding: 0 2px;
+  }
+  .menu-head button:hover { color: var(--text); }
+  .menu-inner a {
+    display: block; text-decoration: none; color: #d8d3c8;
+    font-size: .88rem; padding: 10px 14px; border-radius: 9px; transition: .14s;
+  }
+  .menu-inner a:hover { background: var(--bg-soft); color: var(--gold-soft); }
+
+  /* ---------- Pain checklist ---------- */
+  .pain-points { list-style: none; }
+  .pain-points li {
+    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
+    position: relative; font-size: .92rem; color: #d8d3c8;
+  }
+  .pain-points li:last-child { border-bottom: none; }
+  .pain-points li::before {
+    content: "◆"; position: absolute; left: 0; top: 13px;
+    color: var(--maroon); font-size: .65rem;
+  }
+  .pain-closer { color: var(--gold-soft); font-weight: 600; margin-top: 18px; font-size: .92rem; }
+
+  /* ---------- Testimonials ---------- */
+  .t-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  .t-card {
+    background: linear-gradient(160deg, var(--card-2), var(--card));
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; position: relative; overflow: hidden; transition: .18s;
+  }
+  .t-card::after {
+    content: ""; position: absolute; top: -30px; right: -30px;
+    width: 100px; height: 100px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,162,39,.13), transparent 70%);
+  }
+  .t-card:hover { border-color: #3a3630; transform: translateY(-2px); }
+  .t-name { font-weight: 700; font-size: 1rem; color: var(--gold-soft); }
+  .vbadge { width: 15px; height: 15px; vertical-align: -2px; margin-left: 5px; }
+  .t-role { color: var(--muted); font-size: .8rem; margin: 2px 0 10px; }
+  .t-chip {
+    display: inline-block; font-size: .68rem; font-weight: 500;
+    letter-spacing: .4px; text-transform: uppercase;
+    color: var(--gold-soft); background: rgba(201,162,39,.1);
+    border-radius: 6px; padding: 3px 9px; margin-bottom: 14px;
+    text-decoration: none; transition: .18s;
+  }
+  a.t-chip:hover { background: rgba(201,162,39,.2); }
+  .t-text { font-size: .88rem; color: #d8d3c8; font-weight: 400; }
+  .t-text p + p { margin-top: 10px; }
+
+  /* ---------- Section 3: benefits ---------- */
+  .lead { color: #d8d3c8; margin-bottom: 18px; font-size: .95rem; }
+  .lead .caps { color: var(--gold); font-weight: 700; }
+  .benefit-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 40px; }
+  .benefit {
+    background: rgba(127, 174, 107, .07); border: 1px solid rgba(127, 174, 107, .55);
+    border-radius: var(--radius); padding: 26px; transition: .18s;
+  }
+  .benefit:hover { border-color: rgba(127, 174, 107, .65); transform: translateY(-2px); }
+  .benefit h3 {
+    font-size: 1rem; font-weight: 600; line-height: 1.45; margin-bottom: 10px;
+    padding-left: 18px; position: relative;
+  }
+  .benefit h3::before {
+    content: "◆"; position: absolute; left: 0; top: 2px;
+    color: var(--green); font-size: .65rem;
+  }
+  .benefit p { color: var(--muted); font-size: .88rem; }
+  .honest-block {
+    border: 1px solid rgba(176, 65, 60, .55); background: rgba(176, 65, 60, .07);
+    border-radius: var(--radius); padding: 26px; margin-top: 36px;
+    color: #d8d3c8; font-size: .92rem;
+  }
+  .honest-block b { color: var(--text); font-weight: 700; }
+
+  /* ---------- CTA blocks ---------- */
+  .cta-mid { text-align: center; }
+  .cta-mid .btn-primary, .final .btn-primary { margin-left: auto; margin-right: auto; }
+
+  .offer-box {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px; margin-bottom: 26px;
+    text-align: left;
+  }
+  .offer-row {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 11px 0; border-bottom: 1px dashed var(--line);
+    font-size: .9rem; color: #d8d3c8;
+  }
+  .offer-row:last-of-type { border-bottom: none; }
+  .offer-row .val { color: var(--gold-soft); font-weight: 600; white-space: nowrap; }
+  .offer-price {
+    text-align: center; font-family: 'Poppins', sans-serif;
+    font-size: 2.3rem; font-weight: 900; color: var(--gold);
+    margin-top: 14px; line-height: 1;
+  }
+  .offer-price .strike {
+    display: block; font-size: 1.05rem; font-weight: 600;
+    color: var(--muted); text-decoration: line-through; margin-bottom: 8px;
+  }
+
+  /* ---------- Sticky CTA bar ---------- */
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 14px; padding: 12px 20px;
+    background: rgba(18, 17, 16, .92);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    border-top: 1px solid var(--line);
+    transform: translateY(110%); transition: transform .25s;
+  }
+  .sticky-cta.show { transform: none; }
+  .sticky-price { display: flex; flex-direction: column; line-height: 1.3; }
+  .sticky-price .old { color: var(--muted); font-size: .74rem; text-decoration: line-through; }
+  .sticky-price .now { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--gold-soft); }
+  .sticky-btn {
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110; font-family: 'Poppins', sans-serif; font-weight: 700;
+    font-size: .92rem; text-decoration: none;
+    padding: 12px 24px; border-radius: 10px; white-space: nowrap;
+  }
+
+  /* ---------- Deliverables ---------- */
+  .get-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .get-card {
+    background: linear-gradient(160deg, var(--card-2), var(--card));
+    border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 20px; font-size: .9rem; font-weight: 500;
+    display: flex; align-items: center; gap: 13px; transition: .18s;
+  }
+  .get-card:hover { border-color: #3a3630; transform: translateY(-2px); }
+  .get-card .ico { color: var(--green); font-size: .7rem; }
+
+  /* ---------- Curriculum ---------- */
+  .module-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 34px; }
+  .module-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 26px;
+    position: relative; overflow: hidden;
+  }
+  .module-card::before {
+    content: attr(data-num); position: absolute; top: -20px; right: 4px;
+    font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 7rem;
+    line-height: 1; color: rgba(244, 239, 228, .045); pointer-events: none;
+  }
+  .module-card h3 {
+    font-size: 1.12rem; font-weight: 700; color: var(--gold); margin-bottom: 18px;
+    display: flex; align-items: center; gap: 9px;
+  }
+  .module-card h3::before {
+    content: ""; width: 4px; height: 16px; border-radius: 2px; background: var(--gold);
+    flex: 0 0 auto;
+  }
+  .video { padding: 11px 0; border-bottom: 1px dashed var(--line); }
+  .video:last-child { border-bottom: none; padding-bottom: 0; }
+  .video:first-of-type { padding-top: 0; }
+  .v-title { font-weight: 600; font-size: .92rem; color: var(--text); }
+  .v-dur {
+    font-weight: 400; font-size: .74rem; color: var(--muted);
+    background: var(--bg-soft); border: 1px solid var(--line);
+    border-radius: 999px; padding: 1px 9px; margin-left: 7px;
+    white-space: nowrap; vertical-align: middle;
+  }
+  .v-desc { display: block; font-size: .82rem; font-weight: 400; color: var(--muted); margin-top: 2px; }
+
+  /* ---------- Mind map strip ---------- */
+  .mm-strip { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0 6px; }
+  .mm-item {
+    position: relative; aspect-ratio: 3 / 2; overflow: hidden;
+    border-radius: 12px; border: 1px solid var(--line); background: var(--card);
+  }
+  .mm-item:last-child:nth-child(odd) { grid-column: 1 / -1; width: calc(50% - 7px); margin: 0 auto; }
+  .mm-item img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 40%;
+    transform: scale(1.12); display: block;
+  }
+  .mm-caption { font-size: .8rem; color: var(--muted); margin-bottom: 22px; }
+
+  /* ---------- Discord ---------- */
+  .panel {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .d-points { list-style: none; margin: 22px 0; }
+  .d-points li {
+    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
+    position: relative; font-size: .92rem; color: #d8d3c8;
+  }
+  .d-points li:last-child { border-bottom: none; }
+  .d-points li::before {
+    content: "◆"; position: absolute; left: 0; top: 13px;
+    color: var(--gold); font-size: .65rem;
+  }
+  .closer { color: var(--muted); font-size: .9rem; }
+  .discord-panel {
+    border-color: rgba(88, 101, 242, .55);
+    background: rgba(88, 101, 242, .08);
+  }
+  .discord-panel .d-points li::before { color: #7983f5; }
+
+  /* ---------- Why different ---------- */
+  .why p { margin-bottom: 18px; color: #d8d3c8; font-size: .95rem; }
+  .reframe { margin-bottom: 38px; }
+  .reframe-title {
+    font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.5rem;
+    color: var(--text); line-height: 1.3;
+  }
+  .reframe p { margin-top: 12px; color: #d8d3c8; font-size: .95rem; }
+  .reframe .reframe-title { margin-top: 0; color: var(--text); font-size: 1.5rem; }
+  .fromto {
+    border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; margin-top: 22px;
+  }
+  .ft-row {
+    display: grid; grid-template-columns: 1fr auto 1.4fr; align-items: center;
+    gap: 12px; padding: 12px 18px; font-size: .88rem;
+  }
+  .ft-row + .ft-row { border-top: 1px dashed var(--line); }
+  .ft-row .from { color: var(--muted); text-align: right; }
+  .ft-row .arrow { color: var(--gold); }
+  .ft-row .to { color: var(--gold-soft); font-weight: 600; }
+  .embodied {
+    font-size: 1.25rem; font-weight: 700; color: var(--gold);
+    margin: 30px 0; letter-spacing: .01em;
+  }
+  .diff-table {
+    border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 26px;
+  }
+  .diff-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .diff-row + .diff-row { border-top: 1px dashed var(--line); }
+  .diff-cell { padding: 14px 16px; font-size: .85rem; color: #d8d3c8; }
+  .diff-cell.them {
+    background: rgba(176, 65, 60, .05); color: var(--muted);
+    border-right: 1px dashed var(--line);
+  }
+  .diff-cell.me { background: rgba(127, 174, 107, .05); }
+  .diff-head .diff-cell {
+    font-weight: 700; font-size: .72rem; text-transform: uppercase;
+    letter-spacing: 1.5px; padding: 12px 16px;
+  }
+  .diff-head .them { color: var(--maroon); }
+  .diff-head .me { color: var(--green); }
+
+  /* ---------- Not for you ---------- */
+  .notfor {
+    border: 1px solid rgba(176, 65, 60, .45); background: rgba(176, 65, 60, .05);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .notfor-list { list-style: none; margin-bottom: 22px; }
+  .notfor-list li {
+    padding: 10px 0 10px 22px; border-bottom: 1px dashed rgba(176, 65, 60, .25);
+    position: relative; font-size: .92rem; color: #d8d3c8;
+  }
+  .notfor-list li:last-child { border-bottom: none; }
+  .notfor-list li::before {
+    content: "◆"; position: absolute; left: 0; top: 13px;
+    color: var(--maroon); font-size: .65rem;
+  }
+  .notfor-closer { font-weight: 700; color: var(--text); }
+
+  /* ---------- FAQ ---------- */
+  .faq-item {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; margin-bottom: 14px; transition: .18s;
+  }
+  .faq-item:hover { border-color: #3a3630; }
+  .faq-q {
+    font-weight: 600; font-size: .95rem; cursor: pointer;
+    list-style: none; padding: 18px 22px;
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after {
+    content: "+"; color: var(--gold); font-size: 1.3rem; font-weight: 400;
+    flex: 0 0 auto; line-height: 1; transition: .18s;
+  }
+  .faq-item[open] .faq-q::after { content: "\2212"; }
+  .faq-a { color: var(--muted); font-size: .88rem; font-weight: 400; padding: 0 22px 18px; }
+  .faq-a b { color: var(--gold-soft); font-weight: 600; }
+
+  /* ---------- Final ---------- */
+  .final { text-align: center; padding-bottom: 110px; }
+  .final h2 { font-size: 1.8rem; font-weight: 900; line-height: 1.25; margin-bottom: 26px; }
+  .final p { text-align: left; color: #d8d3c8; margin-bottom: 18px; font-size: .95rem; }
+  .final .choice-two { font-weight: 600; color: var(--gold-soft); }
+  .final .cta-block { margin-top: 36px; }
+
+  /* ---------- Desktop ---------- */
+  @media (min-width: 860px) {
+    body { font-size: 17px; }
+    section { padding: 38px 0; }
+    .hero { padding: 52px 0 38px; }
+    .hero-grid { grid-template-columns: 360px 1fr; gap: 64px; }
+    .hero-grid.no-cover { grid-template-columns: 1fr; }
+    .hero-grid.no-cover > div { max-width: 760px; margin: 0 auto; }
+    .cover-frame { max-width: none; margin: 0; }
+    .hero h1 { font-size: 2.7rem; }
+    .sec-head { font-size: 1.55rem; }
+    .t-grid { grid-template-columns: 1fr 1fr; }
+    .benefit-grid { grid-template-columns: 1fr 1fr; }
+    .get-grid { grid-template-columns: repeat(3, 1fr); }
+    .module-grid { grid-template-columns: 1fr 1fr; }
+    .module-grid .module-card:first-child { grid-column: 1 / -1; }
+    .final h2 { font-size: 2.3rem; }
+  }
+
+  /* ===== TAMBAHAN VERSI RINGKAS ===== */
   .draftbar {
     background:var(--maroon); color:#fff; text-align:center;
-    font-size:.74rem; font-weight:700; letter-spacing:1.4px;
-    text-transform:uppercase; padding:9px 14px;
+    font-family:'Poppins',sans-serif; font-size:.72rem; font-weight:700;
+    letter-spacing:1.4px; text-transform:uppercase; padding:9px 14px;
   }
-
-  /* ============ ATURAN FONT — jangan dilanggar ============
-     Poppins   : semua yang GEDE, semua label, semua tombol.
-     Atkinson  : badan teks doang.
-     Karena `p,li,dd` di atas udah dikunci ke Atkinson, tiap kelas
-     display/label yang kebetulan dipasang di <p> WAJIB nulis
-     font-family Poppins sendiri. Kalo lupa, dia ketiban Atkinson
-     dan weight 800-nya diem-diem turun ke 700 (Atkinson cuma
-     punya 400 & 700). Itu yang bikin keliatan campur.
-     ======================================================== */
-
-  /* ---- Judul bagian: kecil, cuma penanda. Bukan bintang utama. ---- */
-  .shead {
-    font-family:'Poppins',sans-serif;
-    font-size:.68rem; font-weight:700; letter-spacing:2.6px;
-    text-transform:uppercase; color:var(--muted-2); margin-bottom:18px;
-  }
-
-  /* ---- Pernyataan gede. Ini pengganti paragraf. ----
-     Satu section idealnya punya SATU dari ini. Sisanya nunjang. */
-  .say {
-    font-family:'Poppins',sans-serif;
-    font-size:clamp(1.5rem,4.4vw,2.35rem); font-weight:800;
-    line-height:1.22; letter-spacing:-.5px; max-width:22ch;
-  }
-  .say em { font-style:normal; color:var(--gold); }
-  .sub {
-    font-family:'Atkinson Hyperlegible',sans-serif;
-    color:var(--muted); margin-top:16px; max-width:48ch; font-size:1rem;
-  }
-
-  /* ---- Hero ---- */
-  .hero { padding:44px 0 56px; }
-  .hero h1 {
-    font-size:clamp(2rem,6.4vw,3.9rem); font-weight:900;
-    line-height:1.06; letter-spacing:-1.3px; max-width:17ch;
-  }
-  .hero h1 em { font-style:normal; color:var(--gold); }
-
-  /* ---- from → to: dua kata lawan dua kata. Ini "ilustrasi" murah. ---- */
-  .fromto { display:grid; gap:1px; margin:34px 0 0; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
-  .ft {
-    display:grid; grid-template-columns:1fr 30px 1fr; align-items:center;
-    gap:10px; background:var(--card); padding:15px 18px;
-    font-family:'Atkinson Hyperlegible',sans-serif; font-size:.93rem;
-  }
-  .ft .a { color:var(--muted-2); text-decoration:line-through; text-decoration-color:rgba(176,65,60,.6); }
-  .ft .arw { color:var(--gold); text-align:center; font-weight:700; }
-  .ft .b { color:var(--text); font-weight:700; }
-
-  /* ---- Tombol ---- */
-  .cta { display:flex; flex-wrap:wrap; gap:11px; margin-top:32px; }
-  .btn {
-    display:inline-flex; align-items:center; justify-content:center;
-    font-family:'Poppins',sans-serif; font-size:.9rem; font-weight:700;
-    text-decoration:none; padding:15px 26px; border-radius:11px;
-    border:1px solid transparent;
-  }
-  .btn-1 { background:linear-gradient(180deg,var(--gold-soft),var(--gold)); color:#191510; box-shadow:0 8px 24px rgba(201,162,39,.22); }
-  .btn-2 { border-color:var(--line); color:var(--text); background:rgba(255,255,255,.02); }
-  .micro { font-family:'Atkinson Hyperlegible',sans-serif; font-size:.82rem; color:var(--muted-2); margin-top:14px; }
-
-  /* ---- Pita angka. Jeda visual + bukti ukuran, nol prosa. ---- */
-  .band {
+  /* Pita angka: jeda visual, nol prosa. Gantiin section "Yang lu dapet"
+     yang tadinya cuma daftar. Warna ngikutin .get-card yang udah ada. */
+  .statband {
     display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
     border:1px solid var(--line); border-radius:var(--radius);
-    overflow:hidden; margin:0;
+    overflow:hidden; margin-top:26px;
   }
-  .band div { background:var(--card); padding:22px 14px; text-align:center; }
-  .band b {
-    display:block; font-family:'Poppins',sans-serif; font-weight:900;
-    font-size:clamp(1.5rem,4vw,2.1rem); color:var(--gold-soft); line-height:1;
+  .statband div { background:var(--card); padding:20px 12px; text-align:center; }
+  .statband b {
+    display:block; font-family:'Poppins',sans-serif; font-weight:700;
+    font-size:clamp(1.35rem,3.6vw,1.95rem); color:var(--gold-soft); line-height:1;
   }
-  .band span {
-    display:block; font-size:.66rem; font-weight:700; letter-spacing:1.5px;
-    text-transform:uppercase; color:var(--muted-2); margin-top:9px;
+  .statband span {
+    display:block; font-family:'Poppins',sans-serif; font-size:.64rem;
+    font-weight:600; letter-spacing:1.4px; text-transform:uppercase;
+    color:var(--muted-2); margin-top:8px;
   }
-
-  /* ---- Checklist nyeri: potong jadi sependek mungkin ---- */
-  .pains { display:grid; gap:1px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
-  .pains li {
-    list-style:none; background:var(--card); padding:14px 18px;
-    font-size:.95rem; display:flex; gap:12px; align-items:baseline;
-  }
-  .pains li::before { content:"—"; color:var(--maroon); font-weight:700; flex:none; }
-  .tally {
-    margin-top:20px; font-family:'Poppins',sans-serif; font-weight:800;
-    font-size:1.05rem;
-  }
-  .tally b { color:var(--gold); }
-
-  /* ---- Kutipan gede: satu kalimat doang, jadi rem visual ---- */
-  .pull {
-    border-left:3px solid var(--gold); padding:6px 0 6px 22px;
-    font-family:'Poppins',sans-serif; font-weight:800;
-    font-size:clamp(1.25rem,3.4vw,1.85rem); line-height:1.3;
-    letter-spacing:-.3px; max-width:26ch;
-  }
-  .pull cite {
-    display:block; font-family:'Atkinson Hyperlegible',sans-serif;
-    font-style:normal; font-weight:400; font-size:.86rem;
-    color:var(--muted); margin-top:14px; letter-spacing:0;
-  }
-
-  /* ---- Kartu: judul tebal + SATU baris. Paragraf pindah ke produk. ---- */
-  .cards { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
-  .c {
-    background:linear-gradient(180deg,var(--card-2),var(--card));
-    border:1px solid var(--line); border-radius:var(--radius); padding:22px 21px;
-  }
-  .c h3 { font-size:1.02rem; font-weight:800; line-height:1.35; margin-bottom:9px; }
-  .c p { color:var(--muted); font-size:.92rem; line-height:1.65; }
-
-  /* ---- Testimoni ringkas ---- */
-  .tests { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; align-items:start; }
-  .t { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px 19px; }
-  .t p { font-size:.9rem; line-height:1.7; color:var(--muted); }
-  /* Kalimat kunci ditebelin DAN diterangin, biar kebaca duluan pas discroll
-     cepet. Sisanya tetep ada buat yang mau mastiin ini omongan orang beneran. */
-  .t p b { color:var(--text); font-weight:700; }
-  .t footer { margin-top:15px; padding-top:13px; border-top:1px solid var(--line); font-family:'Poppins',sans-serif; font-size:.78rem; font-weight:700; }
-  /* Badge verified TETEP dipasang buat yang punya. Ini bukan hiasan —
-     dia yang bikin klaim "295K followers" bisa dipegang. */
-  .t .nm { display:flex; align-items:center; gap:5px; }
-  .t .vbadge { width:14px; height:14px; flex:none; }
-  .t footer span { display:block; color:var(--muted-2); font-weight:400; margin-top:3px; font-size:.74rem; }
-
-  /* ---- Penawaran. Angka tetep teks. ---- */
-  .offer { border:1px solid rgba(201,162,39,.32); border-radius:var(--radius); background:var(--bg-soft); padding:8px 20px 22px; }
-  .orow { display:flex; justify-content:space-between; gap:16px; padding:14px 0; border-bottom:1px dashed var(--line); font-family:'Atkinson Hyperlegible',sans-serif; font-size:.93rem; }
-  .orow .v { color:var(--gold-soft); font-family:'Poppins',sans-serif; font-weight:700; white-space:nowrap; }
-  .oprice { text-align:center; padding-top:22px; }
-  .oprice s { display:block; color:var(--muted-2); font-size:.95rem; }
-  .oprice b { font-family:'Poppins',sans-serif; font-weight:900; font-size:clamp(2.1rem,6vw,3rem); color:var(--gold); line-height:1.1; }
-
-  /* ---- Mind map: ini "ilustrasi" asli lu ---- */
-  .mm { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-  /* JANGAN dikunci pakai aspect-ratio + object-fit:cover. Mind map isinya
-     tulisan kecil yang padat; begitu dipaksa masuk rasio tertentu,
-     pinggirannya kepotong dan isinya ilang. Biarin dia ngikutin rasio
-     aslinya (1,543), tingginya auto. */
-  .mm { align-items:start; }
-  .mm img { width:100%; height:auto; border-radius:10px; border:1px solid var(--line); display:block; }
-  .cap { font-family:'Atkinson Hyperlegible',sans-serif; font-size:.82rem; color:var(--muted-2); margin-top:12px; }
-
-  /* ---- Modul: judul + jumlah, detail disembunyiin di <details> ---- */
-  .mod { border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
-  .mod details { border-bottom:1px solid var(--line); }
-  .mod details:last-child { border-bottom:0; }
-  .mod summary {
-    cursor:pointer; list-style:none; padding:17px 20px; background:var(--card);
-    display:flex; justify-content:space-between; gap:14px; align-items:center;
-    font-family:'Poppins',sans-serif; font-weight:700; font-size:.97rem;
-  }
-  .mod summary::-webkit-details-marker { display:none; }
-  .mod summary i { font-style:normal; font-size:.72rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted-2); flex:none; }
-  /* Tiap video tetep dikasih satu baris keterangan. Judul doang ga jualan:
-     "Jebakan Dopamin Digital" bikin penasaran cuma separo, tapi begitu
-     dibilang isinya soal PMO sama scrolling, orang langsung ngerasa
-     ketembak. Karena ini di dalem <details>, dia ga bikin scroll pertama
-     jadi panjang. */
-  .mod .vid { padding:12px 20px; background:var(--bg-soft); border-top:1px solid var(--line); }
-  .mod .vtop { display:flex; justify-content:space-between; gap:14px; align-items:baseline; }
-  .mod .vtop b { font-family:'Poppins',sans-serif; font-size:.9rem; font-weight:600; color:var(--text); }
-  .mod .vtop span { font-family:'Atkinson Hyperlegible',sans-serif; font-size:.8rem; color:var(--muted-2); flex:none; }
-  .mod .vdesc { font-family:'Atkinson Hyperlegible',sans-serif; font-size:.85rem; color:var(--muted); margin-top:3px; }
-
-  /* ---- Tabel beda: dua kolom pendek ---- */
-  .vs { display:grid; gap:1px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
-  .vs .r { display:grid; grid-template-columns:1fr 1fr; gap:1px; }
-  .vs .cel { background:var(--card); padding:15px 18px; font-family:'Atkinson Hyperlegible',sans-serif; font-size:.91rem; }
-  .vs .them { color:var(--muted-2); }
-  .vs .me { color:var(--text); background:var(--card-2); }
-  .vs .r.h .cel { font-family:'Poppins',sans-serif; font-size:.68rem; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; padding:12px 18px; }
-  .vs .r.h .them { color:var(--muted-2); }
-  .vs .r.h .me { color:var(--gold); }
-
-  /* ---- Bukan buat lu ---- */
-  .no { display:grid; gap:1px; border:1px solid rgba(176,65,60,.3); border-radius:var(--radius); overflow:hidden; }
-  .no li { list-style:none; background:var(--card); padding:14px 18px; font-size:.94rem; display:flex; gap:12px; }
-  .no li::before { content:"✕"; color:var(--maroon); font-weight:700; flex:none; }
-
-  /* ---- FAQ ---- */
-  .faq details { border-bottom:1px solid var(--line); }
-  .faq summary { cursor:pointer; list-style:none; padding:17px 0; font-family:'Poppins',sans-serif; font-weight:700; font-size:.96rem; display:flex; justify-content:space-between; gap:14px; }
-  .faq summary::-webkit-details-marker { display:none; }
-  .faq summary::after { content:"+"; color:var(--gold); font-weight:700; flex:none; }
-  .faq details[open] summary::after { content:"–"; }
-  .faq p { padding:0 0 18px; color:var(--muted); font-size:.93rem; max-width:60ch; }
-
-  /* ---- Penutup ---- */
-  .final { background:var(--bg-soft); border-top:1px solid var(--line); }
-
-  @media (max-width:820px) {
-    .cards,.tests,.mm { grid-template-columns:1fr; }
-    .band { grid-template-columns:repeat(2,1fr); }
-    section { padding:52px 0; }
-    /* Di HP panahnya JANGAN dibiarin dapet barisnya sendiri — dia jadi
-       baris kosong yang keliatan patah. Panahnya dimatiin, terus
-       dipindah nempel di depan teks tujuannya. */
-    .ft { grid-template-columns:1fr; gap:3px; }
-    .ft .arw { display:none; }
-    .ft .b::before { content:"→ "; color:var(--gold); font-weight:700; }
-    .vs .r { grid-template-columns:1fr; }
-    .vs .r.h { display:none; }
-    .vs .them::before { content:"Yang lain: "; font-weight:700; color:var(--muted-2); }
-    .vs .me::before { content:"Course ini: "; font-weight:700; color:var(--gold); }
-    .cta .btn { flex:1 1 100%; }
-  }
+  /* Tanda x / cek di tabel beda. Warnanya nambah, TAPI yang bawa makna
+     tetep bentuknya — biar yang buta warna merah-hijau (sekitar 8% cowok,
+     dan audiens lu mayoritas cowok) tetep kebaca. */
+  .diff-cell.them::before { content:"\2715  "; color:var(--maroon); font-weight:700; }
+  .diff-cell.me::before   { content:"\2713  "; color:var(--gold); font-weight:700; }
+  .diff-row.diff-head .diff-cell::before { content:none; }
+  @media (max-width:600px){ .statband { grid-template-columns:repeat(2,1fr); } }
 </style>
 </head>
 <body>
-
-<div class="draftbar">Draft versi ringkas · bukan halaman live · buat dibandingin sama index.html</div>
-
+<div class="draftbar">Draft versi ringkas &middot; bukan halaman live</div>
+<div class="announce" id="announce">Rp299.000 itu harga launch, bukan harga permanen. Begitu materi dan member nambah, harga naik.</div>
 <div class="wrap">
 
-  <!-- 1. HERO — 126 kata jadi 38 -->
+  <!-- 1. HERO -->
   <section class="hero">
-    <h1>Framework buat jadi cowo yang <em>paling susah ditolak</em> cewe.</h1>
-    <p class="sub">Bukan tips dating. Tips itu makeup: bagus sampai kena air. Ini mulai dari akarnya.</p>
-    <div class="fromto">
-      <div class="ft"><span class="a">ngejar kupu-kupu</span><span class="arw">→</span><span class="b">bangun tamannya</span></div>
-      <div class="ft"><span class="a">nonton ratusan konten</span><span class="arw">→</span><span class="b">sistem yang jalan tanpa mood</span></div>
-      <div class="ft"><span class="a">tips chatting</span><span class="arw">→</span><span class="b">fundamental yang bikin lu ga butuh tips</span></div>
-      <div class="ft"><span class="a">topeng</span><span class="arw">→</span><span class="b">identitas</span></div>
+    <div class="hero-grid no-cover">
+      <div>
+        <h1>Framework lengkap buat jadi cowo yang <em>paling susah ditolak</em> cewe.</h1>
+        <div class="reframe" style="margin: 34px 0 0;">
+          <p class="reframe-title">Ini bukan kumpulan tips dating.</p>
+          <p>Tips chatting, pickup lines, cara keliatan menarik: itu semua <b>makeup</b>. Bagus sampe kena air. Dan yang bikin lu stuck bukan kurang teknik, melainkan pondasi yang belum kelar, dan <b>itu ga bisa ditutup pake teknik</b>.</p>
+          <p>Gw sambungin titik-titiknya dari banyak dimensi ilmu sampe ketemu <b>akar</b> masalahnya, terus gw garap dari akar itu. Bukan dari gejalanya.</p>
+          <p>Analoginya: gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng sendiri. Sisa halaman ini soal cara bangun tamannya.</p>
+          <div class="fromto">
+            <div class="ft-row"><span class="from">ngejar kupu-kupu</span><span class="arrow">→</span><span class="to">bangun taman yang indah</span></div>
+            <div class="ft-row"><span class="from">nonton ratusan konten</span><span class="arrow">→</span><span class="to">sistem yang berjalan tanpa mengandalkan motivasi</span></div>
+            <div class="ft-row"><span class="from">tips chatting</span><span class="arrow">→</span><span class="to">fundamental yang bikin lu ga butuh tips</span></div>
+            <div class="ft-row"><span class="from">topeng</span><span class="arrow">→</span><span class="to">identitas</span></div>
+          </div>
+        </div>
+        <div class="cta-block">
+          <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
+          <a class="btn-secondary" href="optin.html">Gw ambil PDF gratisnya dulu</a>
+          <p class="micro">Mulai dari nol? Modul 1 emang buat itu.</p>
+        </div>
+        <div class="statband">
+          <div><b>~4 jam</b><span>Total materi</span></div>
+          <div><b>~15 mnt</b><span>Rata-rata per video</span></div>
+          <div><b>5</b><span>PDF workbook</span></div>
+          <div><b>&infin;</b><span>Akses seumur hidup</span></div>
+        </div>
+      </div>
     </div>
-    <div class="cta">
-      <a class="btn btn-1" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
-      <a class="btn btn-2" href="optin.html">Gw ambil PDF gratisnya dulu</a>
-    </div>
-    <p class="micro">Mulai dari nol? Modul 1 emang buat itu.</p>
   </section>
 
-  <!-- PITA ANGKA — ganti seluruh section "Yang lu dapet" (34 kata jadi 8) -->
-  <section style="padding-top:0">
-    <div class="band">
-      <div><b>~4 jam</b><span>Total materi</span></div>
-      <div><b>~15 mnt</b><span>Rata-rata per video</span></div>
-      <div><b>5</b><span>PDF workbook</span></div>
-      <div><b>∞</b><span>Akses seumur hidup</span></div>
-    </div>
-  </section>
-
-  <!-- 2. RELATE — 117 kata jadi 62, tiap baris dipotong separo -->
+  <!-- PAIN CHECKLIST -->
   <section>
-    <p class="shead">01 · Relate ga?</p>
-    <ul class="pains">
-      <li>Cewe yang lu suka jalan sama cowo lain. Lu cuma bisa mikir "coba dulu gw berani".</li>
-      <li>Lu selalu jadi temen yang baik. Ga pernah jadi pilihan.</li>
-      <li>Punya pasangan, tapi ngalah terus biar ga ribut.</li>
-      <li>Lu mendem semua emosi. Sekarang lu ga tau lagi lu ngerasain apa.</li>
-      <li>Hidup keliatan jalan. Tapi lima tahun lagi mau ke mana, lu ga bisa jawab.</li>
-      <li>Ratusan konten dating ditonton. Teorinya jago, hidupnya sama persis.</li>
-      <li>Semangat tiga hari, terus balik ke porn dan scrolling.</li>
-    </ul>
-    <p class="tally">Minimal <b>2 dari 7</b> kena? Framework ini buat lu.</p>
+    <div class="n780">
+      <h2 class="sec-head">Relate ga?</h2>
+      <div class="panel">
+        <ul class="pain-points">
+          <li>Cewe yang lu suka jalan sama cowo lain. Lu cuma bisa mikir "coba dulu gw berani".</li>
+          <li>Lu selalu jadi "temen yang baik". Ga pernah jadi pilihan.</li>
+          <li>Punya pasangan, tapi ngalah terus biar ga ribut.</li>
+          <li>Lu mendem semua emosi. Sekarang lu ga tau lagi lu ngerasain apa.</li>
+          <li>Hidup keliatan jalan. Tapi ditanya mau ke mana lima tahun lagi, lu ga bisa jawab.</li>
+          <li>Ratusan konten dating ditonton. Teorinya jago, hidupnya sama persis.</li>
+          <li>Semangat tiga hari, abis itu balik ke porn dan scrolling.</li>
+        </ul>
+        <p class="pain-closer">Kalo minimal dua kena, framework ini buat lu.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- VIDEO — biarin, ini visual gratis -->
-  <section style="padding-top:0">
-    <a href="https://www.youtube.com/watch?v=kxZI9Iit_Yc" target="_blank" rel="noopener" style="display:block">
-      <img src="https://img.youtube.com/vi/kxZI9Iit_Yc/maxresdefault.jpg" alt="Overview Paradoxical Man" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);display:block">
-    </a>
-    <p class="cap">Overview 4 modulnya.</p>
+  <!-- VIDEO OVERVIEW -->
+  <section class="vid">
+    <div class="n780">
+      <div class="video-embed facade" id="vid-facade" role="button" tabindex="0" aria-label="Putar video overview">
+        <img src="https://img.youtube.com/vi/kxZI9Iit_Yc/maxresdefault.jpg" alt="Overview Paradoxical Man">
+        <div class="play-btn"></div>
+      </div>
+      <script>
+        (function () {
+          var f = document.getElementById('vid-facade');
+          function play() {
+            f.classList.remove('facade');
+            f.innerHTML = '<iframe src="https://www.youtube.com/embed/kxZI9Iit_Yc?autoplay=1&rel=0" title="Overview Paradoxical Man" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+          }
+          f.addEventListener('click', play, { once: true });
+          f.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+          }, { once: true });
+        })();
+      </script>
+    </div>
   </section>
 
-  <!-- 3. HASIL — 351 kata jadi 96. Paragraf panjang pindah ke dalem course. -->
+  <!-- 2. TESTIMONI -->
   <section>
-    <p class="shead">02 · Abis 4 modul ini</p>
-    <!-- Versi lama: "Yang lu ga punya bukan pengetahuan. Tapi sistem."
-         Diganti karena dia diem-diem ngerusak jualan utama Nicho sendiri.
-         Nilai jual lu justru pengetahuan — kemampuan nyambungin titik dari
-         POV holistik. Kalimat itu bilang pengetahuan ga penting, padahal
-         yang bener: yang PEMBELI punya cuma potongan, bukan pengetahuan.
-         Pengetahuan itu potongan yang udah nyambung, dan itu yang lu jual. -->
-    <p class="say">Informasi lu udah banyak. Yang belum ada <em>benang merahnya</em>.</p>
-    <p class="sub">Nonton ratusan konten cuma numpuk potongan. Itu coli otak: yang nambah informasi, bukan perilaku. Yang gw kerjain: nyambungin titik-titiknya dari banyak dimensi ilmu sampai ketemu akar masalahnya, terus solusinya gw mulai dari akar itu. Bukan dari gejalanya.</p>
-    <div class="cards" style="margin-top:32px">
-      <div class="c">
-        <h3>Disiplin tanpa ngandelin willpower.</h3>
-        <p>Willpower bisa abis. Sistem engga.</p>
+    <h2 class="sec-head" id="testimoni">Kata mereka yang udah masuk</h2>
+    <div class="t-grid">
+
+      <div class="t-card">
+        <div class="t-name">Marcella Ismanto, CHt<svg class="vbadge" viewBox="0 0 24 24" aria-label="Verified" role="img"><circle cx="12" cy="12" r="11" fill="#0095F6"/><path d="M7 12.5l3.2 3.2L17 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="t-role">Certified Hypnotherapist, @cellaish</div>
+        <a class="t-chip" href="https://instagram.com/cellaish" target="_blank" rel="noopener">160K followers on Instagram</a>
+        <div class="t-text">
+          <p><b>Wow! Aku yakin ini yang pertama di Indonesia</b>, program yang mengupas bagaimana caranya menjadi laki-laki yang kuat, utuh, dan tentunya, paradoks. Maksudnya, bagaimana menjadi pria yang bisa build dan create big things di dunia, tapi di saat yang sama tetap punya koneksi intim sama dunia batinnya sendiri. <b>Jujur, ini tipe pasangan idaman semua wanita yang sekarang tuh bener-bener langka.</b> Program ini keren banget!</p>
+        </div>
       </div>
-      <div class="c">
-        <h3>In-touch sama emosi tanpa jadi lemah.</h3>
-        <p>Empatik, dalem, lembut, DAN kuat. Kedengeran kontradiksi, tapi ada caranya.</p>
+
+      <div class="t-card">
+        <div class="t-name">Edward Santoso<svg class="vbadge" viewBox="0 0 24 24" aria-label="Verified" role="img"><circle cx="12" cy="12" r="11" fill="#0095F6"/><path d="M7 12.5l3.2 3.2L17 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="t-role">Founder @the7percent.co</div>
+        <a class="t-chip" href="https://instagram.com/the7percent.co" target="_blank" rel="noopener">295K followers on Instagram</a>
+        <div class="t-text">
+          <p>Saya sudah baca lebih dari 200 buku. Sebagian dari porsi tersebut saya dedikasikan pada buku-buku yang membahas filosofi, maskulinitas dan stoisisme atau sikap hidup. Bagaimanapun, saya merasa course ini akan sangat menghemat waktu jikalau saya menemukannya lebih cepat. Selain penyampaiannya yang terstruktur dan jelas, materi juga didasarkan pada ilmu yang teruji.</p>
+          <p><b>Nicho, naikin harganya. Value is too damn high.</b></p>
+        </div>
       </div>
-      <div class="c">
-        <h3>Berdamai sama luka, biar berhenti dikontrol dia.</h3>
-        <p>Lu gerak karena visi, bukan karena dendam.</p>
+
+      <div class="t-card">
+        <div class="t-name">Christian Harjanto</div>
+        <div class="t-role">AI Business Partner</div>
+        <div class="t-text">
+          <p><b>GILA DAGING ABIZZ</b>, awalnya gw kira cmn bahas cowo in general tapi disini <b>dibahas sampe dalem banget</b>. Jujur change my prespective a lot di tengah dunia yang penuh tipuan ini, jadi lebih sadar apa yang membuat kita di kontrol pdhl gw kira g ngaruh ternyata ngaruh banget dan apa yang bisa kita kontrol. G sampe situ, gw merasa terguided buat take real actionable step yang langsung bisa gw praktekin. Otw menuju paradoxical man!</p>
+        </div>
       </div>
-      <div class="c">
+
+      <div class="t-card">
+        <div class="t-name">Justin Vanes</div>
+        <div class="t-role">Faculty of Electrical Engineering</div>
+        <div class="t-text">
+          <p>Gw adalah tipe orang yang sangat suka untuk belajar dari buku self improvement, dan kebanyakan buku hanya mengajarkan pola pikirnya tanpa ada plan yang jelas. Menurut gw pribadi, kelebihan dari course ini bukan hanya menjelaskan konsep utama tetapi juga <b>dalam course kita diberikan plan plan untuk menjalankan apa yang sudah diajarkan and that's what I need</b>.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. ABIS 4 MODUL INI, APA YANG BEDA -->
+  <section>
+    <div class="n780">
+    <h2 class="sec-head" id="hasil">Abis 4 modul ini, apa yang beda</h2>
+      <p class="lead">Lu nonton, lu catet, lu ngangguk. Tiga minggu lagi hidup lu balik ke pola yang sama persis. Itu <b>coli otak</b>: yang nambah cuma informasi, bukan perilaku. Yang belum lu punya itu <span class="caps">SISTEM</span> yang tetep jalan pas lu ga mood, dan <span class="caps">KOMUNITAS</span> yang nanya pas lu ilang.</p>
+    </div>
+
+    <div class="benefit-grid">
+      <div class="benefit">
+        <h3>Sistem yang bikin lu disiplin tanpa ngandelin willpower.</h3>
+        <p>Willpower bisa abis. Sistem engga. Yang ngebedain cowo yang nyampe dari yang muter di tempat bukan seberapa keras dia maksa diri sendiri.</p>
+      </div>
+      <div class="benefit">
+        <h3>Seni in-touch sama emosi lu tanpa menjadi lemah.</h3>
+        <p>Empatik, dalem, lembut, <b>DAN</b> tetep kuat. Kedengeran kontradiksi, padahal ada caranya, dan ada akar fundamentalnya kenapa itu mungkin.</p>
+      </div>
+      <div class="benefit">
+        <h3>Berdamai sama luka lu, biar lu berhenti dikontrol sama dia.</h3>
+        <p>Banyak keputusan lu digerakin luka yang lu ga sadar ada. Pas itu beres, lu gerak karena <b>visi</b>, bukan karena dendam atau pengen ngebuktiin sesuatu.</p>
+      </div>
+      <div class="benefit">
         <h3>Cewe: efek samping, bukan tujuan.</h3>
-        <p>Hidup lu jadi tempat yang orang pengen ada di dalemnya.</p>
+        <p>Ngejar cewe ga salah. Tapi pas lu fokus ke tujuan yang lebih gede, yang kejadian beda: <b>hidup lu jadi tempat yang orang pengen ada di dalemnya.</b></p>
       </div>
     </div>
-    <p class="tally" style="margin-top:28px">Yang gw <b>GA</b> janjiin: lu punya pacar dalam tiga bulan. Ga ada yang bisa janjiin itu dengan jujur.</p>
+
+    <div class="honest-block">
+      <p><b>Yang gw GA janjiin:</b> lu bakal punya pacar dalam tiga bulan. Ga ada yang bisa janjiin itu dengan jujur, karena itu ngelibatin manusia lain yang punya kehendak sendiri. Siapapun yang berani janjiin itu ke lu, lagi jualan sesuatu yang dia sendiri ga pegang.</p>
+    </div>
   </section>
 
-  <!-- 4. TESTIMONI — 289 kata jadi 88. Satu dijadiin kutipan gede. -->
-  <section>
-    <p class="shead">03 · Kata mereka yang udah masuk</p>
-    <blockquote class="pull">
-      "Nicho, naikin harganya. Value is too damn high."
-      <cite>Edward Santoso · Founder @the7percent.co · 295K followers</cite>
-    </blockquote>
-    <!-- Testimoni SENGAJA ga dipotong. Panjang dan detailnya itu justru
-         buktinya. Yang dikerjain di sini cuma nebelin satu kalimat kunci
-         per testimoni, biar yang scroll cepet tetep nangkep intinya
-         tanpa kehilangan alasan kenapa omongan orang ini berbobot. -->
-    <div class="tests" style="margin-top:34px">
-      <div class="t">
-        <p><b>Saya sudah baca lebih dari 200 buku.</b> Sebagian dari porsi tersebut saya dedikasikan pada buku-buku yang membahas filosofi, maskulinitas dan stoisisme atau sikap hidup. Bagaimanapun, saya merasa course ini akan sangat menghemat waktu jikalau saya menemukannya lebih cepat. Selain penyampaiannya yang terstruktur dan jelas, materi juga didasarkan pada ilmu yang teruji.</p>
-        <footer>
-          <span class="nm">Edward Santoso<svg class="vbadge" viewBox="0 0 24 24" aria-label="Verified" role="img"><circle cx="12" cy="12" r="11" fill="#0095F6"/><path d="M7 12.5l3.2 3.2L17 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span>Founder @the7percent.co · 295K followers</span>
-        </footer>
+  <!-- 4. CTA TENGAH -->
+  <section class="cta-mid" id="harga">
+    <div class="n780">
+      <div class="offer-box">
+        <div class="offer-row"><span>15 video + mind map breakdown, hampir 4 jam</span><span class="val">Rp1.500.000</span></div>
+        <div class="offer-row"><span>3 workbook transformasi</span><span class="val">Rp600.000</span></div>
+        <div class="offer-row"><span>2 bonus PDF</span><span class="val">Rp400.000</span></div>
+        <div class="offer-row"><span>Komunitas Discord khusus member</span><span class="val">Rp500.000</span></div>
+        <div class="offer-price"><span class="strike">Rp3.000.000</span>Rp299.000</div>
       </div>
-      <div class="t">
-        <p><b>Wow! Aku yakin ini yang pertama di Indonesia</b>, program yang mengupas bagaimana caranya menjadi laki-laki yang kuat, utuh, dan tentunya, paradoks. Maksudnya, bagaimana menjadi pria yang bisa build dan create big things di dunia, tapi di saat yang sama tetap punya koneksi intim sama dunia batinnya sendiri. <b>Jujur, ini tipe pasangan idaman semua wanita yang sekarang tuh bener-bener langka.</b></p>
-        <footer>
-          <span class="nm">Marcella Ismanto, CHt<svg class="vbadge" viewBox="0 0 24 24" aria-label="Verified" role="img"><circle cx="12" cy="12" r="11" fill="#0095F6"/><path d="M7 12.5l3.2 3.2L17 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span>Certified Hypnotherapist · 160K followers</span>
-        </footer>
+      <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
+      <p class="micro">Video course. Akses seumur hidup.</p>
+    </div>
+  </section>
+
+  <!-- 5. YANG LU DAPET -->
+  <section>
+    <h2 class="sec-head" id="dapet">Yang lu dapet</h2>
+    <div class="get-grid">
+      <div class="get-card"><span class="ico">◆</span> 15 video, hampir 4 jam</div>
+      <div class="get-card"><span class="ico">◆</span> Breakdown mind map di tiap video</div>
+      <div class="get-card"><span class="ico">◆</span> 5 PDF: 3 workbook transformasi + 2 bonus</div>
+      <div class="get-card"><span class="ico">◆</span> Komunitas Discord khusus member</div>
+      <div class="get-card"><span class="ico">◆</span> Akses seumur hidup</div>
+    </div>
+  </section>
+
+  <!-- 6. ISINYA -->
+  <section>
+    <h2 class="sec-head" id="isinya">Isinya</h2>
+    <p class="lead">4 modul, urutannya sengaja. Lu ga bisa bangun visi hidup di atas <b>pondasi yang belum kelar</b>, dan lu ga bisa benerin pondasi kalo lu belum tau <b>apa yang rusak</b>.</p>
+
+    <div class="mm-strip">
+      <div class="mm-item"><img src="assets/mindmap-1.jpg" alt="Mind map Modern Dating Crisis" loading="lazy"></div>
+      <div class="mm-item"><img src="assets/mindmap-2.jpg" alt="Mind map Dopamine Trap" loading="lazy"></div>
+      <div class="mm-item"><img src="assets/mindmap-3.jpg" alt="Mind map 4 Archetypes" loading="lazy"></div>
+    </div>
+    <p class="mm-caption">Mind map asli dari dalem course. Tiap video dibedah kayak gini.</p>
+
+    <div class="module-grid">
+      <div class="module-card" data-num="00">
+        <h3>Pendahuluan</h3>
+        <div class="video">
+          <span class="v-title">Coli Otak<span class="v-dur">09:49</span></span>
+          <span class="v-desc">Banyak belajar, tapi ga ada yang berubah.</span>
+        </div>
       </div>
-      <div class="t">
-        <p><b>GILA DAGING ABIZZ</b>, awalnya gw kira cmn bahas cowo in general tapi disini <b>dibahas sampe dalem banget</b>. Jujur change my prespective a lot di tengah dunia yang penuh tipuan ini, jadi lebih sadar apa yang membuat kita di kontrol pdhl gw kira g ngaruh ternyata ngaruh banget. G sampe situ, gw merasa terguided buat take real actionable step yang langsung bisa gw praktekin.</p>
-        <footer>Christian Harjanto<span>AI Business Partner</span></footer>
+
+      <div class="module-card" data-num="01">
+        <h3>Modul 1: Diagnosis</h3>
+        <div class="video">
+          <span class="v-title">Modern Dating Crisis<span class="v-dur">20:50</span></span>
+          <span class="v-desc">Akar dari gender war yang ga ada yang akuin.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Jebakan Dopamin Digital<span class="v-dur">15:09</span></span>
+          <span class="v-desc">PMO, scrolling, games, dan apa yang terjadi ke otak lu.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Cowo Red Pill &amp; Blue Pill<span class="v-dur">16:13</span></span>
+          <span class="v-desc">Dua narasi maskulinitas populer, dua-duanya sesat.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">4 Jalan Hidup Cowo<span class="v-dur">09:40</span></span>
+          <span class="v-desc">Lu di jalur yang mana selama ini?</span>
+        </div>
       </div>
-      <div class="t">
-        <p>Gw adalah tipe orang yang sangat suka untuk belajar dari buku self improvement, dan kebanyakan buku hanya mengajarkan pola pikirnya tanpa ada plan yang jelas. Menurut gw pribadi, kelebihan dari course ini bukan hanya menjelaskan konsep utama tetapi juga <b>dalam course kita diberikan plan plan untuk menjalankan apa yang sudah diajarkan and that's what I need</b>.</p>
-        <footer>Justin Vanes<span>Faculty of Electrical Engineering</span></footer>
+
+      <div class="module-card" data-num="02">
+        <h3>Modul 2: Sistem &amp; Pondasi</h3>
+        <div class="video">
+          <span class="v-title">Cara Benerin Otak Lu<span class="v-dur">24:00</span></span>
+          <span class="v-desc">Reset otak yang udah terjebak dopamin digital.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Sistem Hidup Cowo Kokoh<span class="v-dur">16:31</span></span>
+          <span class="v-desc">5 pilar yang bikin konsistensi jadi otomatis, bukan karena willpower.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Halo Effect<span class="v-dur">17:07</span></span>
+          <span class="v-desc">Fisik dan aura sebagai bagian dari keutuhan lu.</span>
+        </div>
+      </div>
+
+      <div class="module-card" data-num="03">
+        <h3>Modul 3: Inner Work</h3>
+        <div class="video">
+          <span class="v-title">Cowo dan Emosinya<span class="v-dur">18:33</span></span>
+          <span class="v-desc">Lu ga pernah diajarin cara ngadepin perasaan lu.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Shadow Work<span class="v-dur">21:03</span></span>
+          <span class="v-desc">Sisi gelap yang diam-diam ngendaliin hidup lu.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Sublimation<span class="v-dur">11:01</span></span>
+          <span class="v-desc">Mengolah luka, dendam, iri hati jadi energi buat berkarya dan tumbuh.</span>
+        </div>
+      </div>
+
+      <div class="module-card" data-num="04">
+        <h3>Modul 4: Visi &amp; Tujuan Hidup</h3>
+        <div class="video">
+          <span class="v-title">Visi Hidup &gt; Cewek<span class="v-dur">16:22</span></span>
+          <span class="v-desc">Cowo bervisi genuine adalah yang paling menarik.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Menemukan Misi<span class="v-dur">11:07</span></span>
+          <span class="v-desc">Lebih dalam dari sekadar "passion".</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Paradoxical Man Integration<span class="v-dur">21:45</span></span>
+          <span class="v-desc">Beast + Monk dalam 1 jiwa yang utuh.</span>
+        </div>
+        <div class="video">
+          <span class="v-title">Surat Penutup<span class="v-dur">02:26</span></span>
+          <span class="v-desc">Dari gw, untuk lu yang sampai sejauh ini.</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. PENAWARAN — angka tetep teks HTML, sengaja -->
+  <!-- 7. DISCORD KHUSUS BUYER -->
   <section>
-    <p class="shead">04 · Harga</p>
-    <div class="offer n700">
-      <div class="orow"><span>15 video + mind map breakdown, hampir 4 jam</span><span class="v">Rp1.500.000</span></div>
-      <div class="orow"><span>3 workbook transformasi</span><span class="v">Rp600.000</span></div>
-      <div class="orow"><span>2 bonus PDF</span><span class="v">Rp400.000</span></div>
-      <div class="orow"><span>Komunitas Discord khusus member</span><span class="v">Rp500.000</span></div>
-      <div class="oprice">
-        <s>Rp3.000.000</s>
-        <b>Rp299.000</b>
+    <div class="n780">
+    <h2 class="sec-head" id="discord">Discord khusus member</h2>
+    <div class="panel discord-panel">
+      <p class="lead">Mayoritas orang yang beli course online <b>ga pernah kelar</b>. Ruangan ini ada buat ngelawan angka itu.</p>
+      <ul class="d-points">
+        <li>Isinya cowo-cowo yang lagi ngejalanin proses yang sama di titik beda-beda. Lu bisa nanya, posting progress, dan liat orang lain mentok di mana.</li>
+        <li>Gampang bohongin diri sendiri. <b>Susah bohongin orang yang tau lu lagi ngerjain apa.</b></li>
+      </ul>
+      <p class="closer">Gw jujur: ini bukan layanan coaching, dan gw ga janjiin gw standby 24 jam. Ini ruangan. Yang bikin dia hidup atau mati itu orang-orang di dalemnya, termasuk lu.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- 8. KENAPA GW BEDA -->
+  <section class="why">
+    <div class="n780">
+    <h2 class="sec-head" id="beda">Kenapa gw beda dari yang lain</h2>
+      <p>Bukan rangkuman textbook, bukan juga ngarang sendiri. Gw bedah studi lintas disiplin: <b>evolutionary psychology, antropologi, neuroscience, filsafat</b>, gw buang yang rontok pas diuji ulang, terus gw satuin sama pengalaman hidup gw sendiri.</p>
+      <p class="embodied">Embodied knowledge, not just theories.</p>
+      <p>Artinya buat lu:</p>
+      <div class="diff-table">
+        <div class="diff-row diff-head">
+          <div class="diff-cell them">Yang lain</div>
+          <div class="diff-cell me">Course ini</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Klaim yang sumbernya ga bisa ditunjukin.</div>
+          <div class="diff-cell me">Ada referensinya, dan gw pengen lu cek.</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Masih pake "fakta" populer yang udah rontok pas diuji ulang. Contohnya efek Dunning-Kruger, yang ternyata lebih ke artefak statistik.</div>
+          <div class="diff-cell me">Yang rontok pas diuji ulang gw buang, walaupun itu bikin kontennya kurang sexy.</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Semua disajiin seolah udah pasti benar.</div>
+          <div class="diff-cell me">Lu bakal tau mana data, mana lensa berpikir, mana opini gw. Yang belum settled, gw bilang belum settled.</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell them">Terjemahan mentah konten Barat.</div>
+          <div class="diff-cell me">Konteks Indonesia.</div>
+        </div>
+      </div>
+      <p class="closer">Gw ga jualan "kebenaran yang disembunyiin". Itu jualannya kubu sebelah. Gw kasih lu mekanismenya, sumbernya, dan batasnya. Sisanya lu yang mikir.</p>
+    </div>
+  </section>
+
+  <!-- 9. INI BUKAN BUAT LU KALO -->
+  <section>
+    <div class="n780">
+    <h2 class="sec-head">Ini bukan buat lu kalo:</h2>
+    <div class="notfor">
+      <ul class="notfor-list">
+        <li>Lu nyari cara cepet. Ini bukan itu, dan ga akan pernah jadi itu.</li>
+        <li>Lu mau nonton doang terus ngerasa cukup. Tiap modul ada workbook yang harus lu isi dan praktekin. Kalo cuma nonton, itu coli otak versi bayar, dan lu cuma buang 299 ribu.</li>
+        <li>Lu belum siap jujur sama diri sendiri. Workbook-nya bakal nanya hal-hal yang jawabannya ga enak diakuin.</li>
+        <li>Lu nyari pembenaran bahwa ini semua salah cewe, salah zaman, atau salah orang lain. Di sini lu bakal disuruh ngaca dulu.</li>
+      </ul>
+      <p class="notfor-closer">Kalo empat-empatnya ga kena, lu udah siap.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ -->
+  <section>
+    <div class="n780">
+    <h2 class="sec-head" id="faq">FAQ</h2>
+      <details class="faq-item">
+        <summary class="faq-q">Gw kayaknya "fine-fine aja", bukan yang "broken" banget. Ini tetep relevan?</summary>
+        <p class="faq-a">Justru ini buat lu. Yang berasa "fine-fine aja" itu sering kali kondisi yang psikolog sebut <b>languishing</b>: ga depresi, tapi juga ga thriving. Stuck secara diam-diam, tanpa krisis yang jelas buat maksa lu berubah. Lu bisa jalanin sepuluh tahun kayak gini dan ga ada satupun alarm yang bunyi.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Gw udah pernah beli course dan ga pernah kelar. Kenapa yang ini beda?</summary>
+        <p class="faq-a">Jujur, ga ada jaminan. Tapi dua hal yang biasanya bikin orang ga kelar: ga ada yang tau dia berhenti, dan materinya ngajarin "apa" tanpa "gimana pas lagi ga mood". Dua-duanya yang gw urus, lewat <b>Discord</b> dan <b>Modul 2</b>. Sisanya di lu.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Perlu baca ebook-nya dulu ga sebelum masuk?</summary>
+        <p class="faq-a">Ga perlu. <b>Modul Diagnosis</b> udah mencakup pondasinya, jadi lu bisa langsung mulai dari sini.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Gw beneran mulai dari nol. Cocok ga?</summary>
+        <p class="faq-a">Cocok. Modul 1 emang didesain buat itu. Yang bahaya justru yang berasa udah ngerti terus loncat ke modul akhir.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Formatnya apa?</summary>
+        <p class="faq-a">Video course, plus 5 PDF workbook. Akses seumur hidup.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- 11. CTA PENUTUP -->
+  <section class="final">
+    <div class="narrow">
+      <h2>Lu punya dua pilihan sekarang.</h2>
+      <p>Satu: lu tutup halaman ini, lu simpen niatnya, dan tiga minggu lagi lu balik ke pola yang sama. Bukan karena lu jahat sama diri lu sendiri, melainkan karena tanpa sistem, itu emang default-nya.</p>
+      <p class="choice-two">Dua: lu mulai bangun tamannya.</p>
+      <div class="cta-block">
+        <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
+        <a class="btn-secondary" href="optin.html">Gw ambil PDF gratisnya dulu</a>
       </div>
     </div>
-    <div class="cta">
-      <a class="btn btn-1" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
-    </div>
-    <p class="micro">Video course. Akses seumur hidup.</p>
   </section>
 
-  <!-- 6. ISINYA — 240 kata jadi 74. Daftar video disembunyiin di <details>. -->
-  <section>
-    <p class="shead">05 · Isinya</p>
-    <p class="say">4 modul. Urutannya <em>sengaja</em>.</p>
-    <p class="sub">Ga bisa bangun visi di atas pondasi yang belum kelar.</p>
-    <div class="mm" style="margin-top:30px">
-      <img src="assets/mindmap-1.jpg" alt="Mind map Modern Dating Crisis" loading="lazy">
-      <img src="assets/mindmap-2.jpg" alt="Mind map Dopamine Trap" loading="lazy">
-      <img src="assets/mindmap-3.jpg" alt="Mind map 4 Archetypes" loading="lazy">
-    </div>
-    <p class="cap">Mind map asli dari dalem course. Tiap video dibedah kayak gini.</p>
-
-    <div class="mod" style="margin-top:26px">
-      <details>
-        <summary>Pendahuluan <i>1 video · 10 mnt</i></summary>
-        <div class="vid"><div class="vtop"><b>Coli Otak</b><span>09:49</span></div><div class="vdesc">Banyak belajar, tapi ga ada yang berubah.</div></div>
-      </details>
-      <details>
-        <summary>Modul 1 · Diagnosis <i>4 video · 1 jam 2 mnt</i></summary>
-        <div class="vid"><div class="vtop"><b>Modern Dating Crisis</b><span>20:50</span></div><div class="vdesc">Akar dari gender war yang ga ada yang akuin.</div></div>
-        <div class="vid"><div class="vtop"><b>Jebakan Dopamin Digital</b><span>15:09</span></div><div class="vdesc">PMO, scrolling, games, dan apa yang terjadi ke otak lu.</div></div>
-        <div class="vid"><div class="vtop"><b>Cowo Red Pill &amp; Blue Pill</b><span>16:13</span></div><div class="vdesc">Dua narasi maskulinitas populer, dua-duanya sesat.</div></div>
-        <div class="vid"><div class="vtop"><b>4 Jalan Hidup Cowo</b><span>09:40</span></div><div class="vdesc">Lu di jalur yang mana selama ini?</div></div>
-      </details>
-      <details>
-        <summary>Modul 2 · Sistem &amp; Pondasi <i>3 video · 58 mnt</i></summary>
-        <div class="vid"><div class="vtop"><b>Cara Benerin Otak Lu</b><span>24:00</span></div><div class="vdesc">Reset otak yang udah terjebak dopamin digital.</div></div>
-        <div class="vid"><div class="vtop"><b>Sistem Hidup Cowo Kokoh</b><span>16:31</span></div><div class="vdesc">5 pilar yang bikin konsistensi jadi otomatis, bukan karena willpower.</div></div>
-        <div class="vid"><div class="vtop"><b>Halo Effect</b><span>17:07</span></div><div class="vdesc">Fisik dan aura sebagai bagian dari keutuhan lu.</div></div>
-      </details>
-      <details>
-        <summary>Modul 3 · Inner Work <i>3 video · 51 mnt</i></summary>
-        <div class="vid"><div class="vtop"><b>Cowo dan Emosinya</b><span>18:33</span></div><div class="vdesc">Lu ga pernah diajarin cara ngadepin perasaan lu.</div></div>
-        <div class="vid"><div class="vtop"><b>Shadow Work</b><span>21:03</span></div><div class="vdesc">Sisi gelap yang diam-diam ngendaliin hidup lu.</div></div>
-        <div class="vid"><div class="vtop"><b>Sublimation</b><span>11:01</span></div><div class="vdesc">Mengolah luka, dendam, iri hati jadi energi buat berkarya dan tumbuh.</div></div>
-      </details>
-      <details>
-        <summary>Modul 4 · Visi &amp; Tujuan Hidup <i>4 video · 52 mnt</i></summary>
-        <div class="vid"><div class="vtop"><b>Visi Hidup &gt; Cewe</b><span>16:22</span></div><div class="vdesc">Cowo bervisi genuine adalah yang paling menarik.</div></div>
-        <div class="vid"><div class="vtop"><b>Menemukan Misi</b><span>11:07</span></div><div class="vdesc">Lebih dalam dari sekadar "passion".</div></div>
-        <div class="vid"><div class="vtop"><b>Paradoxical Man Integration</b><span>21:45</span></div><div class="vdesc">Beast + Monk dalam 1 jiwa yang utuh.</div></div>
-        <div class="vid"><div class="vtop"><b>Surat Penutup</b><span>02:26</span></div><div class="vdesc">Dari gw, untuk lu yang sampai sejauh ini.</div></div>
-      </details>
-    </div>
-  </section>
-
-  <!-- 7. DISCORD — 93 kata jadi 30 -->
-  <section>
-    <p class="shead">06 · Discord khusus member</p>
-    <p class="say">Gampang bohongin diri sendiri. <em>Susah</em> bohongin orang yang tau lu ngerjain apa.</p>
-    <p class="sub">Bukan coaching, dan gw ga standby 24 jam. Ini ruangan. Yang bikin hidup atau mati itu orang di dalemnya, termasuk lu.</p>
-  </section>
-
-  <!-- 8. KENAPA BEDA — 187 kata jadi 74 -->
-  <section>
-    <p class="shead">07 · Kenapa gw beda</p>
-    <p class="say">Embodied knowledge, <em>not just theories</em>.</p>
-    <p class="sub">Studi lintas disiplin: evolutionary psychology, antropologi, neuroscience, filsafat. Yang rontok pas diuji ulang, gw buang.</p>
-    <div class="vs" style="margin-top:28px">
-      <div class="r h"><div class="cel them">Yang lain</div><div class="cel me">Course ini</div></div>
-      <div class="r"><div class="cel them">Klaim tanpa sumber.</div><div class="cel me">Ada referensinya, dan gw pengen lu cek.</div></div>
-      <div class="r"><div class="cel them">Masih pake "fakta" yang udah rontok.</div><div class="cel me">Yang rontok gw buang, walau jadi kurang sexy.</div></div>
-      <div class="r"><div class="cel them">Semua disajiin seolah pasti benar.</div><div class="cel me">Mana data, mana opini gw, gw pisahin.</div></div>
-      <div class="r"><div class="cel them">Terjemahan mentah konten Barat.</div><div class="cel me">Konteks Indonesia.</div></div>
-    </div>
-    <p class="tally" style="margin-top:24px">Gw <b>ga</b> jualan "kebenaran yang disembunyiin". Itu jualannya kubu sebelah.</p>
-  </section>
-
-  <!-- 9. BUKAN BUAT LU — 90 kata jadi 44 -->
-  <section>
-    <p class="shead">08 · Ini bukan buat lu kalo</p>
-    <ul class="no">
-      <li>Lu nyari cara cepet.</li>
-      <li>Lu mau nonton doang. Itu coli otak versi bayar, dan lu cuma buang 299 ribu.</li>
-      <li>Lu belum siap jujur sama diri sendiri. Workbook-nya nanya hal yang ga enak diakuin.</li>
-      <li>Lu nyari pembenaran bahwa ini semua salah cewe, salah zaman, atau salah orang lain. Di sini lu bakal disuruh ngaca dulu.</li>
-    </ul>
-    <p class="tally">Ga ada yang kena? Lu udah siap.</p>
-  </section>
-
-  <!-- 10. FAQ — 169 kata jadi 92 -->
-  <section>
-    <p class="shead">09 · FAQ</p>
-    <div class="faq n700">
-      <details>
-        <summary>Gw kayaknya "fine-fine aja", bukan yang "broken" banget. Ini tetep relevan?</summary>
-        <p>Justru ini buat lu. Yang berasa "fine-fine aja" itu sering kali kondisi yang psikolog sebut <b>languishing</b>: ga depresi, tapi juga ga thriving. Stuck secara diam-diam, tanpa krisis yang jelas buat maksa lu berubah. Lu bisa jalanin sepuluh tahun kayak gini dan ga ada satupun alarm yang bunyi.</p>
-      </details>
-      <details>
-        <summary>Gw udah pernah beli course dan ga pernah kelar. Kenapa yang ini beda?</summary>
-        <p>Jujur, ga ada jaminan. Tapi dua hal yang biasanya bikin orang ga kelar: ga ada yang tau dia berhenti, dan materinya ngajarin "apa" tanpa "gimana pas lagi ga mood". Dua-duanya yang gw urus, lewat <b>Discord</b> dan <b>Modul 2</b>. Sisanya di lu.</p>
-      </details>
-      <details>
-        <summary>Gw belum baca ebook-nya. Bisa langsung ambil course?</summary>
-        <p>Bisa. Modul Diagnosis udah mencakup pondasi yang lu butuhin.</p>
-      </details>
-      <details>
-        <summary>Gw beneran mulai dari nol. Cocok ga?</summary>
-        <p>Cocok. Modul 1 emang didesain buat itu. Yang bahaya justru yang berasa udah ngerti terus loncat ke modul akhir.</p>
-      </details>
-      <details>
-        <summary>Formatnya apa?</summary>
-        <p>Video course, plus 5 PDF workbook. Akses seumur hidup.</p>
-      </details>
-    </div>
-  </section>
 </div>
 
-<!-- 11. PENUTUP — 87 kata jadi 40 -->
-<section class="final">
-  <div class="wrap">
-    <p class="say">Lu punya <em>dua pilihan</em> sekarang.</p>
-    <p class="sub">Satu: tutup halaman ini, dan tiga minggu lagi lu balik ke pola yang sama. Tanpa sistem, itu emang default-nya.</p>
-    <p class="say" style="margin-top:24px">Dua: lu mulai <em>bangun tamannya</em>.</p>
-    <div class="cta">
-      <a class="btn btn-1" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
-      <a class="btn btn-2" href="optin.html">Gw ambil PDF gratisnya dulu</a>
-    </div>
-  </div>
-</section>
+<button class="menu-btn" id="menu-btn" aria-label="Buka daftar isi" aria-expanded="false">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  Daftar isi
+</button>
 
+<div class="menu-panel" id="menu-panel">
+  <div class="menu-inner">
+    <div class="menu-head">
+      <span>Lompat ke bagian</span>
+      <button id="menu-close" aria-label="Tutup daftar isi">&times;</button>
+    </div>
+    <a href="#testimoni">Testimoni yang udah masuk</a>
+    <a href="#hasil">Yang berubah abis 4 modul</a>
+    <a href="#harga">Harga &amp; isi paketnya</a>
+    <a href="#dapet">Yang lu dapet</a>
+    <a href="#isinya">Daftar 15 videonya</a>
+    <a href="#discord">Komunitas Discord</a>
+    <a href="#beda">Kenapa framework ini beda</a>
+    <a href="#faq">FAQ</a>
+  </div>
+</div>
+
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-price"><span class="old">Rp3.000.000</span><span class="now">Rp299.000</span></div>
+  <a class="sticky-btn" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya</a>
+</div>
+<script>
+  (function () {
+    var btn = document.getElementById('menu-btn');
+    var panel = document.getElementById('menu-panel');
+    function buka(v) {
+      panel.classList.toggle('open', v);
+      btn.setAttribute('aria-expanded', v ? 'true' : 'false');
+    }
+    btn.addEventListener('click', function () { buka(!panel.classList.contains('open')); });
+    document.getElementById('menu-close').addEventListener('click', function () { buka(false); });
+    panel.addEventListener('click', function (e) { if (e.target === panel) buka(false); });
+    Array.prototype.forEach.call(panel.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () { buka(false); });
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') buka(false); });
+  })();
+
+  (function () {
+    var bar = document.getElementById('sticky-cta');
+    var mb = document.getElementById('menu-btn');
+    window.addEventListener('scroll', function () {
+      bar.classList.toggle('show', window.scrollY > 700);
+      mb.classList.toggle('show', window.scrollY > 260);
+    }, { passive: true });
+  })();
+
+  (function () {
+    var HARGA_OTO   = 'Rp229.000';
+    var HARGA_ASLI  = 'Rp299.000';
+    var RIBU_OTO    = '229 ribu';
+    var VOUCHER     = 'PRDX70';
+    // Sisa kuota kode voucher. Angkanya HARUS sama sama kuota beneran yang
+    // diset di lynk.id, dan diupdate manual tiap ada yang beli. Biarin null
+    // kalo kuotanya belum diset di lynk — nanti barisnya ga muncul sama sekali.
+    var SISA_KODE   = null;
+    var KODE_PROD   = 'z6o2z34zn9vo';
+    var CHECKOUT_OTO = 'http://lynk.id/nychothesis/z6o2z34zn9vo/checkout';
+    var MENIT = 60;
+    var KEY = 'pm_oto_deadline';
+
+    if (!/[?&]oto=/.test(window.location.search)) return;
+
+    // Besar diskonnya diitung dari dua harga di atas, biar kalo angkanya
+    // diganti, semua tulisan "hemat sekian" ikut bener sendiri.
+    function angka(rp) { return parseInt(String(rp).replace(/\D/g, ''), 10); }
+    function rupiah(n) { return 'Rp' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+    var SELISIH = angka(HARGA_ASLI) - angka(HARGA_OTO);
+    var HEMAT   = rupiah(SELISIH);
+    var HEMAT_PENDEK = Math.round(SELISIH / 1000) + 'rb';
+
+    var deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
+    if (deadline === -1) { window.location.replace('index.html'); return; }
+    if (!deadline || isNaN(deadline)) {
+      deadline = Date.now() + MENIT * 60 * 1000;
+      localStorage.setItem(KEY, String(deadline));
+    }
+
+    document.body.classList.add('oto');
+
+    var ann = document.getElementById('announce');
+    ann.className = 'announce announce-oto';
+    ann.innerHTML = '<span class="ann-lbl">Potongan <b>' + HEMAT + '</b>, sisa</span>' +
+                    '<span class="clock" id="clock">--:--</span>' +
+                    '<span class="vcode js-salin" role="button" tabindex="0">' +
+                      '<small>voucher</small>' + VOUCHER +
+                    '</span>';
+
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+    var nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (node) {
+      if (node.nodeValue.indexOf('Rp299.000') > -1) {
+        node.nodeValue = node.nodeValue.split('Rp299.000').join(HARGA_OTO);
+      }
+      if (node.nodeValue.indexOf('299 ribu') > -1) {
+        node.nodeValue = node.nodeValue.split('299 ribu').join(RIBU_OTO);
+      }
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('a[href*="z6o2z34zn9vo"]'), function (a) {
+      a.href = CHECKOUT_OTO;
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('a[href="optin.html"]'), function (a) {
+      a.href = 'thanks.html';
+      a.textContent = 'Ga dulu, kirim PDF gratisnya aja';
+    });
+
+    // Kode voucher ditempel di bawah tiap tombol beli. Sengaja jujur soal
+    // harga di halaman checkout, biar orang ga ngerasa dijebak pas mau bayar.
+    Array.prototype.forEach.call(
+      document.querySelectorAll('a.btn-primary[href*="' + KODE_PROD + '"]'),
+      function (a) {
+        var box = document.createElement('div');
+        box.className = 'voucher';
+        box.innerHTML =
+          '<div class="vhead">Potongan ' + HEMAT + ' buat lu</div>' +
+          (SISA_KODE !== null
+            ? '<div class="vquota">Vouchernya tinggal ' + SISA_KODE + ' lagi</div>'
+            : '') +
+          '<div class="vbody">' +
+            '<div class="vprice"><s>' + HARGA_ASLI + '</s>' +
+              '<span class="varrow" aria-hidden="true">&rarr;</span>' +
+              '<b>' + HARGA_OTO + '</b></div>' +
+            '<p class="vlead">Pakai voucher ini pas checkout</p>' +
+            '<span class="kode js-salin" role="button" tabindex="0">' + VOUCHER + '</span>' +
+            '<p class="vnote">Di halaman checkout harganya masih ketulis ' + HARGA_ASLI + '. ' +
+            'Masukin vouchernya biar turun ' + HEMAT + '. ' +
+            '<b>Klik buat nyalin.</b></p>' +
+          '</div>';
+        a.parentNode.insertBefore(box, a.nextSibling);
+      }
+    );
+
+    var sp = document.querySelector('.sticky-price');
+    if (sp) {
+      var mini = document.createElement('span');
+      mini.className = 'vcode js-salin';
+      mini.setAttribute('role', 'button');
+      mini.setAttribute('tabindex', '0');
+      mini.style.marginTop = '5px';
+      mini.style.alignSelf = 'flex-start';
+      mini.innerHTML = '<small>voucher</small>' + VOUCHER;
+      sp.appendChild(mini);
+    }
+
+    function salin(el) {
+      var asli = el.innerHTML;
+      function sukses() {
+        el.textContent = 'Tersalin';
+        el.classList.add('copied');
+        setTimeout(function () {
+          el.innerHTML = asli;
+          el.classList.remove('copied');
+        }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(VOUCHER).then(sukses, function () {});
+        return;
+      }
+      var tmp = document.createElement('textarea');
+      tmp.value = VOUCHER;
+      tmp.style.position = 'fixed';
+      tmp.style.opacity = '0';
+      document.body.appendChild(tmp);
+      tmp.select();
+      try { document.execCommand('copy'); sukses(); } catch (e) {}
+      document.body.removeChild(tmp);
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.js-salin'), function (el) {
+      el.addEventListener('click', function () { salin(el); });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); salin(el); }
+      });
+    });
+
+    // Banner-nya bisa patah jadi dua baris di layar sempit, jadi tingginya
+    // diukur langsung terus dipakai buat naro tombol "Daftar isi".
+    function geserMenu() {
+      document.documentElement.style.setProperty(
+        '--oto-banner', Math.round(ann.getBoundingClientRect().height) + 'px');
+    }
+    geserMenu();
+    window.addEventListener('resize', geserMenu);
+
+    var el = document.getElementById('clock');
+    function pad(x) { return x < 10 ? '0' + x : String(x); }
+    function tick() {
+      var sisa = deadline - Date.now();
+      if (sisa <= 0) {
+        localStorage.setItem(KEY, '-1');
+        window.location.replace('index.html');
+        return;
+      }
+      var d = Math.floor(sisa / 1000);
+      el.textContent = pad(Math.floor(d / 60)) + ':' + pad(d % 60);
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
 </body>
 </html>
