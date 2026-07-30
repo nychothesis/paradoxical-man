@@ -1616,19 +1616,27 @@
         e.target.classList.add('in');
         io.unobserve(e.target);
       });
-    }, { threshold: 0.05, rootMargin: '0px 0px 12% 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -6% 0px' });
 
-    // Yang ada di layar pertama sampe sedikit di bawahnya, dinyalain LANGSUNG
-    // pas halaman kebuka, ga nunggu discroll.
-    // Ini benerin masalah nyata: kalo bagian tepat di bawah lipatan layar
-    // masih tembus pandang, halamannya keliatan kayak udah abis di situ, dan
-    // orang ga sadar masih bisa discroll. Animasinya tetep jalan, cuma
-    // dipicu sama kebukanya halaman, bukan sama scroll.
+    // DUA KEBUTUHAN YANG BEDA, JANGAN DICAMPUR:
+    //
+    // (a) Orang harus sadar halamannya masih bisa discroll. Kalo bagian di
+    //     bibir bawah layar tembus pandang, halaman keliatan abis di situ.
+    //     Obatnya: apa pun yang MULAI di layar pertama dinyalain pas halaman
+    //     kebuka. Cukup segitu, ga usah lebih.
+    //
+    // (b) Yang di bawah layar pertama harus KEBACA animasinya. Kalo dinyalain
+    //     kecepetan (atau ikut dinyalain pas kebuka), pas discroll semuanya
+    //     udah rapi duluan dan animasinya berasa ilang.
+    //     Obatnya: rootMargin MINUS, biar nyalanya nunggu bener-bener masuk.
+    //
+    // Angka 1.0 ini batasnya. Dinaikin dikit aja (1.35 pernah dicoba), jatah
+    // animasi dua layar penuh langsung kemakan.
     var tinggi = window.innerHeight;
     var awal = [];
     Array.prototype.forEach.call(target, function (el) {
       el.classList.add('rv');
-      if (el.getBoundingClientRect().top < tinggi * 1.35) awal.push(el);
+      if (el.getBoundingClientRect().top < tinggi) awal.push(el);
       else io.observe(el);
     });
     awal.forEach(function (el, i) {
