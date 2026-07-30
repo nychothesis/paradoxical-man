@@ -473,9 +473,11 @@
     font-size: .7rem; font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase; color: var(--muted-2); flex: none;
   }
+  /* Panahnya digedein. Di ukuran lama dia nyaris ilang di layar HP, jadi
+     orang ga ngeh kartunya bisa dibuka dan isinya ga pernah keliatan. */
   .module-card > summary::after {
     content: "\25BE"; color: var(--gold); flex: none;
-    font-size: .95rem; line-height: 1; transition: transform .18s;
+    font-size: 1.45rem; line-height: 1; transition: transform .18s;
   }
   .module-card[open] > summary::after { transform: rotate(180deg); }
   .module-card[open] > summary { margin-bottom: 14px; }
@@ -494,27 +496,29 @@
   }
   .mm-caption { font-size: .8rem; color: var(--muted); margin-bottom: 22px; }
 
-  /* ---------- Discord ---------- */
+  /* ---------- Ruang khusus member ---------- */
   .panel {
     background: var(--card); border: 1px solid var(--line);
     border-radius: var(--radius); padding: 28px;
   }
-  .d-points { list-style: none; margin: 22px 0; }
-  .d-points li {
-    padding: 10px 0 10px 22px; border-bottom: 1px dashed var(--line);
-    position: relative; font-size: .92rem; color: #d8d3c8;
-  }
-  .d-points li:last-child { border-bottom: none; }
-  .d-points li::before {
-    content: "◆"; position: absolute; left: 0; top: 13px;
-    color: var(--gold); font-size: .65rem;
+  /* Dulu ini daftar berbutir, tapi isinya tinggal SATU butir doang setelah
+     dipangkas. Daftar satu butir keliatan kayak sisa potongan, bukan keputusan.
+     Diubah jadi kutipan bergaris emas: bentuknya jelas disengaja, dan
+     kalimatnya emang layak berdiri sendiri. */
+  .punch {
+    margin: 22px 0; padding: 2px 0 2px 16px;
+    border-left: 3px solid rgba(201, 162, 39, .5);
+    font-size: .96rem; color: #d8d3c8; line-height: 1.75;
   }
   .closer { color: var(--muted); font-size: .9rem; }
-  .discord-panel {
-    border-color: rgba(88, 101, 242, .55);
-    background: rgba(88, 101, 242, .08);
+  /* Dulu ungu, ngambil warna merek Discord. Sekarang balik ke emas brand,
+     karena halaman ini sengaja ga nyebut platform sama sekali: yang dijual
+     komunitasnya, bukan aplikasinya. Kalo platformnya pindah ke Skool nanti,
+     ga ada satu pun yang perlu diubah di sini. */
+  .komunitas-panel {
+    border-color: rgba(201, 162, 39, .5);
+    background: rgba(201, 162, 39, .06);
   }
-  .discord-panel .d-points li::before { color: #7983f5; }
 
   /* ---------- Why different ---------- */
   .why p { margin-bottom: 18px; color: #d8d3c8; font-size: .95rem; }
@@ -602,11 +606,14 @@
     display: flex; align-items: center; justify-content: space-between; gap: 14px;
   }
   .faq-q::-webkit-details-marker { display: none; }
+  /* Panah, bukan tanda plus. Disamain sama kartu modul di atas biar satu
+     halaman cuma punya SATU bahasa isyarat buat "ini bisa dibuka". Plus sama
+     panah di halaman yang sama bikin orang ragu apa dua-duanya jalan sama. */
   .faq-q::after {
-    content: "+"; color: var(--gold); font-size: 1.3rem; font-weight: 400;
-    flex: 0 0 auto; line-height: 1; transition: .18s;
+    content: "\25BE"; color: var(--gold); font-size: 1.45rem; font-weight: 400;
+    flex: 0 0 auto; line-height: 1; transition: transform .18s;
   }
-  .faq-item[open] .faq-q::after { content: "\2212"; }
+  .faq-item[open] .faq-q::after { transform: rotate(180deg); }
   .faq-a { color: var(--muted); font-size: .88rem; font-weight: 400; padding: 0 22px 18px; }
   .faq-a b { color: var(--gold-soft); font-weight: 600; }
 
@@ -813,7 +820,7 @@
         <h1>Framework lengkap buat jadi cowo yang <em>paling susah ditolak</em> cewe.</h1>
         <div class="reframe" style="margin: 34px 0 0;">
           <p class="reframe-title">Ini bukan kumpulan tips dating.</p>
-          <p>Tips chatting, pickup lines, cara keliatan menarik: itu semua <b>makeup</b>. Bagus sampe kena air. Teknik apa pun bakal sia-sia, malah bisa bahaya, kalo akar sama pondasinya belum bener. Makanya gw mulai dari bagian yang justru sering di-skip "guru-guru di luar sana".</p>
+          <p>Tips chatting, pickup lines, cara keliatan menarik: itu semua <b>makeup</b>. Bagus sampe kena air. Teknik tanpa pondasi bukan cuma sia-sia, tapi bisa balik nyerang lu. Makanya gw mulai dari pondasinya, bagian yang paling sering dilewatin.</p>
           <p>Analoginya: gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng sendiri.</p>
           <div class="fromto">
             <div class="ft-row"><span class="from">ngejar kupu-kupu</span><span class="arrow">→</span><span class="to">bangun taman yang indah</span></div>
@@ -825,17 +832,15 @@
         <div class="cta-block">
           <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
           <a class="btn-secondary" href="optin.html">Gw ambil PDF gratisnya dulu</a>
-          <p class="micro">Mulai dari nol? Modul 1 emang buat itu.</p>
         </div>
         <div class="statband">
           <div><b>~4 jam</b><span>Total materi</span></div>
-          <div><b>4</b><span>Modul</span></div>
+          <div><b>15</b><span>Video di 4 modul</span></div>
           <div><b class="word">Mind map</b><span>Breakdown tiap video</span></div>
           <div><b>5</b><span>PDF workbook</span></div>
           <div><b class="word">Komunitas</b><span>Khusus member</span></div>
           <div><b>&infin;</b><span>Akses seumur hidup</span></div>
         </div>
-        <p class="micro">Rata-rata 15 menit per video. Ga ada video 3 menit yang cuma buat manjangin daftar.</p>
       </div>
     </div>
   </section>
@@ -886,7 +891,7 @@
 
   <!-- 2. TESTIMONI -->
   <section>
-    <h2 class="sec-head" id="testimoni">Kata mereka yang udah liat isinya</h2>
+    <h2 class="sec-head" id="testimoni">Kata mereka</h2>
     <div class="t-grid">
 
       <div class="t-card">
@@ -949,7 +954,7 @@
       </div>
       <div class="benefit">
         <h3>Cewe: efek samping, bukan tujuan.</h3>
-        <p>Hidup lu jadi journey yang orang pengen masuk ke dalemnya.</p>
+        <p>Lu jadi magnet. Orang dateng sendiri, bukan karena lu ngejar.</p>
       </div>
     </div>
 
@@ -965,7 +970,7 @@
         <div class="offer-row"><span>15 video + mind map breakdown, hampir 4 jam</span><span class="val">Rp1.500.000</span></div>
         <div class="offer-row"><span>3 workbook transformasi</span><span class="val">Rp600.000</span></div>
         <div class="offer-row"><span>2 bonus PDF</span><span class="val">Rp400.000</span></div>
-        <div class="offer-row"><span>Komunitas Discord khusus member</span><span class="val">Rp500.000</span></div>
+        <div class="offer-row"><span>Komunitas khusus member</span><span class="val">Rp500.000</span></div>
         <div class="offer-price"><span class="strike">Rp3.000.000</span>Rp299.000</div>
       </div>
       <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
@@ -980,7 +985,7 @@
       <div class="get-card"><span class="ico">◆</span> 15 video, hampir 4 jam</div>
       <div class="get-card"><span class="ico">◆</span> Breakdown mind map di tiap video</div>
       <div class="get-card"><span class="ico">◆</span> 5 PDF: 3 workbook transformasi + 2 bonus</div>
-      <div class="get-card"><span class="ico">◆</span> Komunitas Discord khusus member</div>
+      <div class="get-card"><span class="ico">◆</span> Komunitas khusus member</div>
       <div class="get-card"><span class="ico">◆</span> Akses seumur hidup</div>
     </div>
   </section>
@@ -998,12 +1003,12 @@
     <p class="mm-caption">Mind map asli dari dalem course. Tiap video dibedah kayak gini.</p>
 
     <div class="module-grid">
-      <details class="module-card" data-num="00"><summary><h3>Pendahuluan</h3><i>1 video &middot; 9 mnt</i></summary><div class="video">
+      <details class="module-card" data-num="00"><summary><h3>Pendahuluan</h3><i>1 video &middot; ~10 mnt</i></summary><div class="video">
           <span class="v-title">Coli Otak<span class="v-dur">09:49</span></span>
           <span class="v-desc">Banyak belajar, tapi ga ada yang berubah.</span>
         </div></details>
 
-      <details class="module-card" data-num="01"><summary><h3>Modul 1: Diagnosis</h3><i>4 video &middot; 1 jam 1 mnt</i></summary><div class="video">
+      <details class="module-card" data-num="01"><summary><h3>Modul 1: Diagnosis</h3><i>4 video &middot; ~1 jam</i></summary><div class="video">
           <span class="v-title">Modern Dating Crisis<span class="v-dur">20:50</span></span>
           <span class="v-desc">Akar dari gender war yang ga ada yang akuin.</span>
         </div>
@@ -1020,7 +1025,7 @@
           <span class="v-desc">Lu di jalur yang mana selama ini?</span>
         </div></details>
 
-      <details class="module-card" data-num="02"><summary><h3>Modul 2: Sistem &amp; Pondasi</h3><i>3 video &middot; 57 mnt</i></summary><div class="video">
+      <details class="module-card" data-num="02"><summary><h3>Modul 2: Sistem &amp; Pondasi</h3><i>3 video &middot; ~1 jam</i></summary><div class="video">
           <span class="v-title">Cara Benerin Otak Lu<span class="v-dur">24:00</span></span>
           <span class="v-desc">Reset otak yang udah terjebak dopamin digital.</span>
         </div>
@@ -1033,7 +1038,7 @@
           <span class="v-desc">Fisik dan aura sebagai bagian dari keutuhan lu.</span>
         </div></details>
 
-      <details class="module-card" data-num="03"><summary><h3>Modul 3: Inner Work</h3><i>3 video &middot; 50 mnt</i></summary><div class="video">
+      <details class="module-card" data-num="03"><summary><h3>Modul 3: Inner Work</h3><i>3 video &middot; ~50 mnt</i></summary><div class="video">
           <span class="v-title">Cowo dan Emosinya<span class="v-dur">18:33</span></span>
           <span class="v-desc">Lu ga pernah diajarin cara ngadepin perasaan lu.</span>
         </div>
@@ -1046,7 +1051,7 @@
           <span class="v-desc">Mengolah luka, dendam, iri hati jadi energi buat berkarya dan tumbuh.</span>
         </div></details>
 
-      <details class="module-card" data-num="04"><summary><h3>Modul 4: Visi &amp; Tujuan Hidup</h3><i>4 video &middot; 51 mnt</i></summary><div class="video">
+      <details class="module-card" data-num="04"><summary><h3>Modul 4: Visi &amp; Tujuan Hidup</h3><i>4 video &middot; ~55 mnt</i></summary><div class="video">
           <span class="v-title">Visi Hidup &gt; Cewek<span class="v-dur">16:22</span></span>
           <span class="v-desc">Cowo bervisi genuine adalah yang paling menarik.</span>
         </div>
@@ -1065,15 +1070,13 @@
     </div>
   </section>
 
-  <!-- 7. DISCORD KHUSUS BUYER -->
+  <!-- 7. RUANG KHUSUS BUYER -->
   <section>
     <div class="n780">
-    <h2 class="sec-head" id="discord">Discord khusus member</h2>
-    <div class="panel discord-panel">
+    <h2 class="sec-head" id="komunitas">Ruang khusus member</h2>
+    <div class="panel komunitas-panel">
       <p class="lead">Mayoritas orang yang beli course online <b>ga pernah kelar</b>. Ruangan ini ada buat ngelawan angka itu.</p>
-      <ul class="d-points">
-        <li>Gampang bohongin diri sendiri. <b>Susah bohongin orang yang tau lu lagi ngerjain apa.</b></li>
-      </ul>
+      <p class="punch">Gampang bohongin diri sendiri. <b>Susah bohongin orang yang tau lu lagi ngerjain apa.</b></p>
       <p class="closer">Ini bukan coaching, dan gw ga standby 24 jam. Ini ruangan. Yang bikin dia hidup itu orang di dalemnya, termasuk lu.</p>
     </div>
     </div>
@@ -1108,7 +1111,7 @@
           <div class="diff-cell me">Konteks Indonesia.</div>
         </div>
       </div>
-      <p class="closer">Gw ga jualan "kebenaran yang disembunyiin". Gw kasih mekanismenya, sumbernya, dan batasnya. Sisanya lu yang mikir.</p>
+      <p class="closer">Gw ga jualan "kebenaran yang disembunyiin". Gw kasih mekanismenya, sumbernya, dan batasnya.</p>
     </div>
   </section>
 
@@ -1138,7 +1141,7 @@
       </details>
       <details class="faq-item">
         <summary class="faq-q">Gw udah pernah beli course dan ga pernah kelar. Kenapa yang ini beda?</summary>
-        <p class="faq-a">Jujur, ga ada jaminan. Tapi dua hal yang biasanya bikin orang ga kelar: ga ada yang tau dia berhenti, dan materinya ngajarin "apa" tanpa "gimana pas lagi ga mood". Dua-duanya yang gw urus, lewat <b>Discord</b> dan <b>Modul 2</b>. Sisanya di lu.</p>
+        <p class="faq-a">Jujur, ga ada jaminan. Tapi dua hal yang biasanya bikin orang ga kelar: ga ada yang tau dia berhenti, dan materinya ngajarin "apa" tanpa "gimana pas lagi ga mood". Dua-duanya yang gw urus, lewat <b>komunitasnya</b> dan <b>Modul 2</b>. Sisanya di lu.</p>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Perlu baca PDF gratisnya dulu ga sebelum masuk?</summary>
@@ -1186,7 +1189,7 @@
     <a href="#harga">Harga &amp; isi paketnya</a>
     <a href="#dapet">Yang lu dapet</a>
     <a href="#isinya">Daftar 15 videonya</a>
-    <a href="#discord">Komunitas Discord</a>
+    <a href="#komunitas">Komunitas</a>
     <a href="#beda">Kenapa framework ini beda</a>
     <a href="#faq">FAQ</a>
   </div>
