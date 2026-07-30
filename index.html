@@ -1616,11 +1616,28 @@
         e.target.classList.add('in');
         io.unobserve(e.target);
       });
-    }, { threshold: 0.06, rootMargin: '0px 0px -5% 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px 12% 0px' });
 
+    // Yang ada di layar pertama sampe sedikit di bawahnya, dinyalain LANGSUNG
+    // pas halaman kebuka, ga nunggu discroll.
+    // Ini benerin masalah nyata: kalo bagian tepat di bawah lipatan layar
+    // masih tembus pandang, halamannya keliatan kayak udah abis di situ, dan
+    // orang ga sadar masih bisa discroll. Animasinya tetep jalan, cuma
+    // dipicu sama kebukanya halaman, bukan sama scroll.
+    var tinggi = window.innerHeight;
+    var awal = [];
     Array.prototype.forEach.call(target, function (el) {
       el.classList.add('rv');
-      io.observe(el);
+      if (el.getBoundingClientRect().top < tinggi * 1.35) awal.push(el);
+      else io.observe(el);
+    });
+    awal.forEach(function (el, i) {
+      el.style.setProperty('--d', (0.4 + Math.min(i, 6) * 0.09) + 's');
+    });
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        awal.forEach(function (el) { el.classList.add('in'); });
+      });
     });
   })();
 </script>
