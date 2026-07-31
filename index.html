@@ -761,6 +761,38 @@
   .pcheck [aria-pressed="true"] .bx {
     background: var(--gold); border-color: var(--gold); color: #191510;
   }
+  /* Makin banyak dicentang, makin nyala panelnya.
+     Semua diikat ke satu angka --kena yang diisi JS, terus dipake ngitung
+     warna garis tepi, kekuatan sinar, sama kehangatan latarnya. Jadi
+     nambah/ngurangin poin ga perlu nyentuh CSS lagi.
+     Ini bagian paling introspektif di halaman: makin banyak yang kena,
+     makin panelnya kerasa "nyala" bareng orangnya. */
+  .pcheck-panel {
+    --kena: 0;
+    border-color: rgba(201, 162, 39, calc(.16 + var(--kena) * .06));
+    background:
+      radial-gradient(120% 80% at 50% 0%,
+        rgba(201, 162, 39, calc(var(--kena) * .022)), transparent 70%),
+      var(--card);
+    box-shadow: 0 0 calc(var(--kena) * 7px) rgba(201, 162, 39, calc(var(--kena) * .04));
+    transition: border-color .5s ease, box-shadow .5s ease, background .5s ease;
+  }
+  /* Angkanya nyentak bentar tiap berubah, biar kerasa ada yang kejadian. */
+  .tally b { display: inline-block; transition: transform .28s cubic-bezier(.2,1.6,.4,1); }
+  .tally.pop b { transform: scale(1.35); }
+  /* Pas nembus ambang dua, vonisnya nyala sekali. */
+  @keyframes vonis {
+    0%   { color: var(--gold); text-shadow: 0 0 18px rgba(201,162,39,.55); }
+    100% { color: inherit; text-shadow: none; }
+  }
+  .tally.lolos span { animation: vonis 1.1s ease-out; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pcheck-panel, .tally b { transition: none; }
+    .tally.pop b { transform: none; }
+    .tally.lolos span { animation: none; }
+  }
+
   .tally {
     margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
     font-family: 'Poppins', sans-serif; font-size: .95rem; font-weight: 600;
@@ -948,7 +980,7 @@
   <section>
     <div class="n780">
       <h2 class="sec-head">Relate ga?</h2>
-      <div class="panel">
+      <div class="panel pcheck-panel" id="pcheck-panel">
         <p class="pcheck-hint">Centang yang kena di lu.</p>
         <ul class="pcheck" id="pcheck">
           <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu sering dibilang "kamu terlalu baik buat aku". Tapi ga pernah jadi pilihan.</span></button></li>
@@ -957,6 +989,7 @@
           <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu ga pernah berani ngomongin isi hati lu ke cewe, takut begitu dia liat lu yang sebenernya, dia pergi.</span></button></li>
           <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu kesepian. Zaman sekarang bikin orang keliatan makin nyambung, padahal makin terisolasi satu sama lain. Makin lama, ngobrol langsung malah makin susah.</span></button></li>
           <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Satu narasi bilang cowo harus lembut dan terbuka, satunya bilang harus kuat dan tahan banting. Lu bingung harus jadi yang mana.</span></button></li>
+          <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu ngejar duit, status, validasi, dan cewe sebanyak-banyaknya. Soalnya lu ngerasa itu emang jalannya, dan itu emang tujuan akhirnya.</span></button></li>
           <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Hidup keliatan jalan, tapi lu ga pernah tau lu dilahirin dan ditempatin di dunia ini buat apa. Visi besarnya ga pernah ketemu.</span></button></li>
           <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu struggle sama kecanduan, entah porn, video game, atau scrolling. Dan lu bingung gimana cara berhentinya.</span></button></li>
         </ul>
@@ -1558,13 +1591,42 @@
     var asli = out.textContent;
     var tombol = list.querySelectorAll('button');
 
+    var panel = document.getElementById('pcheck-panel');
+    var kenaLalu = 0;
+
     function hitung() {
       var kena = list.querySelectorAll('[aria-pressed="true"]').length;
-      if (kena === 0) { out.textContent = asli; return; }
-      out.innerHTML = 'Lu kena <b>' + kena + '</b> dari ' + tombol.length + '.'
-        + '<span>' + (kena < 2
-            ? 'Baru satu. Kalo minimal dua kena, framework ini buat lu.'
-            : 'Minimal dua kena. Framework ini buat lu.') + '</span>';
+
+      // Satu angka ini yang nyetir warna garis tepi, sinar, sama kehangatan
+      // latar panel. Semua itungannya di CSS, jadi di sini cukup kasih angka.
+      if (panel) panel.style.setProperty('--kena', kena);
+
+      if (kena === 0) { out.textContent = asli; }
+      else {
+        out.innerHTML = 'Lu kena <b>' + kena + '</b> dari ' + tombol.length + '.'
+          + '<span>' + (kena < 2
+              ? 'Baru satu. Kalo minimal dua kena, framework ini buat lu.'
+              : 'Minimal dua kena. Framework ini buat lu.') + '</span>';
+      }
+
+      // Angkanya nyentak tiap berubah. Class-nya dilepas lewat rAF ganda,
+      // bukan setTimeout, biar kalo diklik cepet-cepet tetep nyentak lagi
+      // dari awal, ga ketelen sama sisa animasi sebelumnya.
+      out.classList.remove('pop');
+      void out.offsetWidth;
+      out.classList.add('pop');
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { out.classList.remove('pop'); });
+      });
+
+      // Vonisnya nyala SEKALI, pas pertama kali nembus ambang dua. Kalo
+      // dinyalain tiap centang, dia berhenti berasa sebagai penanda.
+      if (kenaLalu < 2 && kena >= 2) {
+        out.classList.remove('lolos');
+        void out.offsetWidth;
+        out.classList.add('lolos');
+      }
+      kenaLalu = kena;
     }
 
     Array.prototype.forEach.call(tombol, function (b) {
