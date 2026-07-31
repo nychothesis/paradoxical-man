@@ -486,15 +486,6 @@
   }
 
   /* ---------- Deliverables ---------- */
-  .get-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  .get-card {
-    background: linear-gradient(160deg, var(--card-2), var(--card));
-    border: 1px solid var(--line); border-radius: 12px;
-    padding: 18px 20px; font-size: .9rem; font-weight: 500;
-    display: flex; align-items: center; gap: 13px; transition: .18s;
-  }
-  .get-card:hover { border-color: #3a3630; transform: translateY(-2px); }
-  .get-card .ico { color: var(--green); font-size: .7rem; }
 
   /* ---------- Curriculum ---------- */
   .module-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 34px; }
@@ -701,7 +692,6 @@
     .sec-head { font-size: 1.55rem; }
     .t-grid { grid-template-columns: 1fr 1fr; }
     .benefit-grid { grid-template-columns: 1fr 1fr; }
-    .get-grid { grid-template-columns: repeat(3, 1fr); }
     .module-grid { grid-template-columns: 1fr 1fr; }
     .module-grid .module-card:first-child { grid-column: 1 / -1; }
     .final h2 { font-size: 2.3rem; }
@@ -709,7 +699,7 @@
 
   /* ===== TAMBAHAN ===== */
   /* Pita angka: jeda visual, nol prosa. Gantiin section "Yang lu dapet"
-     yang tadinya cuma daftar. Warna ngikutin .get-card yang udah ada. */
+     yang tadinya cuma daftar. */
   /* 6 sel, 3 kolom di layar lebar dan 2 kolom di HP. Dua-duanya bagi habis,
      jadi ga ada sel nyangkut sendirian di baris terakhir. Label komunitas
      sengaja netral (bukan "Discord"), biar ga perlu diubah kalo platformnya
@@ -1103,8 +1093,8 @@
         <p>Lu gerak karena visi, bukan karena dendam.</p>
       </div>
       <div class="benefit">
-        <h3>Cewe: efek samping, bukan tujuan.</h3>
-        <p>Lu jadi magnet. Orang dateng sendiri, bukan karena lu ngejar.</p>
+        <h3>Lu punya arah hidup yang jelas, dan cewe jadi efek sampingnya.</h3>
+        <p>Begitu lu tau lu mau ke mana, lu jadi magnet. Orang dateng sendiri, bukan karena lu ngejar.</p>
       </div>
     </div>
 
@@ -1128,17 +1118,7 @@
     </div>
   </section>
 
-  <!-- 5. YANG LU DAPET -->
-  <section>
-    <h2 class="sec-head" id="dapet">Yang lu dapet</h2>
-    <div class="get-grid">
-      <div class="get-card"><span class="ico">◆</span> 15 video, hampir 4 jam</div>
-      <div class="get-card"><span class="ico">◆</span> Breakdown mind map di tiap video</div>
-      <div class="get-card"><span class="ico">◆</span> 5 PDF: 3 workbook transformasi + 2 bonus</div>
-      <div class="get-card"><span class="ico">◆</span> Komunitas khusus member</div>
-      <div class="get-card"><span class="ico">◆</span> Akses seumur hidup</div>
-    </div>
-  </section>
+  
 
   <!-- 6. ISINYA -->
   <section>
@@ -1337,7 +1317,6 @@
     <a href="#testimoni">Testimoni</a>
     <a href="#hasil">Yang berubah abis 4 modul</a>
     <a href="#harga">Harga &amp; isi paketnya</a>
-    <a href="#dapet">Yang lu dapet</a>
     <a href="#isinya">Daftar 15 videonya</a>
     <a href="#komunitas">Komunitas</a>
     <a href="#beda">Kenapa framework ini beda</a>
@@ -1713,7 +1692,7 @@
 
     var target = document.querySelectorAll(
       '.sec-head, .panel, .t-card, .benefit, .fromto, .statband, .module-card,' +
-      '.diff-row, .faq-item, .offer-box, .honest-block, .get-card, .video');
+      '.diff-row, .faq-item, .offer-box, .honest-block, .video');
     if (!('IntersectionObserver' in window) || !target.length) return;
 
     // Jeda beruntun cuma di dalem satu rombongan yang muncul barengan.
