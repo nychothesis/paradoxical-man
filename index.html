@@ -768,9 +768,18 @@
        color-mix, biar jalan di HP lama juga. */
     --nyala: 201, 162, 39;
     border-color: rgba(var(--nyala), calc(.3 + var(--kena) * .07));
+    /* Cahayanya dibikin nyebar ke SELURUH panel, bukan numpuk di atas doang.
+       Panel ini tinggi (10 poin), jadi kalo cuma satu sumber di atas, orang
+       yang lagi baca di bawah ga ngerasain perubahannya sama sekali.
+       Tiga lapis: sumber di atas, sumber di bawah, plus lapisan rata tipis
+       yang nutup bagian tengah. */
     background:
-      radial-gradient(130% 90% at 50% 0%,
-        rgba(var(--nyala), calc(.03 + var(--kena) * .035)), transparent 72%),
+      radial-gradient(120% 55% at 50% 0%,
+        rgba(var(--nyala), calc(.025 + var(--kena) * .028)), transparent 72%),
+      radial-gradient(120% 55% at 50% 100%,
+        rgba(var(--nyala), calc(.025 + var(--kena) * .028)), transparent 72%),
+      linear-gradient(rgba(var(--nyala), calc(.012 + var(--kena) * .014)),
+                      rgba(var(--nyala), calc(.012 + var(--kena) * .014))),
       var(--card);
     box-shadow:
       0 0 calc(10px + var(--kena) * 9px) rgba(var(--nyala), calc(.05 + var(--kena) * .05)),
@@ -1122,7 +1131,7 @@
 
   <!-- 6. ISINYA -->
   <section>
-    <h2 class="sec-head" id="isinya">Isinya</h2>
+    <h2 class="sec-head" id="isinya">Isi course-nya</h2>
     <p class="lead">4 modul, urutannya sengaja. Lu ga bisa bangun visi hidup di atas <b>pondasi yang belum kelar</b>, dan lu ga bisa benerin pondasi kalo lu belum tau <b>apa yang rusak</b>.</p>
 
     <div class="mm-strip">
@@ -1317,7 +1326,7 @@
     <a href="#testimoni">Testimoni</a>
     <a href="#hasil">Yang berubah abis 4 modul</a>
     <a href="#harga">Harga &amp; isi paketnya</a>
-    <a href="#isinya">Daftar 15 videonya</a>
+    <a href="#isinya">Isi course-nya</a>
     <a href="#komunitas">Komunitas</a>
     <a href="#beda">Kenapa framework ini beda</a>
     <a href="#faq">FAQ</a>
