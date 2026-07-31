@@ -14,11 +14,21 @@ dipakai buat konversi, jadi copy-nya sensitif — jangan diubah tanpa diminta.
 ## Halaman
 | File | Fungsi |
 |---|---|
-| `index.html` | Landing utama (paling panjang, ~55 KB) |
-| `ringkas.html` | Versi ringkas dari landing |
+| `index.html` | Landing utama (~83 KB) |
 | `optin.html` | Form ambil PDF gratis |
 | `thanks.html` | Halaman "cek email lu" setelah opt-in |
 | `funnel.css` | Style bersama halaman opt-in & thanks |
+
+`ringkas.html` udah ga ada. Dia dipromosiin jadi `index.html`, dan yang lama
+dibuang (masih bisa diambil dari riwayat git).
+
+## Kode voucher
+| Kode | Muncul di | Potongan |
+|---|---|---|
+| `OTO70` | cuma di mode `?oto=1` | Rp70.000 |
+| `FPDF50` | ga di sini, adanya di PDF gratis | Rp50.000 |
+
+Halaman normal sengaja **ga nampilin kode apapun**, harganya penuh Rp299.000.
 
 **`index.html` punya dua mode**: normal dan `?oto=1` (one-time offer) — copy-nya
 beda. Kalau ngedit atau proofread, **cek dua-duanya**, gampang kelewat.
