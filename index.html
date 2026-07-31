@@ -769,14 +769,31 @@
      makin panelnya kerasa "nyala" bareng orangnya. */
   .pcheck-panel {
     --kena: 0;
-    border-color: rgba(201, 162, 39, calc(.16 + var(--kena) * .06));
+    /* Warnanya naik dari emas -> jingga -> maroon seiring makin banyak yang
+       kena. Maroon-nya BUKAN merah asal: itu --maroon yang di halaman ini
+       udah dipake buat nandain sisi "yang lain" di tabel banding sama daftar
+       "ini bukan buat lu". Jadi pas panelnya nyampe maroon, otak pembaca
+       udah kenal artinya: ini yang parah.
+       Nilai RGB-nya diitung di JS terus dititipin ke --nyala, bukan pake
+       color-mix, biar jalan di HP lama juga. */
+    --nyala: 201, 162, 39;
+    border-color: rgba(var(--nyala), calc(.3 + var(--kena) * .07));
     background:
-      radial-gradient(120% 80% at 50% 0%,
-        rgba(201, 162, 39, calc(var(--kena) * .022)), transparent 70%),
+      radial-gradient(130% 90% at 50% 0%,
+        rgba(var(--nyala), calc(.03 + var(--kena) * .035)), transparent 72%),
       var(--card);
-    box-shadow: 0 0 calc(var(--kena) * 7px) rgba(201, 162, 39, calc(var(--kena) * .04));
-    transition: border-color .5s ease, box-shadow .5s ease, background .5s ease;
+    box-shadow:
+      0 0 calc(10px + var(--kena) * 9px) rgba(var(--nyala), calc(.05 + var(--kena) * .05)),
+      inset 0 1px 0 rgba(var(--nyala), calc(.06 + var(--kena) * .04));
+    transition: border-color .55s ease, box-shadow .55s ease, background .55s ease;
   }
+  /* Centangannya ikut ganti warna, jadi kotak sama panelnya senada. */
+  .pcheck-panel [aria-pressed="true"] { color: rgb(var(--nyala)); }
+  .pcheck-panel [aria-pressed="true"] .bx {
+    background: rgb(var(--nyala)); border-color: rgb(var(--nyala));
+    transition: background .45s ease, border-color .45s ease;
+  }
+  .pcheck-panel .tally b { color: rgb(var(--nyala)); transition: color .45s ease, transform .28s cubic-bezier(.2,1.6,.4,1); }
   /* Angkanya nyentak bentar tiap berubah, biar kerasa ada yang kejadian. */
   .tally b { display: inline-block; transition: transform .28s cubic-bezier(.2,1.6,.4,1); }
   .tally.pop b { transform: scale(1.35); }
@@ -1594,12 +1611,27 @@
     var panel = document.getElementById('pcheck-panel');
     var kenaLalu = 0;
 
+    // Tiga titik warna: emas (aman) -> jingga (mulai berat) -> maroon (parah).
+    // Diitung manual, bukan pake color-mix(), biar HP lama tetep kebagian.
+    var TITIK = [[201, 162, 39], [205, 124, 42], [176, 65, 60]];
+    function warna(rasio) {
+      var t = Math.max(0, Math.min(1, rasio)) * (TITIK.length - 1);
+      var i = Math.min(Math.floor(t), TITIK.length - 2);
+      var f = t - i;
+      return TITIK[i].map(function (a, k) {
+        return Math.round(a + (TITIK[i + 1][k] - a) * f);
+      }).join(', ');
+    }
+
     function hitung() {
       var kena = list.querySelectorAll('[aria-pressed="true"]').length;
 
       // Satu angka ini yang nyetir warna garis tepi, sinar, sama kehangatan
       // latar panel. Semua itungannya di CSS, jadi di sini cukup kasih angka.
-      if (panel) panel.style.setProperty('--kena', kena);
+      if (panel) {
+        panel.style.setProperty('--kena', kena);
+        panel.style.setProperty('--nyala', warna(kena / tombol.length));
+      }
 
       if (kena === 0) { out.textContent = asli; }
       else {
