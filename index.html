@@ -362,11 +362,6 @@
     border: 1px solid var(--line); border-radius: var(--radius);
     padding: 26px; position: relative; overflow: hidden; transition: .18s;
   }
-  .t-card::after {
-    content: ""; position: absolute; top: -30px; right: -30px;
-    width: 100px; height: 100px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(201,162,39,.13), transparent 70%);
-  }
   .t-card:hover { border-color: #3a3630; transform: translateY(-2px); }
   .t-name { font-weight: 700; font-size: 1rem; color: var(--gold-soft); }
   .vbadge { width: 15px; height: 15px; vertical-align: -2px; margin-left: 5px; }
@@ -1382,7 +1377,7 @@
     var HARGA_OTO   = 'Rp229.000';
     var HARGA_ASLI  = 'Rp299.000';
     var RIBU_OTO    = '229 ribu';
-    var VOUCHER     = 'PRDX70';
+    var VOUCHER     = 'OTO70';
     // Sisa kuota kode voucher. Angkanya HARUS sama sama kuota beneran yang
     // diset di lynk.id, dan diupdate manual tiap ada yang beli. Biarin null
     // kalo kuotanya belum diset di lynk — nanti barisnya ga muncul sama sekali.
