@@ -909,7 +909,7 @@
 <body>
 <div class="aura" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
 
-<div class="announce" id="announce">Rp299.000 itu harga launch, bukan harga permanen. Begitu materi dan member nambah, harga naik.</div>
+<div class="announce" id="announce">Ini harga launch, bukan harga permanen. Begitu materi dan member nambah, harga naik.</div>
 <div class="wrap">
 
   <!-- 1. HERO -->
@@ -929,7 +929,7 @@
           </div>
         </div>
         <div class="cta-block">
-          <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
+          <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya</a>
           <a class="btn-secondary" href="optin.html">Gw ambil PDF gratisnya dulu</a>
         </div>
         <div class="statband">
@@ -1318,8 +1318,23 @@
   (function () {
     var bar = document.getElementById('sticky-cta');
     var mb = document.getElementById('menu-btn');
+    var harga = document.getElementById('harga');
+
+    // Tombol lengket itu bawa ANGKA HARGA. Dulu dia nongol di scrollY 700,
+    // yang di HP baru satu layar turun. Jadi harganya bocor jauh sebelum
+    // orang lewat testimoni sama tumpukan nilai, persis yang mau dihindarin.
+    // Sekarang dia nunggu bagian harga hampir kelewat, jadi angka pertama
+    // yang orang liat tetep yang di bagian harga, bukan yang di pita bawah.
+    function ambang() {
+      if (!harga) return 700;
+      var atas = harga.getBoundingClientRect().top + window.scrollY;
+      return Math.max(700, atas - window.innerHeight * 0.35);
+    }
+    var batas = ambang();
+    window.addEventListener('resize', function () { batas = ambang(); }, { passive: true });
+
     window.addEventListener('scroll', function () {
-      bar.classList.toggle('show', window.scrollY > 700);
+      bar.classList.toggle('show', window.scrollY > batas);
       mb.classList.toggle('show', window.scrollY > 260);
     }, { passive: true });
   })();
