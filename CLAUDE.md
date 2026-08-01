@@ -7,7 +7,7 @@ dipakai buat konversi, jadi copy-nya sensitif — jangan diubah tanpa diminta.
 > (`Vibe Code/CLAUDE.md`) — berlaku juga di sini, ga perlu diulang.
 
 ## Fakta repo
-- Folder lokal `paradoxical-man-landing/`, repo `nychothesis/paradoxical-man` (publik).
+- Folder lokal `paradoxical-man-lp/`, repo `nychothesis/paradoxical-man` (publik).
 - Live: **https://nychothesis.com/paradoxical-man/**
 - Deploy: push ke `main`, Pages auto-update. Ga ada build step.
 
