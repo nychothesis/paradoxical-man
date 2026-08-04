@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RINGKAS · Paradoxical Man</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<!-- Font yang kepake di layar pertama diminta duluan, biar ga nunggu
+     fonts.css selesai diunduh. crossorigin WAJIB ada walaupun file-nya
+     seserver; tanpa itu font-nya malah keunduh dua kali. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-900.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/atkinson-400.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
 <!-- Dipasang sebelum apa pun kegambar. Kalo ditaro di bawah, isinya sempet
      keliatan sekejap terus ilang, dan itu keliatan kayak halaman rusak.
      Kalo JS mati, class ini ga pernah kepasang dan semuanya tampil utuh. -->
@@ -948,6 +952,16 @@
     html { scroll-behavior: auto; }
   }
 </style>
+
+<!-- Google Analytics 4. Ditaro di ujung <head> biar ga rebutan jatah unduhan
+     sama font yang dipreload di atas. Lihat catatan lengkapnya di homepage. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FFND4PK6SC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-FFND4PK6SC');
+</script>
 </head>
 <body>
 <div class="aura" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>

@@ -5,10 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>Cek email lu</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-900.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/atkinson-400.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="funnel.css">
+
+<!-- Google Analytics 4.
+     CATATAN: halaman ini BUKAN penanda pendaftar. Alurnya begini:
+
+       optin.html  --(form sukses)-->  index.html?oto=1
+                                          |
+                            +-------------+-------------+
+                            |                           |
+                     klik beli                  "Ga dulu, kirim
+                     -> lynk.id                  PDF gratisnya aja"
+                                                 -> thanks.html
+
+     Jadi yang nandain PENDAFTAR BARU itu index.html?oto=1, karena semua orang
+     yang formnya sukses pasti lewat situ. Halaman ini cuma dilewatin orang
+     yang NOLAK penawaran, jadi angkanya selalu lebih kecil dari jumlah
+     pendaftar beneran.
+
+     Yang diukur di sini: berapa yang nolak OTO. Itu tetep berguna, tapi
+     jangan ketuker sama angka pendaftar. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FFND4PK6SC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-FFND4PK6SC');
+</script>
 </head>
 <body>
 <div class="aura" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>

@@ -1,0 +1,76 @@
+/* ============ FONT LOKAL ============
+   Dulu font ditarik dari Google Fonts. Masalahnya bukan ukuran file, tapi
+   browser harus nyari alamat + salaman keamanan ke DUA domain asing
+   (fonts.googleapis.com terus fonts.gstatic.com) sebelum teks bisa dirapiin.
+   Di HP dengan sinyal pas-pasan, itu bagian yang paling kerasa lama.
+
+   Sekarang file font-nya ada di assets/fonts/, satu server sama halamannya.
+   Nol domain asing, nol salaman tambahan.
+
+   Bonus: Google Fonts ngirim alamat IP tiap pengunjung ke Google. Sekarang
+   enggak lagi.
+
+   Cuma potongan huruf latin yang diambil. Poppins bawaannya ikut nyeret
+   Devanagari yang ga bakal kepake buat bahasa Indonesia.
+
+   Weight-nya SENGAJA cuma yang dipake sekarang (Poppins 400/500/600/700/900,
+   Atkinson 400/700), persis sama kayak yang dulu ditarik dari Google. Jadi
+   tampilannya ga berubah sama sekali. Kalo nambah weight baru di CSS,
+   file-nya harus diunduh dan didaftarin di sini juga.
+
+   Lisensi: Poppins sama Atkinson Hyperlegible dua-duanya Open Font License,
+   jadi naro file-nya di server sendiri emang diizinin.
+
+   font-display: swap = teks langsung kebaca pake font cadangan, terus ditimpa
+   begitu font aslinya nyampe. Lebih baik daripada halaman kosong sedetik. */
+
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/poppins-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/poppins-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/poppins-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/poppins-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('fonts/poppins-900.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/atkinson-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Atkinson Hyperlegible';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/atkinson-700.woff2') format('woff2');
+}
