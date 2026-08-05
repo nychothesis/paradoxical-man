@@ -484,6 +484,31 @@
     padding: 12px 24px; border-radius: 10px; white-space: nowrap;
   }
 
+  /* Tombol tanya di bar melayang.
+     Sengaja NUMPANG di bar yang udah ada, bukan bikin bubble melayang sendiri.
+     Dua benda melayang bakal rebutan pojok layar yang sama, dan di HP itu
+     langsung berasa sesak.
+
+     Bentuknya ikon doang, sementara tombol beli tetep kotak penuh berwarna
+     emas. Jadi dua-duanya kejangkau, tapi mata tetep jatuh ke tombol beli
+     duluan. Kalo dua-duanya dibikin tombol penuh, orang jadi ragu harus
+     mencet yang mana, dan ragu itu ujungnya ga mencet apa-apa. */
+  .sticky-act { display: flex; align-items: center; gap: 10px; }
+  .sticky-wa {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; flex: none;
+    border: 1px solid var(--line); border-radius: 10px;
+    background: rgba(255,255,255,.03); color: var(--gold-soft);
+    transition: border-color .18s, background .18s;
+  }
+  .sticky-wa:hover { border-color: rgba(201,162,39,.45); background: rgba(201,162,39,.08); }
+  .sticky-wa svg { width: 21px; height: 21px; }
+  @media (max-width: 380px) {
+    .sticky-cta { padding: 10px 14px; gap: 10px; }
+    .sticky-btn { padding: 12px 16px; font-size: .86rem; }
+    .sticky-wa { width: 42px; height: 42px; }
+  }
+
   /* ---------- Deliverables ---------- */
 
   /* ---------- Curriculum ---------- */
@@ -668,6 +693,39 @@
     flex: 0 0 auto; line-height: 1; transition: transform .18s;
   }
   .faq-item[open] .faq-q::after { transform: rotate(180deg); }
+
+  /* ---------- Tanya lewat WhatsApp ----------
+     Sengaja ditaro di UJUNG FAQ, bukan nempel tombol beli. Di sini orang yang
+     pertanyaannya belum kejawab lagi ngumpul, jadi ngajak ngobrol itu nolong.
+     Kalo ditempel di sebelah tombol beli, dia malah jadi pintu keluar buat
+     orang yang udah siap bayar.
+
+     Warnanya ngikut emas brand, BUKAN hijau WhatsApp. Hijau di palet
+     gelap-emas ini keliatan kayak potongan situs lain yang nyasar ke sini.
+
+     Teks pembuka chat-nya beda-beda per halaman (lihat ?text= di link), jadi
+     pas chat masuk langsung ketauan orangnya dateng dari mana tanpa nanya. */
+  .wa-ask {
+    display: flex; align-items: center; gap: 13px;
+    max-width: 480px; margin: 30px auto 0;
+    padding: 15px 20px;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: rgba(255,255,255,.02);
+    text-decoration: none; color: inherit;
+    transition: border-color .18s, background .18s;
+  }
+  .wa-ask:hover { border-color: rgba(201,162,39,.42); background: rgba(201,162,39,.05); }
+  .wa-ask svg { width: 21px; height: 21px; flex: none; color: var(--gold); }
+  .wa-ask .wa-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .wa-ask .wa-hi {
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
+    color: var(--gold-soft);
+  }
+  .wa-ask .wa-sub { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  @media (max-width: 520px) {
+    .wa-ask { padding: 14px 16px; gap: 11px; }
+    .wa-ask .wa-hi { font-size: .87rem; }
+  }
   .faq-a { color: var(--muted); font-size: .88rem; font-weight: 400; padding: 0 22px 18px; }
   .faq-a b { color: var(--gold-soft); font-weight: 600; }
 
@@ -1303,6 +1361,17 @@
         <summary class="faq-q">Formatnya apa?</summary>
         <p class="faq-a">Video course, plus 5 PDF workbook. Akses seumur hidup.</p>
       </details>
+
+      <a class="wa-ask" href="https://wa.me/6285121328200?text=Halo%20Nicho%2C%20gw%20mau%20nanya%20soal%20Paradoxical%20Man" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20.5 11.7a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.4-4.5A8.4 8.4 0 1 1 20.5 11.7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9.2 9.1c.3-.6.6-.6.9-.6h.5c.2 0 .4 0 .6.5l.6 1.4c0 .2 0 .4-.2.6l-.3.4c-.2.2-.3.3 0 .6.2.5.7 1.2 1.4 1.7.7.5 1.2.6 1.4.7.2 0 .3 0 .5-.2l.4-.5c.2-.3.4-.2.6-.2l1.3.7c.2.1.4.2.4.4 0 .2 0 .8-.4 1.3-.3.4-1 .8-1.5.8-1 0-2.6-.5-4.2-1.9-1.5-1.4-2.3-3-2.5-3.6-.2-.6-.2-1.4.5-2.1Z" fill="currentColor"/>
+        </svg>
+        <span class="wa-txt">
+          <span class="wa-hi">Pertanyaannya belum kejawab?</span>
+          <span class="wa-sub">Tanya langsung lewat WhatsApp.</span>
+        </span>
+      </a>
     </div>
   </section>
 
@@ -1344,7 +1413,20 @@
 
 <div class="sticky-cta" id="sticky-cta">
   <div class="sticky-price"><span class="old">Rp3.000.000</span><span class="now">Rp299.000</span></div>
-  <a class="sticky-btn" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya</a>
+  <div class="sticky-act">
+    <!-- Pesan pembukanya SENGAJA beda dari yang di ujung FAQ ("...soal
+         Paradoxical Man"). Tombol ini nempel di sebelah harga, jadi yang
+         mencet di sini biasanya udah lebih deket ke beli. Bedain teksnya =
+         pas chat masuk, langsung ketauan dia lagi sekedar penasaran atau
+         udah di ujung mau bayar. -->
+    <a class="sticky-wa" href="https://wa.me/6285121328200?text=Halo%20Nicho%2C%20gw%20mau%20nanya%20dulu%20sebelum%20beli" target="_blank" rel="noopener" aria-label="Tanya lewat WhatsApp">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M20.5 11.7a8.4 8.4 0 0 1-12.4 7.4L3.5 20.5l1.4-4.5A8.4 8.4 0 1 1 20.5 11.7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M9.2 9.1c.3-.6.6-.6.9-.6h.5c.2 0 .4 0 .6.5l.6 1.4c0 .2 0 .4-.2.6l-.3.4c-.2.2-.3.3 0 .6.2.5.7 1.2 1.4 1.7.7.5 1.2.6 1.4.7.2 0 .3 0 .5-.2l.4-.5c.2-.3.4-.2.6-.2l1.3.7c.2.1.4.2.4.4 0 .2 0 .8-.4 1.3-.3.4-1 .8-1.5.8-1 0-2.6-.5-4.2-1.9-1.5-1.4-2.3-3-2.5-3.6-.2-.6-.2-1.4.5-2.1Z" fill="currentColor"/>
+      </svg>
+    </a>
+    <a class="sticky-btn" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya</a>
+  </div>
 </div>
 <script>
   (function () {
