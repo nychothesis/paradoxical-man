@@ -24,11 +24,13 @@
    font-display: swap = teks langsung kebaca pake font cadangan, terus ditimpa
    begitu font aslinya nyampe. Lebih baik daripada halaman kosong sedetik.
 
-   size-adjust: 90.8% di Inter = Inter x-height-nya 54.6% dari em, Atkinson
-   dulu cuma 49.6% (diukur pake fontTools). Tanpa ini, badan teks keliatan
-   lebih gede dari sebelumnya walau font-size di CSS-nya ga diubah sama
-   sekali. Angka ini ngerapetin x-height Inter biar setara Atkinson lama,
-   jangan dihapus pas edit font-face ini. */
+   size-adjust di Inter = tanpa ini, badan teks keliatan lebih gede dari
+   Atkinson lama walau font-size di CSS-nya ga diubah sama sekali (x-height
+   Inter 54.6% dari em, Atkinson cuma 49.6%, diukur pake fontTools). Angka
+   90.8% (murni matching x-height) masih kerasa kegedean buat Nicho, jadi
+   diturunin ke 85% 2026-08-18. Ini keputusan mata/selera, bukan hasil
+   ukur — kalo masih kegedean/kekecilan, itu angka yang paling gampang
+   diubah. Jangan dihapus pas edit font-face ini. */
 
 @font-face {
   font-family: 'Poppins';
@@ -72,7 +74,7 @@
   font-weight: 400;
   font-display: swap;
   src: url('fonts/inter-400.woff2') format('woff2');
-  size-adjust: 90.8%;
+  size-adjust: 85%;
 }
 @font-face {
   font-family: 'Inter';
@@ -80,5 +82,5 @@
   font-weight: 700;
   font-display: swap;
   src: url('fonts/inter-700.woff2') format('woff2');
-  size-adjust: 90.8%;
+  size-adjust: 85%;
 }
