@@ -14,12 +14,12 @@
    Devanagari yang ga bakal kepake buat bahasa Indonesia.
 
    Weight-nya SENGAJA cuma yang dipake sekarang (Poppins 400/500/600/700/900,
-   Atkinson 400/700), persis sama kayak yang dulu ditarik dari Google. Jadi
-   tampilannya ga berubah sama sekali. Kalo nambah weight baru di CSS,
+   Inter 400/700). Dulu badan teksnya Atkinson Hyperlegible, diganti Inter
+   2026-08-17 (Nicho lebih suka tampilannya). Kalo nambah weight baru di CSS,
    file-nya harus diunduh dan didaftarin di sini juga.
 
-   Lisensi: Poppins sama Atkinson Hyperlegible dua-duanya Open Font License,
-   jadi naro file-nya di server sendiri emang diizinin.
+   Lisensi: Poppins sama Inter dua-duanya Open Font License, jadi naro
+   file-nya di server sendiri emang diizinin.
 
    font-display: swap = teks langsung kebaca pake font cadangan, terus ditimpa
    begitu font aslinya nyampe. Lebih baik daripada halaman kosong sedetik. */
@@ -61,16 +61,16 @@
 }
 
 @font-face {
-  font-family: 'Atkinson Hyperlegible';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('fonts/atkinson-400.woff2') format('woff2');
+  src: url('fonts/inter-400.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Atkinson Hyperlegible';
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url('fonts/atkinson-700.woff2') format('woff2');
+  src: url('fonts/inter-700.woff2') format('woff2');
 }
