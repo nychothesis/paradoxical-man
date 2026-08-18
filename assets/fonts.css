@@ -14,23 +14,19 @@
    Devanagari yang ga bakal kepake buat bahasa Indonesia.
 
    Weight-nya SENGAJA cuma yang dipake sekarang (Poppins 400/500/600/700/900,
-   Inter 400/700). Dulu badan teksnya Atkinson Hyperlegible, diganti Inter
-   2026-08-17 (Nicho lebih suka tampilannya). Kalo nambah weight baru di CSS,
-   file-nya harus diunduh dan didaftarin di sini juga.
+   Inter 400/700/900). Dulu badan teksnya Atkinson Hyperlegible, diganti
+   Inter 2026-08-17 (Nicho lebih suka tampilannya). 2026-08-19: judul/tombol/
+   label juga dipindah dari Poppins ke Inter (Poppins masih ke-load, belum
+   dicabut, biar gampang direvert), makanya Inter 900 nyusul, dan size-adjust
+   disamain ke 90% kayak homepage (riwayat lengkap size-adjust ada di
+   assets/fonts.css homepage). Kalo nambah weight baru di CSS, file-nya
+   harus diunduh dan didaftarin di sini juga.
 
    Lisensi: Poppins sama Inter dua-duanya Open Font License, jadi naro
    file-nya di server sendiri emang diizinin.
 
    font-display: swap = teks langsung kebaca pake font cadangan, terus ditimpa
-   begitu font aslinya nyampe. Lebih baik daripada halaman kosong sedetik.
-
-   size-adjust di Inter = tanpa ini, badan teks keliatan lebih gede dari
-   Atkinson lama walau font-size di CSS-nya ga diubah sama sekali (x-height
-   Inter 54.6% dari em, Atkinson cuma 49.6%, diukur pake fontTools). Angka
-   90.8% (murni matching x-height) masih kerasa kegedean buat Nicho, jadi
-   diturunin ke 85% 2026-08-18. Ini keputusan mata/selera, bukan hasil
-   ukur — kalo masih kegedean/kekecilan, itu angka yang paling gampang
-   diubah. Jangan dihapus pas edit font-face ini. */
+   begitu font aslinya nyampe. Lebih baik daripada halaman kosong sedetik. */
 
 @font-face {
   font-family: 'Poppins';
@@ -74,7 +70,7 @@
   font-weight: 400;
   font-display: swap;
   src: url('fonts/inter-400.woff2') format('woff2');
-  size-adjust: 85%;
+  size-adjust: 90%;
 }
 @font-face {
   font-family: 'Inter';
@@ -82,5 +78,13 @@
   font-weight: 700;
   font-display: swap;
   src: url('fonts/inter-700.woff2') format('woff2');
-  size-adjust: 85%;
+  size-adjust: 90%;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('fonts/inter-900.woff2') format('woff2');
+  size-adjust: 90%;
 }

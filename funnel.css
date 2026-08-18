@@ -18,7 +18,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Poppins', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   background: radial-gradient(1200px 700px at 80% -10%, #1c1a17 0%, var(--bg) 55%);
   color: var(--text);
   font-size: 16px;
@@ -27,8 +27,9 @@ body {
   min-height: 100vh;
 }
 
-/* Badan teks pakai Inter, sama kayak homepage. Judul,
-   tombol, sama label tetep Poppins. */
+/* 2026-08-19: judul, tombol, sama label ikut Inter juga sekarang, samain
+   kayak homepage. Poppins masih ke-load (belum dicabut @font-face-nya)
+   biar gampang direvert. */
 p, li, dd, blockquote { font-family: 'Inter', sans-serif; }
 
 b, strong { font-weight: 600; color: var(--gold-soft); }
@@ -119,7 +120,7 @@ input::placeholder { color: var(--muted-2); }
   display: block; width: 100%; border: 0; cursor: pointer;
   background: linear-gradient(160deg, var(--gold-soft), var(--gold));
   color: #121110;
-  font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.02rem;
+  font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.02rem;
   text-align: center; text-decoration: none;
   padding: 17px 28px; border-radius: 12px;
   box-shadow: 0 0 45px rgba(201, 162, 39, .22);

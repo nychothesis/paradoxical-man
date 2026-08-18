@@ -38,7 +38,7 @@
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Poppins', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     background: radial-gradient(1200px 700px at 80% -10%, #1c1a17 0%, var(--bg) 55%);
     color: var(--text);
     font-size: 16px;
@@ -46,8 +46,9 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Badan teks pakai Inter, sama kayak homepage. Judul,
-     tombol, sama label tetep Poppins. */
+  /* 2026-08-19: judul, tombol, sama label ikut Inter juga sekarang, samain
+     kayak homepage. Poppins masih ke-load (belum dicabut @font-face-nya)
+     biar gampang direvert. */
   p, li, dd, blockquote { font-family: 'Inter', sans-serif; }
 
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
@@ -83,7 +84,7 @@
     color: var(--gold); font-weight: 800; letter-spacing: 1.2px;
   }
   .announce-oto .clock {
-    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-family: 'Inter', sans-serif; font-weight: 900;
     font-size: 1.25rem; color: var(--text); line-height: 1;
   }
   /* Tombol menu digeser ke bawah biar ga nutupin banner sticky.
@@ -95,7 +96,7 @@
     display: inline-flex; align-items: baseline; gap: 7px; cursor: pointer;
     background: linear-gradient(160deg, var(--gold-soft), var(--gold));
     color: #121110; border: 0; border-radius: 8px; padding: 6px 12px;
-    font-family: 'Poppins', sans-serif; font-weight: 800;
+    font-family: 'Inter', sans-serif; font-weight: 800;
     font-size: .88rem; letter-spacing: 1.8px; transition: .15s;
   }
   .vcode small {
@@ -132,7 +133,7 @@
   }
   .voucher .vprice .varrow { color: var(--muted); font-size: .9rem; }
   .voucher .vprice b {
-    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-family: 'Inter', sans-serif; font-weight: 900;
     font-size: 1.6rem; color: var(--gold); line-height: 1;
   }
   .voucher .vlead {
@@ -141,7 +142,7 @@
   }
   .voucher .kode {
     display: inline-block; cursor: pointer;
-    font-family: 'Poppins', sans-serif; font-weight: 900;
+    font-family: 'Inter', sans-serif; font-weight: 900;
     font-size: 1.5rem; letter-spacing: 4px; line-height: 1;
     color: var(--gold); background: rgba(201, 162, 39, .13);
     border: 1px dashed rgba(201, 162, 39, .6);
@@ -396,7 +397,7 @@
   .t-more {
     display: inline-flex; align-items: center; gap: 7px; margin-top: 14px;
     padding: 0; background: none; border: 0;
-    font-family: 'Poppins', sans-serif; font-size: .77rem; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: .77rem; font-weight: 600;
     color: var(--muted); cursor: pointer; transition: color .18s;
   }
   .t-more:hover { color: var(--gold-soft); }
@@ -454,7 +455,7 @@
   .offer-row:last-of-type { border-bottom: none; }
   .offer-row .val { color: var(--gold-soft); font-weight: 600; white-space: nowrap; }
   .offer-price {
-    text-align: center; font-family: 'Poppins', sans-serif;
+    text-align: center; font-family: 'Inter', sans-serif;
     font-size: 2.3rem; font-weight: 900; color: var(--gold);
     margin-top: 14px; line-height: 1;
   }
@@ -476,10 +477,10 @@
   .sticky-cta.show { transform: none; }
   .sticky-price { display: flex; flex-direction: column; line-height: 1.3; }
   .sticky-price .old { color: var(--muted); font-size: .74rem; text-decoration: line-through; }
-  .sticky-price .now { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--gold-soft); }
+  .sticky-price .now { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--gold-soft); }
   .sticky-btn {
     background: linear-gradient(160deg, var(--gold-soft), var(--gold));
-    color: #121110; font-family: 'Poppins', sans-serif; font-weight: 700;
+    color: #121110; font-family: 'Inter', sans-serif; font-weight: 700;
     font-size: .92rem; text-decoration: none;
     padding: 12px 24px; border-radius: 10px; white-space: nowrap;
   }
@@ -520,7 +521,7 @@
   }
   .module-card::before {
     content: attr(data-num); position: absolute; top: -20px; right: 4px;
-    font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 7rem;
+    font-family: 'Inter', sans-serif; font-weight: 900; font-size: 7rem;
     line-height: 1; color: rgba(244, 239, 228, .045); pointer-events: none;
   }
   .module-card h3 {
@@ -548,7 +549,7 @@
   .module-card > summary::-webkit-details-marker { display: none; }
   .module-card > summary h3 { margin-bottom: 0; }
   .module-card > summary i {
-    font-family: 'Poppins', sans-serif; font-style: normal;
+    font-family: 'Inter', sans-serif; font-style: normal;
     font-size: .7rem; font-weight: 600; letter-spacing: 1px;
     text-transform: uppercase; color: var(--muted-2); flex: none;
   }
@@ -603,7 +604,7 @@
   .why p { margin-bottom: 18px; color: #d8d3c8; font-size: .95rem; }
   .reframe { margin-bottom: 38px; }
   .reframe-title {
-    font-family: 'Poppins', sans-serif; font-weight: 900; font-size: 1.5rem;
+    font-family: 'Inter', sans-serif; font-weight: 900; font-size: 1.5rem;
     color: var(--text); line-height: 1.3;
   }
   .reframe p { margin-top: 12px; color: #d8d3c8; font-size: .95rem; }
@@ -718,7 +719,7 @@
   .wa-ask svg { width: 21px; height: 21px; flex: none; color: var(--gold); }
   .wa-ask .wa-txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .wa-ask .wa-hi {
-    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: .92rem;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: .92rem;
     color: var(--gold-soft);
   }
   .wa-ask .wa-sub { font-size: .8rem; color: var(--muted); line-height: 1.5; }
@@ -768,7 +769,7 @@
   }
   .statband div { background:var(--card); padding:20px 12px; text-align:center; }
   .statband b {
-    display:block; font-family:'Poppins',sans-serif; font-weight:700;
+    display:block; font-family:'Inter',sans-serif; font-weight:700;
     font-size:clamp(1.35rem,3.6vw,1.95rem); color:var(--gold-soft); line-height:1;
   }
   /* Angka dibikin gede biar kebaca sekilas. Tapi kalo isinya kata, ukuran
@@ -786,7 +787,7 @@
   /* Tanpa arahan, kotaknya gampang dikira hiasan dan ga ada yang nge-tap.
      Satu baris pendek aja, ga usah panjang-panjang. */
   .pcheck-hint {
-    font-family: 'Poppins', sans-serif; font-size: .74rem; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: .74rem; font-weight: 600;
     letter-spacing: .04em; color: var(--muted-2);
     margin-bottom: 14px; padding-left: 8px;
   }
@@ -868,7 +869,7 @@
 
   .tally {
     margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
-    font-family: 'Poppins', sans-serif; font-size: .95rem; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: .95rem; font-weight: 600;
   }
   .tally b { color: var(--gold-soft); font-size: 1.25rem; }
   .tally span {
@@ -876,7 +877,7 @@
     font-size: .86rem; font-weight: 400; color: var(--muted); margin-top: 3px;
   }
   .statband span {
-    display:block; font-family:'Poppins',sans-serif; font-size:.64rem;
+    display:block; font-family:'Inter',sans-serif; font-size:.64rem;
     font-weight:600; letter-spacing:1.4px; text-transform:uppercase;
     color:var(--muted-2); margin-top:8px;
   }
