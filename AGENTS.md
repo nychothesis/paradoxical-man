@@ -3,8 +3,8 @@
 Landing page + funnel jualan produk **Paradoxical Man**. Ini halaman publik yang
 dipakai buat konversi, jadi copy-nya sensitif — jangan diubah tanpa diminta.
 
-> Profil brand, gaya bahasa, dan preferensi visual ada di `AGENTS.md` root
-> (`Vibe Code/AGENTS.md`) — berlaku juga di sini, ga perlu diulang.
+> Untuk pekerjaan user-facing yang menyentuh brand, baca `../BRAND.md` dulu.
+> Aturan universal berlaku dari `../AGENTS.md`.
 
 ## Fakta repo
 - Folder lokal `paradoxical-man-lp/`, repo `nychothesis/paradoxical-man` (publik).
