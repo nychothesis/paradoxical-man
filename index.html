@@ -168,6 +168,11 @@
     content: ""; width: 5px; height: 22px; border-radius: 3px;
     background: linear-gradient(var(--gold), var(--gold-soft)); flex: 0 0 auto;
   }
+  .product-label {
+    display: inline-block; margin-bottom: 18px;
+    color: var(--gold-soft); font-size: .72rem; font-weight: 700;
+    letter-spacing: 2.2px; text-transform: uppercase;
+  }
 
   /* ---------- Buttons ---------- */
   .btn-primary {
@@ -425,6 +430,35 @@
     color: var(--green); font-size: .65rem;
   }
   .benefit p { color: var(--muted); font-size: .88rem; }
+  .stage-grid {
+    display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 32px;
+  }
+  .stage {
+    position: relative; overflow: hidden;
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: linear-gradient(155deg, rgba(33,31,28,.96), rgba(24,22,20,.96));
+    padding: 26px;
+  }
+  .stage::after {
+    content: attr(data-step); position: absolute; right: 16px; top: 2px;
+    color: rgba(224,195,126,.07); font-size: 5.8rem; font-weight: 900;
+    line-height: 1; pointer-events: none;
+  }
+  .stage-kicker {
+    display: block; position: relative; z-index: 1;
+    color: var(--gold); font-size: .68rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;
+  }
+  .stage h3 {
+    position: relative; z-index: 1; font-size: 1.3rem; font-weight: 900;
+    color: var(--text); margin-bottom: 10px;
+  }
+  .stage p { position: relative; z-index: 1; color: #c8c2b7; font-size: .9rem; }
+  .stage-example {
+    margin-top: 18px; padding: 20px 22px;
+    border-left: 3px solid var(--gold); background: rgba(201,162,39,.06);
+    color: #d8d3c8; font-size: .9rem;
+  }
   .honest-block {
     border: 1px solid rgba(176, 65, 60, .55); background: rgba(176, 65, 60, .07);
     border-radius: var(--radius); padding: 26px; margin-top: 36px;
@@ -751,6 +785,11 @@
   .final p { text-align: left; color: #d8d3c8; margin-bottom: 18px; font-size: .95rem; }
   .final .choice-two { font-weight: 600; color: var(--gold-soft); }
   .final .cta-block { margin-top: 36px; }
+  .cost-block {
+    border: 1px solid rgba(176,65,60,.45); border-radius: var(--radius);
+    background: rgba(176,65,60,.06); padding: 28px;
+  }
+  .cost-block p { color: #d8d3c8; }
 
   /* ---------- Desktop ---------- */
   @media (min-width: 860px) {
@@ -765,6 +804,7 @@
     .sec-head { font-size: 1.55rem; }
     .t-grid { grid-template-columns: 1fr 1fr; }
     .benefit-grid { grid-template-columns: 1fr 1fr; }
+    .stage-grid { grid-template-columns: repeat(3, 1fr); }
     .module-grid { grid-template-columns: 1fr 1fr; }
     .module-grid .module-card:first-child { grid-column: 1 / -1; }
     .fit-grid { grid-template-columns: 1fr 1fr; }
@@ -1054,8 +1094,9 @@
   <section class="hero">
     <div class="hero-grid no-cover">
       <div>
+        <span class="product-label">Paradoxical Man</span>
         <h1>Buat Cowo yang Capek Dibilang <em>“Kamu Terlalu Baik Buat Aku,”</em> Tapi Ga Pernah Jadi Pilihan.</h1>
-        <p>Dapet pasangan yang bener-bener respect dan pilih lu apa adanya, bukan cuma “aman” buat disandarin. Tanpa trik, manipulasi, atau pick-up lines murahan.</p>
+        <p>Sistem 3 tahap, <b>ROOT, RELEASE, RISE</b>, buat jadi cowo yang diinginkan wanita tanpa trik, manipulasi, atau pick-up lines murahan. Biar lu bisa dapet pasangan idaman yang bener-bener milih dan respect sama lu apa adanya.</p>
         <div class="cta-block">
           <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya</a>
         </div>
@@ -1067,7 +1108,8 @@
   <section>
     <div class="n780 reframe">
       <h2 class="sec-head">Ini bukan kumpulan tips dating.</h2>
-      <p>Pickup lines, cara chatting, cheap tricks. Bisa works di awal, tapi ga ngajarin lu cara ngejalanin hubungan jangka panjang. Bahkan bisa narik tipe cewe yang sebenernya ga lu mau ajak serius.</p>
+      <p>Pickup lines, cara chatting, cheap tricks yang kadang kerasa manipulatif, atau flexing sana sini. Mungkin works secara jangka pendek, tapi fatal secara jangka panjang. Dapetin cewe <i>ga sama</i> dengan sukses ngejalanin hubungan, apalagi pernikahan. Malah, cara-cara itu menarik cewe yang salah (alias bukan tipe yang lu mau ajak serius).</p>
+      <p>🔎 Misal, lu belajar teknik “jangan kelihatan available” dari internet, terus berhasil bikin seseorang penasaran. Begitu masuk pacaran, teknik itu ga ngajarin apa-apa soal gimana lu ngomongin isi hati lu, atau gimana lu jadi sosok yang mereka respect dalam jangka panjang.</p>
       <p>Analoginya: gw ga suka ngejar kupu-kupu. Gw lebih suka <b>bangun tamannya</b>, dan kupu-kupunya yang dateng sendiri.</p>
       <div class="fromto">
         <div class="ft-row"><span class="from">ngejar kupu-kupu</span><span class="arrow">→</span><span class="to">bangun taman yang indah</span></div>
@@ -1089,7 +1131,7 @@
             <p class="pcheck-label">Yang lu takutin</p>
             <ul class="pcheck">
               <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Udah jadi baik, tapi tetep ga pernah jadi pilihan.</span></button></li>
-              <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Atau malah kebalikannya: lu maksa keliatan kuat terus. Takut ditinggalin kalo lu nunjukin sisi lemah.</span></button></li>
+              <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Atau kebalikannya: lu berusaha selalu keliatan kuat, karena begitu lu nunjukin sisi lemah, lu takut ditinggalin.</span></button></li>
             </ul>
           </div>
           <div class="pcheck-group">
@@ -1098,7 +1140,7 @@
               <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Sering denger “kamu terlalu baik buat aku.” Tapi ga pernah jadi pilihan.</span></button></li>
               <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Punya pasangan, tapi ga pernah ngerasa direspect. Lu ngalah terus biar ga ribut.</span></button></li>
               <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Dari kecil lu diajarin cowo ga boleh lemah, jadi semua emosi lu pendem. Sekarang dikit-dikit lu malah meledak marah.</span></button></li>
-              <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu kesepian. Chat rame terus, tapi giliran butuh temen cerita beneran, sepi.</span></button></li>
+              <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu kesepian. Zaman sekarang bikin orang keliatan makin nyambung, padahal makin terisolasi satu sama lain.</span></button></li>
             </ul>
           </div>
           <div class="pcheck-group">
@@ -1113,7 +1155,7 @@
             <p class="pcheck-label">Yang bikin lu bingung</p>
             <ul class="pcheck">
               <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Ada yang bilang cowo harus cuek. Ada yang bilang harus care. Lu bingung mesti ikut yang mana.</span></button></li>
-              <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu ngejar duit, status, validasi, dan cewe sebanyak-banyaknya. Buat lu, itu emang tujuan akhirnya.</span></button></li>
+              <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu ngejar duit, status, validasi, dan cewe sebanyak-banyaknya, karena lu ngerasa itu emang jalannya, dan itu tujuan akhirnya.</span></button></li>
               <li><button type="button" aria-pressed="false"><span class="bx">&#10003;</span><span>Lu struggle sama kecanduan, entah porn, video game, atau scrolling. Dan lu bingung gimana cara berhentinya.</span></button></li>
             </ul>
           </div>
@@ -1127,10 +1169,9 @@
   <section class="why">
     <div class="n780">
       <h2 class="sec-head" id="beda">Kenapa gw beda dari yang lain</h2>
-      <p>Bukan rangkuman textbook, bukan juga ngarang sendiri.</p>
-      <p>Ini lahir dari pengalaman hidup gw sendiri yang udah kebukti jalan. Tapi pengalaman doang gampang kejebak <i>survivorship bias</i> (works buat gw, bukan berarti otomatis works buat semua orang).</p>
-      <p>Makanya gw bedah ulang lewat studi lintas disiplin, 4 pilar: <b>Evolution, Psychology, Philosophy, Society</b>. Yang rontok pas diuji ulang, gw buang.</p>
-      <p>Baru jadi framework yang lebih utuh, bisa dirangkul banyak orang, bukan cuma kebetulan works di gw doang.</p>
+      <p>Bukan rangkuman textbook, bukan juga ngarang sendiri. Ini lahir dari pengalaman hidup gw sendiri yang udah kebukti jalan.</p>
+      <p>Tapi pengalaman doang gampang kejebak <i>survivorship bias</i> (cuma karena works buat gw, bukan berarti otomatis works buat semua orang).</p>
+      <p>Makanya gw bedah ulang lewat studi lintas disiplin, 4 pilar: <b>Evolution, Psychology, Philosophy, Society</b>. Yang rontok pas diuji ulang, gw buang. Baru jadi framework yang lebih utuh, yang bisa dirangkul banyak orang, bukan cuma kebetulan works di gw doang.</p>
       <p class="embodied">Embodied knowledge, bukan sekadar teori.</p>
     </div>
   </section>
@@ -1204,26 +1245,46 @@
   <!-- 3. APA YANG BERUBAH -->
   <section>
     <div class="n780">
-      <h2 class="sec-head" id="hasil">Apa yang bakal beda</h2>
-      <p class="lead">Bukan sekadar berasa udah ngerti. Lu punya hal yang bisa lu jalanin buat ngebangun diri dan relasi lu dari akar.</p>
+      <h2 class="sec-head" id="hasil">Abis 4 modul ini, apa yang beda?</h2>
+      <p class="lead">Lu nonton, lu catet, lu ngangguk. Tiga minggu lagi hidup lu balik ke pola yang sama. Itu <b>coli otak</b>. Yang belum lu punya itu <span class="caps">SISTEM</span> yang jalan pas lu ga mood, dan <span class="caps">KOMUNITAS</span> yang nanya pas lu ilang.</p>
+
+      <div class="stage-grid">
+        <article class="stage" data-step="01">
+          <span class="stage-kicker">Tahap 1</span>
+          <h3>ROOT</h3>
+          <p>Kelarin akar masalah, bangun pondasi yang selama ini bocor. Bukan pura-pura kelar, tapi beneran dibongkar dari sumbernya.</p>
+        </article>
+        <article class="stage" data-step="02">
+          <span class="stage-kicker">Tahap 2</span>
+          <h3>RELEASE</h3>
+          <p>Berdamai sama luka dan <i>shadow</i> (sisi gelap yang diam-diam ngendaliin cara lu mikir, ngerasa, dan ngambil keputusan).</p>
+        </article>
+        <article class="stage" data-step="03">
+          <span class="stage-kicker">Tahap 3</span>
+          <h3>RISE</h3>
+          <p>Setelah dua itu kelar, lu unlock visi dan misi hidup yang beneran datang dari diri lu sendiri, bukan dari kompensasi luka yang belum sembuh.</p>
+        </article>
+      </div>
+
+      <p class="stage-example">🔎 Misal, lu pernah diinjek-injek terus mutusin, “gw harus jadi tegas 24 jam biar ga direndahin lagi.” Itu bukan RISE. Itu kompensasi dari RELEASE yang belum kelar. RISE baru kejadian kalo ketegasan itu keluar karena lu emang mau, bukan karena takut direndahin lagi.</p>
     </div>
 
     <div class="benefit-grid">
       <div class="benefit">
-        <h3>Pondasi yang bikin lu konsisten tanpa ngandelin willpower.</h3>
-        <p>Biar lu ga cuma semangat di awal, terus balik ke pola lama.</p>
+        <h3>Sistem yang bikin lu disiplin tanpa ngandelin willpower.</h3>
+        <p>Willpower bisa abis. Sistem engga.</p>
       </div>
       <div class="benefit">
-        <h3>Ngerti emosi lu tanpa kehilangan ketegasan.</h3>
-        <p>Lu ga perlu milih antara jadi lembut atau jadi kuat.</p>
+        <h3>Seni in-touch sama emosi lu tanpa menjadi lemah.</h3>
+        <p>Empatik, dalem, lembut, DAN tetep kuat. Kedengeran kontradiksi, padahal ada caranya.</p>
       </div>
       <div class="benefit">
         <h3>Berdamai sama luka lu, biar lu berhenti dikontrol sama dia.</h3>
-        <p>Lu gerak karena visi, bukan cuma karena takut, dendam, atau pembuktian.</p>
+        <p>Lu gerak karena visi, bukan karena dendam.</p>
       </div>
       <div class="benefit">
-        <h3>Hidup yang punya arah, dan hubungan yang ga dibangun dari topeng.</h3>
-        <p>Lu jadi magnet karena lu punya hidup yang beneran lu hidupi, bukan karena lu ngejar.</p>
+        <h3>Lu punya arah hidup yang jelas, dan cewe jadi efek sampingnya.</h3>
+        <p>Begitu lu tau lu mau ke mana, lu jadi magnet. Orang dateng sendiri, bukan karena lu ngejar.</p>
       </div>
     </div>
   </section>
@@ -1248,7 +1309,7 @@
   <!-- 6. ISI COURSE -->
   <section>
     <h2 class="sec-head" id="isinya">Isi course-nya</h2>
-    <p class="lead">4 modul, urutannya sengaja. Lu mulai dari ngerti apa yang lagi ngerusak lu, bangun pondasinya, beresin yang ngendaliin lu dari dalem, baru nentuin arah hidup lu.</p>
+    <p class="lead">4 modul, urutannya sengaja. Lu ga bisa bangun visi hidup di atas <b>pondasi yang belum kelar</b>, dan lu ga bisa benerin pondasi kalo lu belum tau <b>apa yang rusak</b>.</p>
 
     <div class="mm-strip">
       <div class="mm-item"><img src="assets/mindmap-1.jpg" alt="Mind map Modern Dating Crisis" loading="lazy"></div>
@@ -1265,58 +1326,58 @@
 
       <details class="module-card" data-num="01"><summary><h3>Modul 1: Diagnosis</h3><i>4 video</i></summary><div class="video">
           <span class="v-title">Modern Dating Crisis<span class="v-dur">20:50</span></span>
-          <span class="v-desc">Biar lu ngerti akar gender war yang lagi narik lu ke arah yang salah.</span>
+          <span class="v-desc">Akar dari gender war yang ga ada yang akuin.</span>
         </div>
         <div class="video">
           <span class="v-title">Jebakan Dopamin Digital<span class="v-dur">15:09</span></span>
-          <span class="v-desc">Biar lu ngerti kenapa PMO, scrolling, dan games bikin lu susah gerak.</span>
+          <span class="v-desc">PMO, scrolling, games, dan apa yang terjadi ke otak lu.</span>
         </div>
         <div class="video">
           <span class="v-title">Cowo Red Pill &amp; Blue Pill<span class="v-dur">16:13</span></span>
-          <span class="v-desc">Biar lu ga lagi kejebak dua narasi maskulinitas yang sama-sama ga utuh.</span>
+          <span class="v-desc">Dua narasi maskulinitas populer, dua-duanya sesat.</span>
         </div>
         <div class="video">
           <span class="v-title">4 Jalan Hidup Cowo<span class="v-dur">09:40</span></span>
-          <span class="v-desc">Biar lu bisa lihat lu selama ini lagi jalan ke arah mana.</span>
+          <span class="v-desc">Lu di jalur yang mana selama ini?</span>
         </div></details>
 
       <details class="module-card" data-num="02"><summary><h3>Modul 2: Sistem &amp; Pondasi</h3><i>3 video</i></summary><div class="video">
           <span class="v-title">Cara Benerin Otak Lu<span class="v-dur">24:00</span></span>
-          <span class="v-desc">Biar lu bisa mulai keluar dari pola dopamin digital yang ngontrol hari lu.</span>
+          <span class="v-desc">Reset otak yang udah terjebak dopamin digital.</span>
         </div>
         <div class="video">
           <span class="v-title">Sistem Hidup Cowo Kokoh<span class="v-dur">16:31</span></span>
-          <span class="v-desc">Biar konsistensi lu punya pondasi, bukan cuma numpang ke mood.</span>
+          <span class="v-desc">5 pilar yang bikin konsistensi jadi otomatis, bukan karena willpower.</span>
         </div>
         <div class="video">
           <span class="v-title">Halo Effect<span class="v-dur">17:07</span></span>
-          <span class="v-desc">Biar penampilan dan aura lu jadi ekspresi diri, bukan topeng.</span>
+          <span class="v-desc">Fisik dan aura sebagai bagian dari keutuhan lu.</span>
         </div></details>
 
       <details class="module-card" data-num="03"><summary><h3>Modul 3: Inner Work</h3><i>3 video</i></summary><div class="video">
           <span class="v-title">Cowo dan Emosinya<span class="v-dur">18:33</span></span>
-          <span class="v-desc">Biar lu bisa ngadepin perasaan lu tanpa kabur atau meledak.</span>
+          <span class="v-desc">Lu ga pernah diajarin cara ngadepin perasaan lu.</span>
         </div>
         <div class="video">
           <span class="v-title">Shadow Work<span class="v-dur">21:03</span></span>
-          <span class="v-desc">Biar lu sadar sisi gelap yang selama ini diam-diam ngendaliin lu.</span>
+          <span class="v-desc">Sisi gelap yang diam-diam ngendaliin hidup lu.</span>
         </div>
         <div class="video">
           <span class="v-title">Sublimation<span class="v-dur">11:01</span></span>
-          <span class="v-desc">Biar luka, dendam, dan iri hati lu bisa diolah jadi tenaga buat tumbuh.</span>
+          <span class="v-desc">Mengolah luka, dendam, iri hati jadi energi buat berkarya dan tumbuh.</span>
         </div></details>
 
       <details class="module-card" data-num="04"><summary><h3>Modul 4: Visi &amp; Tujuan Hidup</h3><i>5 video</i></summary><div class="video">
           <span class="v-title">Visi Hidup &gt; Cewe<span class="v-dur">16:22</span></span>
-          <span class="v-desc">Biar lu punya arah hidup yang lebih besar dari sekadar ngejar cewe.</span>
+          <span class="v-desc">Cowo bervisi genuine adalah yang paling menarik.</span>
         </div>
         <div class="video">
           <span class="v-title">Menemukan Misi<span class="v-dur">11:07</span></span>
-          <span class="v-desc">Biar lu nemuin arah yang lebih dalam dari sekadar "passion".</span>
+          <span class="v-desc">Lebih dalam dari sekadar "passion".</span>
         </div>
         <div class="video">
           <span class="v-title">Paradoxical Man Integration<span class="v-dur">21:45</span></span>
-          <span class="v-desc">Biar BEAST dan MONK nyatu jadi 1 jiwa yang utuh.</span>
+          <span class="v-desc">BEAST + MONK dalam 1 jiwa yang utuh.</span>
         </div>
         <div class="video">
           <span class="v-title">Akar Kokoh, Buah Authentic</span>
@@ -1324,7 +1385,7 @@
         </div>
         <div class="video">
           <span class="v-title">Surat Penutup<span class="v-dur">02:26</span></span>
-          <span class="v-desc">Penutup dari gw, buat lu yang udah sampai sejauh ini.</span>
+          <span class="v-desc">Dari gw, untuk lu yang sampai sejauh ini.</span>
         </div></details>
     </div>
   </section>
@@ -1349,20 +1410,22 @@
         <div class="for-you">
           <p class="pcheck-label">Ini buat lu kalo:</p>
           <ul class="for-list">
-            <li>Lu capek jadi cowo baik yang cuma dicari pas mereka butuh sandaran.</li>
-            <li>Lu pengen punya pasangan idaman tanpa berubah jadi manipulatif.</li>
-            <li>Lu pengen direspect tanpa harus pura-pura jadi cowo dingin.</li>
-            <li>Lu siap ngaca, ngerjain workbook, dan beneran latihan.</li>
+            <li>Lu udah capek sama pola yang sama: baik tapi ga direspect, atau kuat tapi ga pernah kenal emosi lu sendiri.</li>
+            <li>Lu pengen dicintai apa adanya, bukan karena topeng yang lu pasang.</li>
+            <li>Lu bingung mesti ikut narasi red pill atau blue pill, dan curiga dua-duanya ga lengkap.</li>
+            <li>Lu siap kerja pada diri lu sendiri dulu, sebelum kerja pada “cara dapetin cewe”.</li>
           </ul>
+          <p class="notfor-closer">Kalo minimal satu ini kena, lu di tempat yang tepat.</p>
         </div>
         <div class="notfor">
           <p class="pcheck-label">Ini bukan buat lu kalo:</p>
           <ul class="notfor-list">
-            <li>Lu nyari cara cepet atau pickup lines baru.</li>
-            <li>Lu cuma mau nonton. Kalo cuma nonton, itu coli otak versi bayar.</li>
-            <li>Lu belum siap jujur sama diri sendiri.</li>
-            <li>Lu nyari pembenaran bahwa semuanya salah cewe atau salah zaman.</li>
+            <li>Lu nyari cara cepet.</li>
+            <li>Lu mau nonton doang. Tiap modul ada workbook yang harus dipraktekin. Kalo cuma nonton, itu coli otak versi bayar.</li>
+            <li>Lu belum siap jujur sama diri sendiri. Workbook-nya nanya hal yang ga enak diakuin.</li>
+            <li>Lu nyari pembenaran bahwa ini salah cewe atau salah zaman. Di sini lu disuruh ngaca dulu.</li>
           </ul>
+          <p class="notfor-closer">Kalo empat-empatnya ga kena, lu udah siap.</p>
         </div>
       </div>
     </div>
@@ -1406,11 +1469,20 @@
     </div>
   </section>
 
-  <!-- 11. CTA PENUTUP -->
+  <!-- 11. COST OF INACTION -->
+  <section>
+    <div class="n780 cost-block">
+      <h2 class="sec-head">Yang lu bayar kalo terus nunda</h2>
+      <p>Ini bukan cuma soal harga yang bakal naik. Tiap hari lu nunda, pola yang sama, baik tapi ga direspect, atau kuat tapi mati rasa, makin ngeras jadi identitas lu, bukan cuma kebiasaan yang gampang diganti.</p>
+      <p>Momentum buat berubah itu paling gede sekarang, pas lu lagi baca ini, bukan nanti pas lu “siap”.</p>
+    </div>
+  </section>
+
+  <!-- 12. CTA PENUTUP -->
   <section class="final">
     <div class="narrow">
       <h2>Lu punya dua pilihan sekarang.</h2>
-      <p>Satu: lu tutup halaman ini, lu simpen niatnya, lalu pelan-pelan balik ke pola yang sama. Bukan karena lu jahat sama diri lu sendiri, melainkan karena niat tanpa sistem gampang kalah sama hidup sehari-hari.</p>
+      <p>Satu: lu tutup halaman ini, lu simpen niatnya, dan tiga minggu lagi lu balik ke pola yang sama. Bukan karena lu jahat sama diri lu sendiri, melainkan karena tanpa sistem, itu emang default-nya.</p>
       <p class="choice-two">Dua: lu mulai bangun tamannya.</p>
       <div class="cta-block">
         <a class="btn-primary" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Ambil aksesnya, Rp299.000</a>
@@ -1433,7 +1505,7 @@
     </div>
     <a href="#beda">Kenapa framework ini beda</a>
     <a href="#testimoni">Testimoni</a>
-    <a href="#hasil">Apa yang bakal beda</a>
+    <a href="#hasil">Sistem ROOT, RELEASE, RISE</a>
     <a href="#harga">Harga &amp; isi paketnya</a>
     <a href="#isinya">Isi course-nya</a>
     <a href="#komunitas">Komunitas</a>
