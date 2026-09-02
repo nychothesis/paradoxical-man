@@ -236,6 +236,15 @@
     margin: 0;
   }
   .hero .cta-block { margin-top: 28px; }
+  @media (min-width: 420px) and (max-width: 540px) {
+    .hero h1 { font-size: 1.52rem; letter-spacing: -.025em; line-height: 1.28; }
+    .hero h1 .hero-prefix,
+    .hero h1 .hero-quote,
+    .hero h1 .hero-payoff { white-space: nowrap; }
+    .hero h1 .hero-prefix,
+    .hero h1 .hero-payoff { display: block; }
+    .hero h1 .hero-quote { margin: 8px 0 6px; padding: 4px 10px 6px; }
+  }
 
   /* ---------- Video overview ---------- */
   .vid { padding: 0 0 26px; }
@@ -1121,7 +1130,7 @@
     <div class="hero-grid no-cover">
       <div>
         <span class="product-label">Paradoxical Man</span>
-        <h1>Buat Cowo yang Capek Dibilang <em class="hero-quote">“Kamu Terlalu Baik Buat Aku,”</em> Tapi Ga Pernah Jadi Pilihan.</h1>
+        <h1><span class="hero-prefix">Buat Cowo yang Capek Dibilang</span> <em class="hero-quote">“Kamu Terlalu Baik Buat Aku,”</em> <span class="hero-payoff">Tapi Ga Pernah Jadi Pilihan.</span></h1>
         <p>Lu bisa dapet pasangan yang bener-bener <b>respect dan pilih lu</b> tanpa lu harus pake topeng, bukan cuma sekedar jadi pilihan “aman”.</p>
         <p class="hero-guardrail">Tanpa trik, manipulasi, atau pick-up lines murahan.</p>
         <p class="hero-proof">Berangkat dari pengalaman hidup, diuji ulang lewat Evolution, Psychology, Philosophy, Society.</p>
