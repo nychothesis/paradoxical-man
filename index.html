@@ -1182,7 +1182,7 @@
     <div class="n780">
       <h2 class="sec-head">Apakah lu pernah ngalamin ini?</h2>
       <div class="panel pcheck-panel" id="pcheck-panel">
-        <p class="pcheck-hint">Centang yang kena di lu.</p>
+        <p class="pcheck-hint">Kalau minimal dua dari ini kena, framework ini buat lu. Centang yang paling relate sama hidup lu sekarang.</p>
         <div id="pcheck">
           <div class="pcheck-group">
             <p class="pcheck-label">Yang lu takutin</p>
@@ -1217,7 +1217,7 @@
             </ul>
           </div>
         </div>
-        <p class="tally" id="tally">Kalo minimal dua kena, framework ini buat lu.</p>
+        <p class="tally" id="tally" hidden></p>
       </div>
     </div>
   </section>
@@ -1840,14 +1840,12 @@
 
 <script>
   (function () {
-    // Checklist "Relate ga?". Kalimat penutupnya cuma berubah jadi hitungan
-    // setelah orang nyentang minimal satu. Sebelum disentuh, dia tetep kalimat
-    // aslinya, jadi yang cuma baca sekilas ga ketinggalan apa-apa.
+    // Checklist. Ambang "minimal dua" udah dikasih sebelum daftar, supaya
+    // orang tau konteksnya sebelum mulai nyentang.
     var list = document.getElementById('pcheck');
     var out  = document.getElementById('tally');
     if (!list || !out) return;
 
-    var asli = out.textContent;
     var tombol = list.querySelectorAll('button');
 
     var panel = document.getElementById('pcheck-panel');
@@ -1875,13 +1873,8 @@
         panel.style.setProperty('--nyala', warna(kena / tombol.length));
       }
 
-      if (kena === 0) { out.textContent = asli; }
-      else {
-        out.innerHTML = 'Lu kena <b>' + kena + '</b> dari ' + tombol.length + '.'
-          + '<span>' + (kena < 2
-              ? 'Baru satu. Kalo minimal dua kena, framework ini buat lu.'
-              : 'Minimal dua kena. Framework ini buat lu.') + '</span>';
-      }
+      out.hidden = false;
+      out.innerHTML = 'Lu kena <b>' + kena + '</b> dari ' + tombol.length + '.';
 
       // Angkanya nyentak tiap berubah. Class-nya dilepas lewat rAF ganda,
       // bukan setTimeout, biar kalo diklik cepet-cepet tetep nyentak lagi
