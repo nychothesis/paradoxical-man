@@ -219,6 +219,13 @@
     letter-spacing: -.01em; margin-bottom: 24px;
   }
   .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero h1 .hero-quote {
+    display: block; width: fit-content; max-width: 100%;
+    margin: 10px 0 7px; padding: 5px 13px 7px;
+    border-left: 4px solid var(--gold); border-radius: 2px;
+    background: linear-gradient(90deg, rgba(201, 162, 39, .16), transparent);
+    line-height: 1.18;
+  }
   .hero p { margin-bottom: 18px; color: #d8d3c8; font-size: .95rem; }
   .hero .hero-guardrail {
     color: var(--gold-soft); font-size: .9rem; font-weight: 700;
@@ -658,6 +665,9 @@
     width: 100%; display: block; margin: 28px 0;
     border: 1px solid rgba(201, 162, 39, .24); border-radius: var(--radius);
     box-shadow: var(--shadow), 0 0 48px rgba(201, 162, 39, .08);
+  }
+  .root-bridge {
+    margin: 22px 0 0; color: #d8d3c8; font-size: .95rem;
   }
   .fromto {
     border: 1px solid var(--line); border-radius: var(--radius);
@@ -1111,7 +1121,7 @@
     <div class="hero-grid no-cover">
       <div>
         <span class="product-label">Paradoxical Man</span>
-        <h1>Buat Cowo yang Capek Dibilang <em>“Kamu Terlalu Baik Buat Aku,”</em> Tapi Ga Pernah Jadi Pilihan.</h1>
+        <h1>Buat Cowo yang Capek Dibilang <em class="hero-quote">“Kamu Terlalu Baik Buat Aku,”</em> Tapi Ga Pernah Jadi Pilihan.</h1>
         <p>Lu bisa dapet pasangan yang bener-bener <b>respect dan pilih lu</b> tanpa lu harus pake topeng, bukan cuma sekedar jadi pilihan “aman”.</p>
         <p class="hero-guardrail">Tanpa trik, manipulasi, atau pick-up lines murahan.</p>
         <p class="hero-proof">Berangkat dari pengalaman hidup, diuji ulang lewat Evolution, Psychology, Philosophy, Society.</p>
@@ -1128,9 +1138,17 @@
       <h2 class="sec-head">Ini bukan kumpulan tips dating.</h2>
       <p>Pickup lines, cara chatting, cheap tricks. Works jangka pendek, fatal jangka panjang, dan malah bisa narik tipe cewe yang salah, bukan yang lu mau ajak serius.</p>
       <p>Framework ini <b>bukan</b> main di level <i>permukaan</i> (cara chatting, dsb.), melainkan kita bakal masuk ke <b>akar &amp; pondasi</b> sebenarnya. Yang bikin cewe jadi attracted itu cuma efek samping dari pondasi yang udah solid.</p>
+    </div>
+  </section>
+
+  <!-- ANALOGI AKAR & BUAH -->
+  <section>
+    <div class="n780 reframe">
+      <h2 class="sec-head">Yang perlu lu benerin itu akarnya.</h2>
+      <img class="tree-visual" src="assets/tree-paradoxical-man.png" alt="Pohon berbuah dengan akar yang kuat">
       <p>Analoginya: kayak buah dari pohon. Banyak orang fokus “menghias buah mereka” biar keliatan lezat &amp; indah, tapi semua itu bakal sia-sia kalo akarnya sendiri ga sehat &amp; ga kuat (termasuk pikiran bawah sadar lu).</p>
       <p>Dengan lu fokus benerin akar, buah yang indah ini akan dengan sendirinya terbentuk.</p>
-      <img class="tree-visual" src="assets/tree-paradoxical-man.png" alt="Pohon berbuah dengan akar yang kuat">
+      <p class="root-bridge">Maksudnya bukan lu berhenti belajar komunikasi atau ngerawat diri. Tapi itu ga cukup kalau lu masih hidup di atas pondasi yang rapuh.</p>
       <div class="fromto">
         <div class="ft-row"><span class="from">menghias “buah”</span><span class="arrow">→</span><span class="to">benerin akar</span></div>
         <div class="ft-row"><span class="from">topeng</span><span class="arrow">→</span><span class="to">identitas</span></div>
@@ -1144,7 +1162,7 @@
   <!-- PAIN CHECKLIST -->
   <section>
     <div class="n780">
-      <h2 class="sec-head">Relate ga?</h2>
+      <h2 class="sec-head">Apakah lu pernah ngalamin ini?</h2>
       <div class="panel pcheck-panel" id="pcheck-panel">
         <p class="pcheck-hint">Centang yang kena di lu.</p>
         <div id="pcheck">
@@ -1431,9 +1449,10 @@
   <!-- 9. BUAT LU / BUKAN BUAT LU -->
   <section>
     <div class="n780">
-      <h2 class="sec-head">Ini buat lu kalo:</h2>
+      <h2 class="sec-head">Ini buat lu, atau bukan?</h2>
       <div class="fit-grid">
         <div class="for-you">
+          <p class="pcheck-label">Ini buat lu kalo:</p>
           <ul class="for-list">
             <li>Lu udah capek sama pola yang sama: baik tapi ga direspect, atau kuat tapi ga pernah kenal emosi lu sendiri.</li>
             <li>Lu pengen dicintai apa adanya, bukan karena topeng yang lu pasang.</li>
