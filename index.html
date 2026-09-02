@@ -886,10 +886,15 @@
      itu bonus, bukan syarat. */
   /* Tanpa arahan, kotaknya gampang dikira hiasan dan ga ada yang nge-tap.
      Satu baris pendek aja, ga usah panjang-panjang. */
+  .pcheck-rule {
+    font-family: 'Inter', sans-serif; font-size: .96rem; font-weight: 700;
+    line-height: 1.45; color: var(--cream); margin: 0 0 7px; padding-left: 8px;
+  }
+  .pcheck-rule b { color: var(--gold-soft); }
   .pcheck-hint {
     font-family: 'Inter', sans-serif; font-size: .74rem; font-weight: 600;
     letter-spacing: .04em; color: var(--muted-2);
-    margin-bottom: 14px; padding-left: 8px;
+    margin: 0 0 14px; padding-left: 8px;
   }
   .pcheck { list-style: none; display: grid; gap: 2px; }
   .pcheck-group + .pcheck-group { margin-top: 22px; }
@@ -1182,7 +1187,8 @@
     <div class="n780">
       <h2 class="sec-head">Apakah lu pernah ngalamin ini?</h2>
       <div class="panel pcheck-panel" id="pcheck-panel">
-        <p class="pcheck-hint">Kalau minimal dua dari ini kena, framework ini buat lu. Centang yang paling relate sama hidup lu sekarang.</p>
+        <p class="pcheck-rule">Kalau minimal dua dari ini kena, <b>framework ini buat lu.</b></p>
+        <p class="pcheck-hint">Centang yang paling relate sama hidup lu sekarang.</p>
         <div id="pcheck">
           <div class="pcheck-group">
             <p class="pcheck-label">Yang lu takutin</p>
