@@ -245,6 +245,12 @@
     .hero h1 .hero-payoff { display: block; }
     .hero h1 .hero-quote { margin: 8px 0 6px; padding: 4px 10px 6px; }
   }
+  .mobile-head-break { display: none; }
+  @media (max-width: 419px) {
+    .hero h1 .hero-prefix,
+    .hero h1 .hero-payoff { display: block; }
+    .mobile-head-break { display: block; }
+  }
 
   /* ---------- Video overview ---------- */
   .vid { padding: 0 0 26px; }
@@ -411,6 +417,12 @@
     text-decoration: none; transition: .18s;
   }
   a.t-chip:hover { background: rgba(201,162,39,.2); }
+  .t-context { margin: 14px 0 16px; color: #d8d3c8; font-size: .9rem; line-height: 1.65; }
+  .t-context b { color: var(--gold-soft); }
+  .t-screenshot {
+    display: block; width: 100%; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.08); background: #0d0d0d;
+  }
   .t-text { font-size: .88rem; color: #d8d3c8; font-weight: 400; }
   .t-text p + p { margin-top: 10px; }
 
@@ -1130,7 +1142,7 @@
     <div class="hero-grid no-cover">
       <div>
         <span class="product-label">Paradoxical Man</span>
-        <h1><span class="hero-prefix">Buat Cowo yang Capek Dibilang</span> <em class="hero-quote">“Kamu Terlalu Baik Buat Aku,”</em> <span class="hero-payoff">Tapi Ga Pernah Jadi Pilihan.</span></h1>
+        <h1><span class="hero-prefix">Buat Cowo yang<span class="mobile-head-break"><br></span> Capek Dibilang</span> <em class="hero-quote">“Kamu Terlalu Baik Buat Aku,”</em> <span class="hero-payoff">Tapi Ga Pernah<span class="mobile-head-break"><br></span> Jadi Pilihan.</span></h1>
         <p>Lu bisa dapet pasangan yang bener-bener <b>respect dan pilih lu</b> tanpa lu harus pake topeng, bukan cuma sekedar jadi pilihan “aman”.</p>
         <p class="hero-guardrail">Tanpa trik, manipulasi, atau pick-up lines murahan.</p>
         <p class="hero-proof">Berangkat dari pengalaman hidup, diuji ulang lewat Evolution, Psychology, Philosophy, Society.</p>
@@ -1250,42 +1262,37 @@
 
   <!-- 2. TESTIMONI -->
   <section>
-    <h2 class="sec-head" id="testimoni">Kata mereka</h2>
+    <h2 class="sec-head" id="testimoni">Bukan cuma kata gw.</h2>
     <div class="t-grid">
 
       <div class="t-card">
         <div class="t-name">Marcella Ismanto, CHt<svg class="vbadge" viewBox="0 0 24 24" aria-label="Verified" role="img"><circle cx="12" cy="12" r="11" fill="#0095F6"/><path d="M7 12.5l3.2 3.2L17 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="t-role">Certified Hypnotherapist, @cellaish</div>
-        <a class="t-chip" href="https://instagram.com/cellaish" target="_blank" rel="noopener">160K followers on Instagram</a>
-        <div class="t-text">
-          <p><b>Wow! Aku yakin ini yang pertama di Indonesia</b>, program yang mengupas bagaimana caranya menjadi laki-laki yang kuat, utuh, dan tentunya, paradoks. Maksudnya, bagaimana menjadi pria yang bisa build dan create big things di dunia, tapi di saat yang sama tetap punya koneksi intim sama dunia batinnya sendiri. <b>Jujur, ini tipe pasangan idaman semua wanita yang sekarang tuh bener-bener langka.</b> Program ini keren banget!</p>
-        </div>
+        <div class="t-role">Certified Hypnotherapist</div>
+        <a class="t-chip" href="https://instagram.com/cellaish" target="_blank" rel="noopener">@cellaish · 160K followers ↗</a>
+        <p class="t-context"><b>Yang Marcella sorot:</b> sosok cowo yang kuat dan bisa bangun hal besar, tapi tetap punya koneksi sama dunia batinnya. Dia bahkan bilang, “Aku yakin ini yang pertama di Indonesia.”</p>
+        <img class="t-screenshot" src="assets/testimonial-marcella.jpg" alt="Screenshot testimoni WhatsApp dari Marcella Ismanto" loading="lazy">
       </div>
 
       <div class="t-card">
         <div class="t-name">Edward Santoso<svg class="vbadge" viewBox="0 0 24 24" aria-label="Verified" role="img"><circle cx="12" cy="12" r="11" fill="#0095F6"/><path d="M7 12.5l3.2 3.2L17 8.5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="t-role">Founder @the7percent.co</div>
-        <a class="t-chip" href="https://instagram.com/the7percent.co" target="_blank" rel="noopener">295K followers on Instagram</a>
-        <div class="t-text">
-          <p>Saya sudah baca lebih dari 200 buku. Sebagian dari porsi tersebut saya dedikasikan pada buku-buku yang membahas filosofi, maskulinitas dan stoisisme atau sikap hidup. Bagaimanapun, saya merasa course ini akan sangat menghemat waktu jikalau saya menemukannya lebih cepat. Selain penyampaiannya yang terstruktur dan jelas, materi juga didasarkan pada ilmu yang teruji.</p>
-          <p><b>Nicho, naikin harganya. Value is too damn high.</b></p>
-        </div>
+        <a class="t-chip" href="https://instagram.com/the7percent.co" target="_blank" rel="noopener">@the7percent.co · 295K followers ↗</a>
+        <p class="t-context"><b>Yang Edward nilai:</b> pembahasannya terstruktur dan jelas. Menurut dia, value-nya jauh di atas harga sekarang.</p>
+        <img class="t-screenshot" src="assets/testimonial-edward.jpg" alt="Screenshot testimoni WhatsApp dari Edward Santoso" loading="lazy">
       </div>
 
       <div class="t-card">
         <div class="t-name">Christian Harjanto</div>
         <div class="t-role">AI Business Partner</div>
-        <div class="t-text">
-          <p><b>GILA DAGING ABIZZ</b>, awalnya gw kira cmn bahas cowo in general tapi disini <b>dibahas sampe dalem banget</b>. Jujur change my prespective a lot di tengah dunia yang penuh tipuan ini, jadi lebih sadar apa yang membuat kita di kontrol pdhl gw kira g ngaruh ternyata ngaruh banget dan apa yang bisa kita kontrol. G sampe situ, gw merasa terguided buat take real actionable step yang langsung bisa gw praktekin. Otw menuju paradoxical man!</p>
-        </div>
+        <p class="t-context"><b>Yang Christian rasain:</b> lebih sadar apa yang selama ini ngontrol hidupnya, lalu punya langkah nyata yang bisa langsung dipraktekin.</p>
+        <img class="t-screenshot" src="assets/testimonial-christian.jpg" alt="Screenshot testimoni WhatsApp dari Christian Harjanto" loading="lazy">
       </div>
 
       <div class="t-card">
         <div class="t-name">Justin Vanes</div>
         <div class="t-role">Faculty of Electrical Engineering</div>
-        <div class="t-text">
-          <p>Gw adalah tipe orang yang sangat suka untuk belajar dari buku self improvement, dan kebanyakan buku hanya mengajarkan pola pikirnya tanpa ada plan yang jelas. Menurut gw pribadi, kelebihan dari course ini bukan hanya menjelaskan konsep utama tetapi juga <b>dalam course kita diberikan plan plan untuk menjalankan apa yang sudah diajarkan and that's what I need</b>.</p>
-        </div>
+        <p class="t-context"><b>Yang Justin butuhin:</b> bukan cuma konsep, tapi plan buat ngejalanin apa yang udah dipelajari.</p>
+        <img class="t-screenshot" src="assets/testimonial-justin.jpg" alt="Screenshot testimoni WhatsApp dari Justin Vanes" loading="lazy">
       </div>
 
     </div>
