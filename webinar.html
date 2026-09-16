@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Webinar Gratis: Jadi Cowo Idaman Dari Wanita Pujaan Lu</title>
+<!-- Preload cuma weight yang beneran kepake di halaman ini (900 buat h1,
+     700 buat tombol/label, 400 buat body), samain pola sama index.html.
+     optin.html/thanks.html masih preload atkinson-400 yang filenya udah
+     ga ada (peninggalan sebelum body font pindah ke Inter) -- jangan
+     ditiru di sini. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-900.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-400.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="funnel.css">
+
+<!-- Google Analytics 4, ID sama kayak halaman lain di repo ini. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FFND4PK6SC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-FFND4PK6SC');
+</script>
+</head>
+<body>
+<div class="aura" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
+
+<div class="wrap">
+
+  <div class="brand">
+    <img src="assets/logo.svg" alt="" width="34" height="34">
+    <div class="brand-name">NYCHO<span>THESIS</span></div>
+  </div>
+
+  <span class="eyebrow">Webinar Gratis &middot; Live via Zoom</span>
+
+  <h1>Menjadi Pria yang Diinginkan Perempuan yang Lu Inginkan, <em>Tanpa Trik dan Manipulasi</em></h1>
+  <p class="sub">Live bareng Nicholas Kristianus (Nychothesis). Lu bakal ngerti kenapa jadi "cowo baik" aja ga pernah cukup, dan apa yang beneran bikin cewe respect &amp; pilih lu apa adanya, bukan karena topeng yang lu pasang.</p>
+
+  <ul class="list">
+    <li>&#128197; Rabu, 28 Oktober 2026</li>
+    <li>&#128337; 20.00 WIB</li>
+    <li>&#128187; Live via Zoom, link dikirim ke WhatsApp &amp; email lu</li>
+  </ul>
+
+  <div class="panel">
+    <p style="font-size:.95rem; color:#d8d3c8; margin-bottom:14px;"><b>Yang lu dapet:</b></p>
+    <ul class="list">
+      <li>Kenapa "jadi cowo baik" doang ga pernah cukup buat bikin cewe respect &amp; pilih lu.</li>
+      <li>Framework Paradoxical Man: integrasi kekuatan &amp; kelembutan jadi satu identitas utuh, bukan dua topeng gantian.</li>
+      <li>Langkah konkret abis webinar, biar lu ga cuma dapet insight terus mentok di situ lagi.</li>
+    </ul>
+  </div>
+
+  <div class="panel" id="form-panel">
+    <form id="webinar-form" novalidate>
+      <div class="field">
+        <label for="nama">Nama</label>
+        <input type="text" id="nama" name="field_1" placeholder="nama lu" required
+               autocomplete="name" autocapitalize="words" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="email">Email aktif</label>
+        <input type="email" id="email" name="field_0" placeholder="email@lu.com" required
+               autocomplete="email" inputmode="email"
+               autocapitalize="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="wa">Nomor WhatsApp</label>
+        <input type="tel" id="wa" name="field_4" inputmode="numeric" autocomplete="tel" placeholder="08xxxxxxxxxx" required>
+      </div>
+      <input type="text" name="hpc4b27b6e-eb38-11e9-be00-06b4694bee2a" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <button type="submit" class="btn-primary" id="submit-btn">Daftar Webinar Gratis</button>
+      <p class="err" id="err" hidden></p>
+      <p class="micro">Link &amp; reminder dikirim ke WhatsApp/email lu sebelum hari-H. Data lu cuma dipake buat ini, bisa berhenti kapan aja.</p>
+    </form>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    // Endpoint sama kayak optin.html: satu list EmailOctopus, ga dipisah
+    // per sumber pendaftaran (dikonfirmasi Nicho 2026-09-16).
+    var ENDPOINT = 'https://eocampaign1.com/form/d55e6cce-8a68-11f1-9ee5-27fb991eb42d';
+
+    var form = document.getElementById('webinar-form');
+    var panel = document.getElementById('form-panel');
+    var btn = document.getElementById('submit-btn');
+    var err = document.getElementById('err');
+    var labelAsli = btn.textContent;
+
+    function tampilError(pesan) {
+      err.textContent = pesan;
+      err.hidden = false;
+      btn.disabled = false;
+      btn.textContent = labelAsli;
+    }
+
+    // Samain ke format 08xxxxxxxxxx, ngikutin data yang udah ada di list.
+    function rapihinNomor(mentah) {
+      var s = String(mentah).replace(/[\s\-\.\(\)]/g, '');
+      if (s.charAt(0) === '+') s = s.slice(1);
+      if (s.slice(0, 2) === '62') s = '0' + s.slice(2);
+      else if (s.charAt(0) === '8') s = '0' + s;
+      return s;
+    }
+
+    function nomorValid(s) {
+      return /^08[1-9][0-9]{7,10}$/.test(s);
+    }
+
+    function emailValid(s) {
+      return /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(s);
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      err.hidden = true;
+
+      if (!form.nama.value.trim() || !form.email.value.trim() || !form.wa.value.trim()) {
+        tampilError('Isi dulu semua kolomnya ya.');
+        return;
+      }
+
+      var isiNama = form.nama.value.trim();
+      var isiEmail = form.email.value.trim();
+      if (!emailValid(isiEmail) && emailValid(isiNama)) {
+        form.nama.value = isiEmail;
+        form.email.value = isiNama;
+      }
+
+      if (!emailValid(form.email.value.trim())) {
+        tampilError('Emailnya kayaknya salah ketik. Cek lagi ya.');
+        return;
+      }
+
+      var nomor = rapihinNomor(form.wa.value);
+      if (!nomorValid(nomor)) {
+        tampilError('Nomor WhatsApp-nya belum bener. Contoh: 08123456789');
+        return;
+      }
+      form.wa.value = nomor;
+
+      btn.disabled = true;
+      btn.textContent = 'Lagi ngirim...';
+
+      var data = new URLSearchParams(new FormData(form));
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data
+      }).then(function (res) {
+        if (res.ok) {
+          panel.innerHTML = '<h2 style="font-size:1.3rem; font-weight:900; margin-bottom:10px;">Lu udah terdaftar. <em style="font-style:normal; color:var(--gold);">Sampai ketemu 28 Oktober.</em></h2><p style="font-size:.92rem; color:#d8d3c8;">Link Zoom dan reminder bakal dikirim ke WhatsApp &amp; email lu H-1 dan 1 jam sebelum mulai. Kalau ga ketemu, cek folder spam/promosi.</p>';
+          return null;
+        }
+        return res.json().catch(function () { return null; });
+      }).then(function (j) {
+        if (j === null) return;
+        var pesan = (j && j.error && j.error.message) || 'Gagal ngirim. Coba lagi bentar.';
+        tampilError(pesan);
+      }).catch(function () {
+        tampilError('Koneksinya bermasalah. Coba lagi bentar.');
+      });
+    });
+  })();
+</script>
+</body>
+</html>

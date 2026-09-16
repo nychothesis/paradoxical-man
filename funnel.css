@@ -81,6 +81,12 @@ h1 em { font-style: normal; color: var(--gold); }
 
 .sub { color: #d8d3c8; font-size: .95rem; margin-bottom: 30px; }
 
+.eyebrow {
+  display: inline-block; margin-bottom: 14px;
+  color: var(--gold-soft); font-size: .72rem; font-weight: 700;
+  letter-spacing: 2.2px; text-transform: uppercase;
+}
+
 /* Panel jadi kaca buram, bukan kotak padat. Aura di belakangnya jadi
    nembus samar, dan itu yang bikin permukaannya berasa punya kedalaman.
    Garis tepinya bergradien (emas terang ke redup) lewat trik dua latar:
