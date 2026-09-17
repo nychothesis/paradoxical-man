@@ -45,3 +45,7 @@ mentah & aset kerja, sengaja ga ikut ke repo publik.
 ## Catatan kerja
 - Sudah dirapikan buat HP: baris from–to ditumpuk (bukan dua kolom sempit).
 - Ada penanda "Analoginya" di bagian analogi kupu-kupu.
+- `.panel` di `funnel.css` ga punya margin sendiri. Dua `.panel` yang ditumpuk
+  langsung (tanpa elemen lain di antaranya) bikin sudut bulatnya nabrak dan
+  keliatan ada celah aneh. Kasih `margin-bottom` manual di panel sebelumnya
+  kalau nyusun beberapa `.panel` berurutan (lihat `webinar.html`).
