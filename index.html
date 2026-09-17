@@ -216,6 +216,13 @@
     position: absolute; z-index: 1; top: 20px; left: 20px; color: var(--gold-soft);
     font-size: .66rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
   }
+  .product-poster-title {
+    position: absolute; z-index: 1; top: 57px; left: 20px; right: 20px; margin: 0;
+    color: var(--text); font-size: clamp(1.72rem, 5.5vw, 2.65rem); font-weight: 900;
+    line-height: 1.08; letter-spacing: -.045em; text-wrap: balance;
+    text-shadow: 0 2px 18px rgba(0,0,0,.65);
+  }
+  .product-poster-title em { font-style: normal; color: var(--gold); }
   .cover-frame { position: relative; max-width: 330px; margin: 0 auto; }
   .cover-frame::before {
     content: ""; position: absolute; inset: 8%;
@@ -1159,13 +1166,13 @@
   <!-- 1. HERO -->
   <section class="hero">
     <div class="hero-grid product-hero">
-      <div class="product-poster" aria-hidden="true">
+      <section class="product-poster" aria-labelledby="product-title">
         <img src="assets/webinar-paradoxical-man-hero.png" alt="" width="1122" height="1402">
         <span class="product-poster-label">Paradoxical Man</span>
-      </div>
+        <h1 class="product-poster-title" id="product-title">Menjadi Cowo Idaman Dari Wanita Pujaan Lu, <em>Tanpa Trik dan Manipulasi</em></h1>
+      </section>
       <div>
         <span class="product-label">Paradoxical Man</span>
-        <h1>Menjadi Cowo Idaman Dari Wanita Pujaan Lu, <em>Tanpa Trik dan Manipulasi</em></h1>
         <p>Lu bisa dapet pasangan yang bener-bener <b>respect dan pilih lu</b> tanpa lu harus pake topeng, bukan cuma sekedar jadi pilihan “aman”.</p>
         <p class="hero-guardrail">Tanpa trik, manipulasi, atau pick-up lines murahan.</p>
         <p class="hero-proof">Berangkat dari pengalaman hidup, diuji ulang lewat Evolution, Psychology, Philosophy, Society.</p>
