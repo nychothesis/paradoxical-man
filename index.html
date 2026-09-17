@@ -204,33 +204,33 @@
   .product-hero { gap: 32px; }
   .product-poster {
     position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 2 / 3;
-    max-width: 460px; margin: 0 auto; border: 1px solid rgba(201,162,39,.42);
+    max-width: 500px; margin: 0 auto; border: 1px solid rgba(201,162,39,.42);
     border-radius: 18px; background: #0e0e0d; box-shadow: 0 22px 58px rgba(0,0,0,.48);
   }
   .product-poster img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center bottom; }
   .product-poster::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(12,11,10,.42), transparent 34%, rgba(12,11,10,.04) 62%, rgba(12,11,10,.55));
+    background:
+      linear-gradient(180deg, rgba(12,11,10,.93) 0%, rgba(12,11,10,.72) 46%, rgba(12,11,10,.22) 70%, rgba(12,11,10,.62) 100%),
+      linear-gradient(90deg, rgba(12,11,10,.32), transparent 58%, rgba(12,11,10,.20));
   }
   .product-poster-copy {
-    position: absolute; z-index: 1; inset: 0; padding: 25px 24px 24px;
+    position: absolute; z-index: 1; inset: 0; padding: 30px 28px 26px;
     display: flex; flex-direction: column;
   }
   .product-poster-label {
     color: var(--gold-soft);
-    font-size: .66rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    font-size: .68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
   }
   .product-poster-title {
     margin: 15px 0 0;
-    color: var(--text); font-size: clamp(1.72rem, 5.5vw, 2.65rem); font-weight: 900;
+    color: var(--text); font-size: clamp(1.85rem, 6vw, 3.05rem); font-weight: 900;
     line-height: 1.08; letter-spacing: -.045em; text-wrap: balance;
     text-shadow: 0 2px 18px rgba(0,0,0,.65);
   }
   .product-poster-title em { font-style: normal; color: var(--gold); }
-  .product-poster-message { margin-top: 20px; }
-  .product-poster-message p { margin: 0; color: #e6e0d5; font-size: .92rem; line-height: 1.62; }
-  .product-poster-message .product-poster-guardrail { margin-top: 15px; color: var(--gold-soft); font-weight: 700; }
-  .product-poster-message .product-poster-proof { margin-top: 14px; color: rgba(244,239,228,.68); font-size: .76rem; line-height: 1.55; }
+  .product-poster-message { margin-top: 22px; max-width: 430px; }
+  .product-poster-message p { margin: 0; color: #e6e0d5; font-size: .97rem; line-height: 1.62; }
   .product-poster-cta { max-width: none; margin-top: auto; padding: 15px 22px; }
   .cover-frame { position: relative; max-width: 330px; margin: 0 auto; }
   .cover-frame::before {
@@ -1178,12 +1178,10 @@
       <section class="product-poster" aria-labelledby="product-title">
         <img src="assets/webinar-paradoxical-man-hero.png" alt="" width="1122" height="1402">
         <div class="product-poster-copy">
-          <span class="product-poster-label">Paradoxical Man</span>
+          <span class="product-poster-label">Paradoxical Man &middot; E-course</span>
           <h1 class="product-poster-title" id="product-title">Menjadi Cowo Idaman Dari Wanita Pujaan Lu, <em>Tanpa Trik dan Manipulasi</em></h1>
           <div class="product-poster-message">
-            <p>Lu bisa dapet pasangan yang bener-bener <b>respect dan pilih lu</b> tanpa lu harus pake topeng, bukan cuma sekedar jadi pilihan “aman”.</p>
-            <p class="product-poster-guardrail">Tanpa trik, manipulasi, atau pick-up lines murahan.</p>
-            <p class="product-poster-proof">Berangkat dari pengalaman hidup, diuji ulang lewat Evolution, Psychology, Philosophy, Society.</p>
+            <p>Lu ga butuh jadi bad boy atau cowo baik yang menghapus dirinya sendiri. Lu butuh pondasi buat jadi kuat, punya arah, dan tetap hadir secara emosional.</p>
           </div>
           <a class="btn-primary product-poster-cta" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Mau Join Sekarang!</a>
         </div>
