@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paradoxical Man · Framework Cara Jadi Cowo yang Diinginkan Para Wanita</title>
+<title>Paradoxical Man · Menjadi Cowo Idaman Dari Wanita Pujaan Lu, Tanpa Trik dan Manipulasi</title>
 <!-- Font yang kepake di layar pertama diminta duluan, biar ga nunggu
      fonts.css selesai diunduh. crossorigin WAJIB ada walaupun file-nya
      seserver; tanpa itu font-nya malah keunduh dua kali. -->
@@ -201,6 +201,21 @@
   /* ---------- Hero ---------- */
   .hero { padding: 40px 0 26px; }
   .hero-grid { display: grid; grid-template-columns: 1fr; gap: 44px; align-items: center; }
+  .product-hero { gap: 32px; }
+  .product-poster {
+    position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 4 / 5;
+    max-width: 380px; margin: 0 auto; border: 1px solid rgba(201,162,39,.42);
+    border-radius: 18px; background: #0e0e0d; box-shadow: 0 22px 58px rgba(0,0,0,.48);
+  }
+  .product-poster img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center bottom; }
+  .product-poster::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(12,11,10,.42), transparent 34%, rgba(12,11,10,.04) 62%, rgba(12,11,10,.55));
+  }
+  .product-poster-label {
+    position: absolute; z-index: 1; top: 20px; left: 20px; color: var(--gold-soft);
+    font-size: .66rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  }
   .cover-frame { position: relative; max-width: 330px; margin: 0 auto; }
   .cover-frame::before {
     content: ""; position: absolute; inset: 8%;
@@ -843,6 +858,8 @@
     .hero-grid { grid-template-columns: 360px 1fr; gap: 64px; }
     .hero-grid.no-cover { grid-template-columns: 1fr; }
     .hero-grid.no-cover > div { max-width: 760px; margin: 0 auto; }
+    .hero-grid.product-hero { grid-template-columns: minmax(280px, 380px) minmax(0, 1fr); gap: 58px; }
+    .product-poster { max-width: none; }
     .cover-frame { max-width: none; margin: 0; }
     .hero h1 { font-size: 2.7rem; }
     .sec-head { font-size: 1.55rem; }
@@ -1141,10 +1158,14 @@
 
   <!-- 1. HERO -->
   <section class="hero">
-    <div class="hero-grid no-cover">
+    <div class="hero-grid product-hero">
+      <div class="product-poster" aria-hidden="true">
+        <img src="assets/webinar-paradoxical-man-hero.png" alt="" width="1122" height="1402">
+        <span class="product-poster-label">Paradoxical Man</span>
+      </div>
       <div>
         <span class="product-label">Paradoxical Man</span>
-        <h1><span class="hero-prefix">Jadi Cowo<span class="mobile-head-break"><br></span> Idaman</span> <em class="hero-quote">Dari Wanita Pujaan Lu</em></h1>
+        <h1>Menjadi Cowo Idaman Dari Wanita Pujaan Lu, <em>Tanpa Trik dan Manipulasi</em></h1>
         <p>Lu bisa dapet pasangan yang bener-bener <b>respect dan pilih lu</b> tanpa lu harus pake topeng, bukan cuma sekedar jadi pilihan “aman”.</p>
         <p class="hero-guardrail">Tanpa trik, manipulasi, atau pick-up lines murahan.</p>
         <p class="hero-proof">Berangkat dari pengalaman hidup, diuji ulang lewat Evolution, Psychology, Philosophy, Society.</p>
