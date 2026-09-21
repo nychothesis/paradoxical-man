@@ -4,19 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>Webinar Gratis: Menjadi Cowo Idaman Dari Wanita Pujaan Lu</title>
-<!-- Preload cuma weight yang beneran kepake di halaman ini (900 buat h1,
-     700 buat tombol/label, 400 buat body), samain pola sama index.html.
-     optin.html/thanks.html masih preload atkinson-400 yang filenya udah
-     ga ada (peninggalan sebelum body font pindah ke Inter) -- jangan
-     ditiru di sini. -->
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-900.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-700.woff2" crossorigin>
-<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-400.woff2" crossorigin>
+<title>Ambil PDF gratisnya</title>
+<!-- Sama persis kayak optin.html, cuma beda tujuan abis submit sukses.
+     Ini landing khusus buat link yang dikirim DM automation (ganti link
+     Google Drive langsung yang lama, biar lead-nya kecatet -- nama, email,
+     WA -- bukan cuma dikasih file terus ilang). Dipisah dari optin.html
+     karena abis isi form, orang dari sini ga digiring ke OTO produk
+     (SUKSES = thanks.html), beda sama optin.html yang emang didesain buat
+     langsung nawarin OTO. -->
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-900.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-700.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/atkinson-400.woff2" crossorigin>
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="funnel.css">
 
-<!-- Google Analytics 4, ID sama kayak halaman lain di repo ini. -->
+<!-- Google Analytics 4. Ditaro di ujung <head> biar ga rebutan jatah unduhan
+     sama font yang dipreload di atas. Lihat catatan lengkapnya di homepage. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FFND4PK6SC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -35,32 +38,17 @@
     <div class="brand-name">NYCHO<span>THESIS</span></div>
   </div>
 
-  <section class="webinar-poster" aria-labelledby="webinar-title">
-    <img src="assets/webinar-paradoxical-man-hero.png" alt="Sosok pria berdiri di antara elemen api dan air" width="1122" height="1402">
-    <div class="poster-scrim"></div>
-    <div class="poster-copy">
-      <span class="eyebrow">Webinar Gratis &middot; Live via Zoom</span>
-      <h1 id="webinar-title">Menjadi Cowo Idaman Dari Wanita Pujaan Lu, <em>Tanpa Trik dan Manipulasi</em></h1>
-      <div class="poster-meta">
-        <span>Rabu, 28 Oktober 2026</span>
-        <span>20.00 WIB</span>
-      </div>
-    </div>
-  </section>
+  <h1>Isi ini, PDF-nya <em>langsung dikirim</em>.</h1>
+  <p class="sub">Gratis. Gw kirim ke email lu dalam beberapa menit.</p>
 
-  <p class="sub webinar-intro">Live bareng Nicholas Kristianus (Nychothesis). Lu bakal ngerti kenapa jadi "cowo baik" aja ga pernah cukup, dan apa yang beneran bikin cewe respect &amp; pilih lu apa adanya, bukan karena topeng yang lu pasang.</p>
-
-  <div class="panel" style="margin-bottom:22px;">
-    <p style="font-size:.95rem; color:#d8d3c8; margin-bottom:14px;"><b>Yang lu dapet:</b></p>
-    <ul class="list">
-      <li>Kenapa "jadi cowo baik" doang ga pernah cukup buat bikin cewe respect &amp; pilih lu.</li>
-      <li>Framework Paradoxical Man: integrasi kekuatan &amp; kelembutan jadi satu identitas utuh, bukan dua topeng gantian.</li>
-      <li>Langkah konkret abis webinar, biar lu ga cuma dapet insight terus mentok di situ lagi.</li>
-    </ul>
-  </div>
-
-  <div class="panel" id="form-panel">
-    <form id="webinar-form" novalidate>
+  <div class="panel">
+    <!-- PENTING: tiap kolom WAJIB punya autocomplete yang bener.
+       Tanpa itu, iOS/Safari nebak sendiri dari urutan sama nama field. Karena
+       name-nya "field_1"/"field_0" (kode EmailOctopus, ga ada artinya buat
+       browser), tebakannya meleset dan email malah masuk ke kolom Nama,
+       sementara nama masuk ke kolom Email. Orang yang autofill jadi kena
+       error "emailnya salah ketik" padahal dia ga salah apa-apa. -->
+    <form id="optin-form" novalidate>
       <div class="field">
         <label for="nama">Nama</label>
         <input type="text" id="nama" name="field_1" placeholder="nama lu" required
@@ -77,9 +65,9 @@
         <input type="tel" id="wa" name="field_4" inputmode="numeric" autocomplete="tel" placeholder="08xxxxxxxxxx" required>
       </div>
       <input type="text" name="hpc4b27b6e-eb38-11e9-be00-06b4694bee2a" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
-      <button type="submit" class="btn-primary" id="submit-btn">Daftar Webinar Gratis</button>
+      <button type="submit" class="btn-primary" id="submit-btn">Kirim PDF-nya ke gw</button>
       <p class="err" id="err" hidden></p>
-      <p class="micro">Link &amp; reminder dikirim ke WhatsApp/email lu sebelum hari-H. Data lu cuma dipake buat ini, bisa berhenti kapan aja.</p>
+      <p class="micro">Email lu cuma gw pake buat ngirim PDF dan insight lanjutan. Bisa berhenti kapan aja.</p>
     </form>
   </div>
 
@@ -87,11 +75,10 @@
 
 <script>
   (function () {
-    // Endpoint sama kayak optin.html: satu list EmailOctopus, ga dipisah
-    // per sumber pendaftaran (dikonfirmasi Nicho 2026-09-16).
     var ENDPOINT = 'https://eocampaign1.com/form/d55e6cce-8a68-11f1-9ee5-27fb991eb42d';
+    var SUKSES = 'thanks.html';
 
-    var form = document.getElementById('webinar-form');
+    var form = document.getElementById('optin-form');
     var btn = document.getElementById('submit-btn');
     var err = document.getElementById('err');
     var labelAsli = btn.textContent;
@@ -112,6 +99,7 @@
       return s;
     }
 
+    // Nomor HP Indonesia: 08 + operator + sisanya. Total 10 sampai 13 digit.
     function nomorValid(s) {
       return /^08[1-9][0-9]{7,10}$/.test(s);
     }
@@ -129,6 +117,15 @@
         return;
       }
 
+      // Jaring pengaman buat autofill yang naro isian di kolom yang salah.
+      // Atribut autocomplete di HTML-nya udah dibenerin, tapi tiap browser
+      // punya tebakan sendiri dan ga ada yang bisa dipaksa 100%. Jadi kalo
+      // kolom Email isinya BUKAN email tapi kolom Nama isinya JUSTRU email,
+      // udah pasti ketuker. Tuker balik diem-diem: orang cuma pengen PDF-nya,
+      // dia ga peduli kotak mana yang bener, dan nyuruh dia benerin sendiri
+      // cuma bikin dia nutup halaman.
+      // Syaratnya sengaja ketat (dua-duanya harus kepenuhan) biar ga ada
+      // isian bener yang malah dituker.
       var isiNama = form.nama.value.trim();
       var isiEmail = form.email.value.trim();
       if (!emailValid(isiEmail) && emailValid(isiNama)) {
@@ -158,7 +155,7 @@
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: data
       }).then(function (res) {
-        if (res.ok) { window.location.href = 'index.html?oto=1'; return null; }
+        if (res.ok) { window.location.href = SUKSES; return null; }
         return res.json().catch(function () { return null; });
       }).then(function (j) {
         if (j === null) return;

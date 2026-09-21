@@ -55,6 +55,13 @@
   .narrow { max-width: 720px; margin: 0 auto; }
   .n780 { max-width: 780px; margin: 0 auto; }
 
+  /* Sama kayak .brand di funnel.css (optin/thanks/webinar) -- index.html ga
+     nge-link funnel.css, jadi rule-nya diduplikasi di sini. */
+  .brand { display: flex; align-items: center; gap: 12px; margin: 26px 0 10px; }
+  .brand img { width: 34px; height: 34px; flex: 0 0 auto; }
+  .brand-name { font-weight: 700; font-size: .98rem; letter-spacing: .5px; }
+  .brand-name span { color: var(--gold); }
+
   section { padding: 26px 0; }
 
   .announce {
@@ -222,7 +229,11 @@
     color: var(--gold-soft);
     font-size: .68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
   }
-  .product-poster-title {
+  /* .hero .product-poster-title (bukan .product-poster-title doang): .hero h1
+     di bawah punya spesifisitas class+tag yang lebih tinggi dan bakal menang
+     nimpa font-size ini kalo cuma pake satu class. Headline sempet keliatan
+     33% lebih kecil dari webinar.html gara-gara ini. */
+  .hero .product-poster-title {
     margin: 15px 0 0;
     color: var(--text); font-size: clamp(2rem, 8vw, 3.15rem); font-weight: 900;
     line-height: 1.08; letter-spacing: -.045em; text-wrap: balance;
@@ -1172,6 +1183,11 @@
 <div class="announce" id="announce">Scroll sampe bawah buat dapetin diskon khusus.</div>
 <div class="wrap">
 
+  <div class="brand">
+    <img src="assets/logo.svg" alt="" width="34" height="34">
+    <div class="brand-name">NYCHO<span>THESIS</span></div>
+  </div>
+
   <!-- 1. HERO -->
   <section class="hero">
     <div class="hero-grid product-hero">
@@ -1728,10 +1744,32 @@
       a.href = CHECKOUT_OTO;
     });
 
-    Array.prototype.forEach.call(document.querySelectorAll('a[href="optin.html"]'), function (a) {
-      a.href = 'thanks.html';
-      a.textContent = 'Ga dulu, kirim PDF gratisnya aja';
-    });
+    // Dulu baris ini nyari <a href="optin.html"> yang udah ada di halaman terus
+    // disulap jadi link "decline". Itu ilang pas hero-nya dirombak jadi poster
+    // (index.html ga punya link ke optin.html lagi sama sekali), jadi kodenya
+    // jalan tapi ga nemu apa-apa, ga pernah ada jalan keluar buat yang ga jadi
+    // beli. Sekarang link declinenya di-bikin sendiri di sini -- teksnya
+    // sengaja generik ("Ga dulu, makasih"), ga nyebut PDF, karena halaman OTO
+    // ini sekarang dituju dari 2 sumber (optin.html yang emang janji PDF, dan
+    // webinar.html yang ga janji PDF sama sekali). Nuju ke index.html biasa
+    // (bukan thanks.html) biar bener buat dua-duanya.
+    // Sengaja DITARO DI #harga, BUKAN di hero poster: poster punya tinggi
+    // tetap (aspect-ratio) + overflow:hidden, dan .voucher yang udah nempel
+    // di situ pake overflow:hidden juga -- di flexbox itu bikin auto-min-height
+    // jadi 0, artinya kalo dijejelin elemen lagi, si voucher box malah keremes
+    // ampe ilang duluan (udah keuji, itu yang kejadian). #harga section biasa,
+    // tinggi ngikutin isi, aman buat ditambahin.
+    var hargaCta = document.querySelector('#harga .btn-primary');
+    if (hargaCta) {
+      var declineLink = document.createElement('a');
+      declineLink.className = 'btn-secondary';
+      declineLink.href = 'index.html';
+      declineLink.textContent = 'Ga dulu, makasih';
+      declineLink.style.display = 'block';
+      declineLink.style.textAlign = 'center';
+      declineLink.style.marginTop = '18px';
+      hargaCta.closest('.n780').appendChild(declineLink);
+    }
 
     // Kode voucher ditempel di bawah tiap tombol beli. Sengaja jujur soal
     // harga di halaman checkout, biar orang ga ngerasa dijebak pas mau bayar.
@@ -1755,7 +1793,19 @@
             'Masukin vouchernya biar turun ' + HEMAT + '. ' +
             '<b>Klik buat nyalin.</b></p>' +
           '</div>';
-        a.parentNode.insertBefore(box, a.nextSibling);
+        // CTA yang di hero poster itu beda: posternya punya tinggi TETAP
+        // (aspect-ratio) + overflow:hidden buat jaga sudut gambar biar bulat
+        // rapi. Kalo voucher box ditaro NEMPEL di situ, flexbox-nya keremes
+        // dia sampe separuh kepotong (kode OTO70-nya ampe ga keliatan --
+        // udah keuji beneran, ini bukan dugaan). Makanya khusus buat CTA
+        // hero, voucher-nya ditaro abis SELURUH poster kelar, bukan nempel di
+        // tombolnya, biar dia render di area yang tinggiannya ngikutin isi.
+        var heroSection = a.closest('.product-poster');
+        if (heroSection) {
+          heroSection.insertAdjacentElement('afterend', box);
+        } else {
+          a.parentNode.insertBefore(box, a.nextSibling);
+        }
       }
     );
 
