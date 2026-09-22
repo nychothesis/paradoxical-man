@@ -1744,33 +1744,12 @@
       a.href = CHECKOUT_OTO;
     });
 
-    // Sekarang halaman OTO ini nawarin 2 pilihan eksplisit (arahan mentor
-    // Nicho, 2026-09-22): "bundling + e-course" (checkout, CHECKOUT_OTO) vs
-    // "ikut webinar aja" (gratis, ga beli apa-apa). Link "ikut webinar aja"
-    // nuju ke webinar-thanks.html -- itu berarti nganggep org yang ngeliat
-    // pilihan ini emang abis DAFTAR WEBINAR (dari webinar.html), karena
-    // webinar-thanks.html isinya "lu udah terdaftar, gabung WA grup". Optin.html
-    // (jalur PDF lama) kemungkinan udah ga ada trafiknya lagi -- kalo ternyata
-    // masih ada, pilihan ini bakal keliatan aneh buat org dari situ (belum
-    // pernah daftar webinar tapi ditawarin "ikut webinar aja" -> halaman
-    // "lu udah terdaftar"). Perlu dicek ulang kalo optin.html ternyata masih
-    // dipake.
-    function buatLinkWebinar() {
-      var a = document.createElement('a');
-      a.className = 'btn-secondary';
-      a.href = 'webinar-thanks.html';
-      a.textContent = 'Ikut webinar aja';
-      a.style.display = 'block';
-      a.style.textAlign = 'center';
-      a.style.marginTop = '14px';
-      return a;
-    }
-    // Dipasang di 2 titik keputusan: #harga (breakdown harga lengkap) dan di
-    // hero (abis voucher box-nya, lihat di bawah).
-    var hargaCta = document.querySelector('#harga .btn-primary');
-    if (hargaCta) {
-      hargaCta.closest('.n780').appendChild(buatLinkWebinar());
-    }
+    // Pilihan "webinar aja vs mau course juga" itu kejadian SEBELUM halaman
+    // ini, di pilihan.html (arahan mentor Nicho, 2026-09-22). Begitu orang
+    // masuk ke index.html?oto=1, artinya mereka udah milih course, jadi
+    // halaman ini ga perlu lagi nawarin jalan keluar balik ke webinar-doang.
+    // (Riwayat: sempet ada tombol "Ikut webinar aja" nempel langsung di
+    // hero/#harga di sini, itu keputusan sebelum pilihan.html ada. Dicabut.)
 
     // Kode voucher ditempel di bawah tiap tombol beli. Sengaja jujur soal
     // harga di halaman checkout, biar orang ga ngerasa dijebak pas mau bayar.
@@ -1804,7 +1783,6 @@
         var heroSection = a.closest('.product-poster');
         if (heroSection) {
           heroSection.insertAdjacentElement('afterend', box);
-          box.insertAdjacentElement('afterend', buatLinkWebinar());
         } else {
           a.parentNode.insertBefore(box, a.nextSibling);
         }
