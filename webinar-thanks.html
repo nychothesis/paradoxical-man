@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Lu udah terdaftar</title>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-900.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter-700.woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="funnel.css">
+
+<!-- Google Analytics 4, ID sama kayak halaman lain di repo ini. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FFND4PK6SC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-FFND4PK6SC');
+</script>
+
+<!-- funnel.css ga punya style buat kartu harga/voucher (itu cuma didefinisiin
+     lokal di index.html), jadi versi ringkasnya dituliskan ulang di sini.
+     Sengaja hardcode harga & kode voucher, BUKAN dihitung/di-swap kayak
+     index.html?oto=1 -- halaman ini emang cuma dikunjungin abis daftar
+     webinar, jadi ga pernah ada "harga normal" yang perlu di-toggle. -->
+<style>
+  .wa-panel {
+    border: 1px solid rgba(201, 162, 39, .55); background: rgba(201, 162, 39, .07);
+    border-radius: 14px; padding: 22px 20px; margin-bottom: 28px;
+  }
+  .wa-eyebrow {
+    display: block; color: var(--gold-soft); font-size: .72rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .wa-panel p { font-size: .95rem; color: #d8d3c8; margin-bottom: 16px; }
+
+  .offer-card {
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    text-align: center; margin-bottom: 10px;
+  }
+  .offer-card .ohead {
+    background: linear-gradient(160deg, var(--gold-soft), var(--gold));
+    color: #121110; font-weight: 800; font-size: .68rem;
+    letter-spacing: 2px; text-transform: uppercase; padding: 8px 10px;
+  }
+  .offer-card .obody { padding: 18px 16px; }
+  .offer-card .oprice {
+    display: flex; align-items: baseline; justify-content: center; gap: 9px;
+    margin-bottom: 10px;
+  }
+  .offer-card .oprice s { color: var(--muted); font-size: .95rem; }
+  .offer-card .oprice b { font-size: 1.6rem; color: var(--gold); }
+  .offer-card .okode {
+    display: inline-block; font-weight: 900; font-size: 1.3rem; letter-spacing: 3px;
+    color: var(--gold); background: rgba(201, 162, 39, .13);
+    border: 1px dashed rgba(201, 162, 39, .6); border-radius: 10px;
+    padding: 9px 16px; margin-bottom: 12px; cursor: pointer;
+  }
+  .offer-card .okode.copied { color: var(--green); border-color: var(--green); }
+  .offer-intro { font-size: .85rem; color: var(--muted); margin-bottom: 14px; }
+</style>
+</head>
+<body>
+<div class="aura" aria-hidden="true"><i class="a1"></i><i class="a2"></i></div>
+
+<div class="wrap">
+
+  <div class="brand">
+    <img src="assets/logo.svg" alt="" width="34" height="34">
+    <div class="brand-name">NYCHO<span>THESIS</span></div>
+  </div>
+
+  <h1>Lu udah terdaftar. <em>Sampe ketemu 28 Oktober.</em></h1>
+  <p class="sub">Link Zoom & reminder H-1 tetep dikirim ke WhatsApp dan email lu. Tapi ada satu langkah lagi yang lebih penting dari itu.</p>
+
+  <div class="wa-panel">
+    <span class="wa-eyebrow">Langkah terakhir</span>
+    <p>Gabung <b>WA grup khusus peserta webinar ini</b>. Di situ tempat gw kirim reminder, bahan sebelum sesi, dan buka ruang tanya sebelum hari-H. Kalau lu ga di grup, kemungkinan besar lu bakal lupa.</p>
+    <!-- TODO(Nicho): ganti href ini abis grup WA-nya jadi dibikin. -->
+    <a class="btn-primary" href="#" id="wa-join-link">Gabung WA Grup Sekarang</a>
+  </div>
+
+  <p class="offer-intro">Buat yang udah yakin dan ga mau nunggu tanggal 28, course-nya bisa langsung diakses sekarang. Ini potongan khusus buat yang baru daftar webinar.</p>
+
+  <div class="offer-card">
+    <div class="ohead">Potongan Rp70.000 buat lu</div>
+    <div class="obody">
+      <div class="oprice"><s>Rp299.000</s><span aria-hidden="true">&rarr;</span><b>Rp229.000</b></div>
+      <span class="okode" id="okode" role="button" tabindex="0">OTO70</span>
+      <p style="font-size:.78rem; color:var(--muted); margin:0;">Klik buat nyalin kodenya, dipake pas checkout.</p>
+    </div>
+  </div>
+  <a class="btn-secondary" style="display:block; width:100%; box-sizing:border-box; text-align:center; margin-top:0;" href="http://lynk.id/nychothesis/z6o2z34zn9vo/checkout">Liat penawarannya</a>
+
+</div>
+
+<script>
+  (function () {
+    var kode = document.getElementById('okode');
+    kode.addEventListener('click', function () {
+      function sukses() {
+        var asli = kode.textContent;
+        kode.textContent = 'Tersalin';
+        kode.classList.add('copied');
+        setTimeout(function () { kode.textContent = asli; kode.classList.remove('copied'); }, 1600);
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('OTO70').then(sukses, function () {});
+        return;
+      }
+      var tmp = document.createElement('textarea');
+      tmp.value = 'OTO70';
+      tmp.style.position = 'fixed'; tmp.style.opacity = '0';
+      document.body.appendChild(tmp); tmp.select();
+      try { document.execCommand('copy'); sukses(); } catch (e) {}
+      document.body.removeChild(tmp);
+    });
+  })();
+</script>
+</body>
+</html>
