@@ -14,13 +14,22 @@ dipakai buat konversi, jadi copy-nya sensitif — jangan diubah tanpa diminta.
 ## Halaman
 | File | Fungsi |
 |---|---|
-| `index.html` | Landing utama (~83 KB) |
-| `optin.html` | Form ambil PDF gratis |
-| `thanks.html` | Halaman "cek email lu" setelah opt-in |
-| `funnel.css` | Style bersama halaman opt-in & thanks |
+| `index.html` | Landing utama (~83 KB). Normal = full price. `?oto=1` = harga diskon + timer, cuma dituju dari `pilihan.html` |
+| `optin.html` | Form ambil PDF gratis, dari link organik (homepage `nychothesis.com` + footer, masih aktif dipake, jangan dianggep dead code) → langsung `index.html?oto=1` |
+| `dm.html` | Form ambil PDF gratis juga, tapi khusus link dari DM automation → `thanks.html` (bukan langsung OTO) |
+| `thanks.html` | "PDF otw, cek email" abis `dm.html`. Promosi webinar itu CTA utama di sini (paling atas), bukan cuma tempelan |
+| `webinar.html` | Form daftar webinar gratis (data doang) → `pilihan.html` |
+| `pilihan.html` | **Sengaja minimalis**, cuma headline + 2 tombol, jangan tambahin apa-apa lagi ke halaman ini. "Ikut webinar aja" → `webinar-thanks.html`, "Mau course juga" → `index.html?oto=1` |
+| `webinar-thanks.html` | "Lu udah terdaftar" + link join WA grup peserta webinar. Ga ada penawaran course di sini, itu keputusannya udah kejadian di `pilihan.html` |
+| `funnel.css` | Style bersama semua halaman kecuali `index.html` (dia punya `<style>` sendiri, ga nge-link `funnel.css`) |
 
 `ringkas.html` udah ga ada. Dia dipromosiin jadi `index.html`, dan yang lama
 dibuang (masih bisa diambil dari riwayat git).
+
+Alur lengkap (per 2026-09-22, dikonfirmasi mentor Mike): `webinar.html` →
+`pilihan.html` → `webinar-thanks.html` (WA grup) *atau* `index.html?oto=1`
+(checkout). `dm.html`/`optin.html` → `thanks.html` → CTA balik ke `webinar.html`.
+Detail lengkap ada di vault `2 - Projects/Nychothesis/📀 Paradoxical Man.md`.
 
 ## Kode voucher
 | Kode | Muncul di | Potongan |
@@ -49,3 +58,24 @@ mentah & aset kerja, sengaja ga ikut ke repo publik.
   langsung (tanpa elemen lain di antaranya) bikin sudut bulatnya nabrak dan
   keliatan ada celah aneh. Kasih `margin-bottom` manual di panel sebelumnya
   kalau nyusun beberapa `.panel` berurutan (lihat `webinar.html`).
+- **Jangan nempelin elemen baru (voucher box, tombol, dll) ke dalem
+  `.product-poster`/`.webinar-poster`.** Kartu itu punya tinggi TETAP
+  (`aspect-ratio`) + `overflow:hidden` buat jaga sudut gambar. Kalo ada child-nya
+  yang juga pake `overflow:hidden` (misal `.voucher`), flexbox/grid nurunin
+  "automatic minimum size"-nya jadi 0, jadi kalo ruang kurang, browser DIEM-DIEM
+  meres kontennya sampe kepotong, bukan overflow atau error di console. Ga
+  ketauan dari nge-grep kode, cuma ketauan kalo beneran diukur (`clientHeight`
+  vs `scrollHeight`) atau discreenshot penuh. Taro elemen tambahan itu SETELAH
+  section poster-nya kelar (`.insertAdjacentElement('afterend', ...)`), bukan di
+  dalemnya.
+- **Jangan pake `-->` sebagai panah ASCII di dalem komentar HTML `<!-- -->`.**
+  Itu nutup komentarnya beneran di situ (HTML tokenizer nyari literal `-->`,
+  bukan cuma `--`), sisa isi komentar (bisa belasan baris) jadi teks visible di
+  halaman. Kejadian di `thanks.html`, bocor ke production tanpa ada error/warning
+  apapun. Pake `->` (satu strip) atau kata biasa buat gambarin arah alur.
+- **Ngecek "halaman ini masih dipake apa nggak" jangan cuma grep repo lokal.**
+  `optin.html` sempet disangka dead code karena ga ada `href` ke situ di HTML
+  manapun dalam repo ini, padahal dia aktif dilink dari homepage
+  `nychothesis.com` (kartu PDF + footer), yang itu sendiri dituju dari bio IG.
+  Buat mastiin, cek live site/homepage-nya juga, jangan cuma grep `*.html` di
+  folder ini.
