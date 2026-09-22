@@ -14,22 +14,25 @@ dipakai buat konversi, jadi copy-nya sensitif — jangan diubah tanpa diminta.
 ## Halaman
 | File | Fungsi |
 |---|---|
-| `index.html` | Landing utama (~83 KB). Normal = full price. `?oto=1` = harga diskon + timer, cuma dituju dari `pilihan.html` |
+| `index.html` | Landing utama (~83 KB). Normal = full price. `?oto=1` = harga diskon + timer + **2 tombol pilihan** ("bundling + e-course" checkout, atau "ikut webinar aja" → `webinar-thanks.html`) |
 | `optin.html` | Form ambil PDF gratis, dari link organik (homepage `nychothesis.com` + footer, masih aktif dipake, jangan dianggep dead code) → langsung `index.html?oto=1` |
 | `dm.html` | Form ambil PDF gratis juga, tapi khusus link dari DM automation → `thanks.html` (bukan langsung OTO) |
 | `thanks.html` | "PDF otw, cek email" abis `dm.html`. Promosi webinar itu CTA utama di sini (paling atas), bukan cuma tempelan |
-| `webinar.html` | Form daftar webinar gratis (data doang) → `pilihan.html` |
-| `pilihan.html` | **Sengaja minimalis**, cuma headline + 2 tombol, jangan tambahin apa-apa lagi ke halaman ini. "Ikut webinar aja" → `webinar-thanks.html`, "Mau course juga" → `index.html?oto=1` |
-| `webinar-thanks.html` | "Lu udah terdaftar" + link join WA grup peserta webinar. Ga ada penawaran course di sini, itu keputusannya udah kejadian di `pilihan.html` |
+| `webinar.html` | Form daftar webinar gratis (data doang) → langsung `index.html?oto=1` |
+| `webinar-thanks.html` | "Lu udah terdaftar" + link join WA grup peserta webinar. Dituju dari tombol "ikut webinar aja" di `index.html?oto=1`, ga ada penawaran course lagi di sini (itu keputusannya udah kejadian sebelum sampe sini) |
 | `funnel.css` | Style bersama semua halaman kecuali `index.html` (dia punya `<style>` sendiri, ga nge-link `funnel.css`) |
 
 `ringkas.html` udah ga ada. Dia dipromosiin jadi `index.html`, dan yang lama
-dibuang (masih bisa diambil dari riwayat git).
+dibuang (masih bisa diambil dari riwayat git). `pilihan.html` juga sempet ada
+sebentar (22 Sep 2026, halaman minimalis 2-tombol terpisah) tapi itu salah
+paham arahan mentor Mike, langsung dicabut hari yang sama. Kalo nemu sisa
+referensi ke `pilihan.html` di tempat lain (vault, Discord), itu basi.
 
 Alur lengkap (per 2026-09-22, dikonfirmasi mentor Mike): `webinar.html` →
-`pilihan.html` → `webinar-thanks.html` (WA grup) *atau* `index.html?oto=1`
-(checkout). `dm.html`/`optin.html` → `thanks.html` → CTA balik ke `webinar.html`.
-Detail lengkap ada di vault `2 - Projects/Nychothesis/📀 Paradoxical Man.md`.
+`index.html?oto=1` → 2 tombol di situ langsung: `webinar-thanks.html` (WA
+grup) *atau* checkout. `dm.html`/`optin.html` → `thanks.html` → CTA balik ke
+`webinar.html`. Detail lengkap ada di vault
+`2 - Projects/Nychothesis/📀 Paradoxical Man.md`.
 
 ## Kode voucher
 | Kode | Muncul di | Potongan |

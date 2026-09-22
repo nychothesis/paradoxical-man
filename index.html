@@ -1744,12 +1744,36 @@
       a.href = CHECKOUT_OTO;
     });
 
-    // Pilihan "webinar aja vs mau course juga" itu kejadian SEBELUM halaman
-    // ini, di pilihan.html (arahan mentor Nicho, 2026-09-22). Begitu orang
-    // masuk ke index.html?oto=1, artinya mereka udah milih course, jadi
-    // halaman ini ga perlu lagi nawarin jalan keluar balik ke webinar-doang.
-    // (Riwayat: sempet ada tombol "Ikut webinar aja" nempel langsung di
-    // hero/#harga di sini, itu keputusan sebelum pilihan.html ada. Dicabut.)
+    // Halaman OTO ini nawarin 2 pilihan eksplisit (arahan mentor Mike,
+    // dikonfirmasi ulang 2026-09-22: sempet ke-pisah ke halaman "pilihan.html"
+    // tersendiri, itu salah paham, Mike-nya emang maksud 2 tombolnya nempel
+    // LANGSUNG di halaman OTO penuh ini, bukan di halaman minimalis terpisah.
+    // pilihan.html dicabut/dihapus). "Bundling + e-course" (checkout,
+    // CHECKOUT_OTO) vs "ikut webinar aja" (gratis, ga beli apa-apa). Link
+    // "ikut webinar aja" nuju ke webinar-thanks.html -- itu berarti nganggep
+    // org yang ngeliat pilihan ini emang abis DAFTAR WEBINAR (dari
+    // webinar.html), karena webinar-thanks.html isinya "lu udah terdaftar,
+    // gabung WA grup". Optin.html (jalur PDF lama) ga lewat sini, dia langsung
+    // ke index.html?oto=1 juga tapi TANPA pernah daftar webinar duluan --
+    // kalau optin.html-sourced traffic keliatan tombol ini, "ikut webinar aja"
+    // bakal nuju halaman "lu udah terdaftar" yang sebenernya belum bener buat
+    // mereka. Belum ada fix buat itu, dicatet aja dulu.
+    function buatLinkWebinar() {
+      var a = document.createElement('a');
+      a.className = 'btn-secondary';
+      a.href = 'webinar-thanks.html';
+      a.textContent = 'Ikut webinar aja';
+      a.style.display = 'block';
+      a.style.textAlign = 'center';
+      a.style.marginTop = '14px';
+      return a;
+    }
+    // Dipasang di 2 titik keputusan: #harga (breakdown harga lengkap) dan di
+    // hero (abis voucher box-nya, lihat di bawah).
+    var hargaCta = document.querySelector('#harga .btn-primary');
+    if (hargaCta) {
+      hargaCta.closest('.n780').appendChild(buatLinkWebinar());
+    }
 
     // Kode voucher ditempel di bawah tiap tombol beli. Sengaja jujur soal
     // harga di halaman checkout, biar orang ga ngerasa dijebak pas mau bayar.
@@ -1783,6 +1807,7 @@
         var heroSection = a.closest('.product-poster');
         if (heroSection) {
           heroSection.insertAdjacentElement('afterend', box);
+          box.insertAdjacentElement('afterend', buatLinkWebinar());
         } else {
           a.parentNode.insertBefore(box, a.nextSibling);
         }
