@@ -11,23 +11,14 @@
 <link rel="stylesheet" href="funnel.css">
 
 <!-- Google Analytics 4.
-     CATATAN: halaman ini BUKAN penanda pendaftar. Alurnya begini:
-
-       optin.html  --(form sukses)->  index.html?oto=1
-                                          |
-                            +-------------+-------------+
-                            |                           |
-                     klik beli                  "Ga dulu, kirim
-                     -> lynk.id                  PDF gratisnya aja"
-                                                 -> thanks.html
-
-     Jadi yang nandain PENDAFTAR BARU itu index.html?oto=1, karena semua orang
-     yang formnya sukses pasti lewat situ. Halaman ini cuma dilewatin orang
-     yang NOLAK penawaran, jadi angkanya selalu lebih kecil dari jumlah
-     pendaftar beneran.
-
-     Yang diukur di sini: berapa yang nolak OTO. Itu tetep berguna, tapi
-     jangan ketuker sama angka pendaftar. -->
+     CATATAN (2026-09-22, update alur): halaman ini sekarang CUMA dilewatin
+     dari satu jalur -- dm.html (form PDF khusus link DM automation) --
+     abis submit sukses. optin.html (PDF di homepage/footer nychothesis.com,
+     masih aktif dipake, dicek langsung ke live site) nuju ke index.html?oto=1
+     langsung, ga pernah mampir sini. index.html?oto=1 sendiri sekarang udah
+     ga punya tombol "decline" yang ngarah ke sini lagi (itu ganti jadi
+     pilihan.html, khusus jalur webinar). Jadi angka pengunjung halaman ini
+     = pendaftar PDF dari dm.html, bukan proxy buat pendaftar OTO lagi. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FFND4PK6SC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -49,7 +40,13 @@
   <h1>Udah gw kirim. <em>Cek email lu.</em></h1>
   <p class="sub">Masuk dalam beberapa menit. Kalo ga ketemu di inbox, cek folder spam atau promosi, terus tandain "bukan spam" biar email gw berikutnya ga kesasar lagi.</p>
 
-  <div class="panel">
+  <div class="panel" style="border-color: rgba(201,162,39,.55);">
+    <p style="font-size:.72rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-soft); margin-bottom:10px;">Webinar gratis &middot; 28 Oktober</p>
+    <p style="font-size:.95rem; color:#d8d3c8; margin-bottom:16px;">PDF ini baru permukaannya. Semua ini gw bedah tuntas <b>live dan gratis</b>, tanggal 28 Oktober. Slotnya gw batesin biar sesi tanya-jawabnya beneran kepake buat yang dateng, jadi amankan tempat lu sekarang.</p>
+    <a class="btn-primary" href="webinar.html">Amankan slot gratis lu</a>
+  </div>
+
+  <div class="panel" style="margin-top:18px;">
     <p style="font-size: .95rem; color: #d8d3c8;">Satu permintaan gw: <b>jangan cuma dibaca.</b> Isinya bakal kedengeran masuk akal dari halaman pertama, dan itu justru jebakannya. Berasa udah ngerti itu beda jauh sama udah berubah.</p>
   </div>
 
@@ -58,14 +55,8 @@
     <li>Yang PDF ini ga kasih: cara ngebangun dua sisi itu jadi satu identitas yang utuh. Itu kerja panjang, dan itu yang dibahas tuntas di course.</li>
   </ul>
 
-  <a class="btn-primary" href="index.html">Liat framework lengkapnya</a>
+  <a class="btn-secondary" style="display:block; width:100%; box-sizing:border-box; text-align:center;" href="index.html">Liat framework lengkapnya</a>
   <p class="micro">16 video, 5 PDF workbook, komunitas khusus member. Akses seumur hidup.</p>
-
-  <div class="panel" style="margin-top:18px; border-color: rgba(201,162,39,.55);">
-    <p style="font-size:.72rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold-soft); margin-bottom:10px;">Webinar gratis &middot; 28 Oktober</p>
-    <p style="font-size:.95rem; color:#d8d3c8; margin-bottom:16px;">PDF ini baru permukaannya. Semua ini gw bedah tuntas <b>live dan gratis</b>, tanggal 28 Oktober. Slotnya gw batesin biar sesi tanya-jawabnya beneran kepake buat yang dateng, jadi amankan tempat lu sekarang.</p>
-    <a class="btn-primary" href="webinar.html">Amankan slot gratis lu</a>
-  </div>
 
 </div>
 </body>
