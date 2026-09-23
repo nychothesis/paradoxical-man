@@ -1742,6 +1742,10 @@
     var MENIT = 60;
     var KEY = 'pm_oto_deadline';
     var DARI_WEBINAR = /(?:[?&]source=webinar(?:&|$))/.test(window.location.search);
+    // Khusus review internal. Jangan pernah dipake di CTA/funnel publik: setiap
+    // halaman direfresh, timer mulai lagi supaya Nicho bisa ngecek OTO tanpa
+    // perlu ngapus data situs di browser GPT.
+    var MODE_REVIEW = /(?:[?&]review=1(?:&|$))/.test(window.location.search);
 
     if (!/[?&]oto=/.test(window.location.search)) return;
 
@@ -1753,7 +1757,7 @@
     var HEMAT   = rupiah(SELISIH);
     var HEMAT_PENDEK = Math.round(SELISIH / 1000) + 'rb';
 
-    var deadline = parseInt(localStorage.getItem(KEY) || '0', 10);
+    var deadline = MODE_REVIEW ? 0 : parseInt(localStorage.getItem(KEY) || '0', 10);
     if (deadline === -1) { window.location.replace('index.html'); return; }
     if (!deadline || isNaN(deadline)) {
       deadline = Date.now() + MENIT * 60 * 1000;
