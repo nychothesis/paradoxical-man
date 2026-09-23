@@ -1765,7 +1765,11 @@
 
     var ann = document.getElementById('announce');
     ann.className = 'announce announce-oto';
-    ann.innerHTML = '<span class="ann-lbl">Potongan <b>' + HEMAT + '</b>, sisa</span>' +
+    ann.innerHTML = '<span class="ann-lbl">' +
+                    (DARI_WEBINAR
+                      ? '<b>Lu udah terdaftar</b> · OTO harga khusus, sisa'
+                      : 'Potongan <b>' + HEMAT + '</b>, sisa') +
+                    '</span>' +
                     '<span class="clock" id="clock">--:--</span>' +
                     '<span class="vcode js-salin" role="button" tabindex="0">' +
                       '<small>voucher</small>' + VOUCHER +
@@ -1780,8 +1784,8 @@
       keputusan.className = 'oto-decision';
       keputusan.id = 'pilihan-bundling';
       keputusan.innerHTML =
-        '<span class="oto-decision-kicker">OTO · Penawaran khusus setelah daftar webinar</span>' +
-        '<h2>Pendaftaran lu udah masuk. Sekarang ada 1 harga khusus buat lu.</h2>' +
+        '<span class="oto-decision-kicker">Pilih akses lu</span>' +
+        '<h2>Mau ikut webinar aja, atau sekalian masuk course lengkap?</h2>' +
         '<p>Lu tetap bisa ikut webinar gratis. Tapi kalau lu mau langsung masuk ke framework lengkapnya, bundling ini cuma aktif selama timer masih jalan.</p>' +
         '<div class="oto-choices">' +
           '<article class="oto-choice">' +
