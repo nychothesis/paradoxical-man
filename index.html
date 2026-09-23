@@ -114,7 +114,7 @@
     display: block; margin-bottom: 9px; color: var(--gold-soft);
     font-size: .7rem; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase;
   }
-  .oto-decision h2 { font-size: clamp(1.45rem, 5.8vw, 2.15rem); line-height: 1.14; letter-spacing: -.035em; }
+  .oto-decision h2 { font-size: clamp(1.7rem, 6.5vw, 2.55rem); line-height: 1.08; letter-spacing: -.04em; }
   .oto-decision > p { color: #d8d3c8; font-size: .93rem; margin: 11px 0 19px; }
   .oto-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .oto-choice {
@@ -1767,7 +1767,7 @@
     ann.className = 'announce announce-oto';
     ann.innerHTML = '<span class="ann-lbl">' +
                     (DARI_WEBINAR
-                      ? '<b>Lu udah terdaftar</b> · OTO harga khusus, sisa'
+                      ? '<b>1 langkah lagi</b> buat amankan tempat lu, sisa'
                       : 'Potongan <b>' + HEMAT + '</b>, sisa') +
                     '</span>' +
                     '<span class="clock" id="clock">--:--</span>' +
@@ -1784,18 +1784,18 @@
       keputusan.className = 'oto-decision';
       keputusan.id = 'pilihan-bundling';
       keputusan.innerHTML =
-        '<span class="oto-decision-kicker">Pilih akses lu</span>' +
-        '<h2>Mau ikut webinar aja, atau sekalian masuk course lengkap?</h2>' +
-        '<p>Lu tetap bisa ikut webinar gratis. Tapi kalau lu mau langsung masuk ke framework lengkapnya, bundling ini cuma aktif selama timer masih jalan.</p>' +
+        '<span class="oto-decision-kicker">Sebelum tempat lu dikunci</span>' +
+        '<h2>Belum selesai. Pilih akses yang lu mau buat amankan tempat di webinar.</h2>' +
+        '<p>Lu bisa lanjut ke webinar gratis. Atau sekalian ambil course lengkap dengan harga khusus yang aktif selama timer masih jalan.</p>' +
         '<div class="oto-choices">' +
           '<article class="oto-choice">' +
-            '<span class="oto-choice-label">Tetap ikut webinar</span>' +
-            '<h3>Webinar gratis aja</h3>' +
-            '<p>Dapet akses webinar tanggal 28 Oktober, reminder, dan WA grup peserta.</p>' +
-            '<a class="oto-free-cta" href="webinar-thanks.html">Lanjut ke webinar gratis</a>' +
+            '<span class="oto-choice-label">Pilihan 1</span>' +
+            '<h3>Webinar gratis</h3>' +
+            '<p>Amankan tempat lu, dapet reminder, dan masuk WA grup peserta tanggal 28 Oktober.</p>' +
+            '<a class="oto-free-cta" href="webinar-thanks.html">Pilih webinar gratis</a>' +
           '</article>' +
           '<article class="oto-choice featured">' +
-            '<span class="oto-choice-label">OTO · Harga khusus</span>' +
+            '<span class="oto-choice-label">Pilihan 2 · Harga khusus</span>' +
             '<h3>Webinar + course lengkap</h3>' +
             '<p>Langsung masuk ke framework utuh dan bisa mulai sebelum webinar dimulai.</p>' +
             '<div class="oto-price"><s>' + HARGA_ASLI + '</s>' + HARGA_OTO + '</div>' +
