@@ -100,15 +100,14 @@
      Angkanya diukur dari tinggi banner beneran, lihat geserMenu(). */
   body.oto .menu-btn { top: calc(var(--oto-banner, 62px) + 10px); }
 
-  /* ---------- Pilihan utama OTO webinar ----------
-     Muncul cuma buat orang yang baru daftar webinar (source=webinar).
-     Ini titik keputusan utama: webinar gratis aja atau bundling course.
-     LP course panjang tetap di bawah buat yang mau baca detail dulu. */
+  /* ---------- Stack pilihan OTO webinar ----------
+     Muncul di titik harga, setelah orang baca konteks core offer. */
   .oto-decision {
-    max-width: 780px; margin: 18px auto 4px; padding: 24px;
+    max-width: 780px; margin: 0 auto 28px; padding: 24px;
     border: 1px solid rgba(201,162,39,.48); border-radius: 18px;
     background: linear-gradient(180deg, rgba(33,31,28,.94), rgba(22,20,18,.94));
     box-shadow: 0 20px 52px rgba(0,0,0,.36);
+    scroll-margin-top: calc(var(--oto-banner, 62px) + 22px);
   }
   .oto-decision-kicker {
     display: block; margin-bottom: 9px; color: var(--gold-soft);
@@ -118,13 +117,16 @@
   .oto-decision > p { color: #d8d3c8; font-size: .93rem; margin: 11px 0 19px; }
   .oto-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .oto-choice {
-    display: flex; flex-direction: column; min-height: 245px; padding: 18px;
+    display: flex; flex-direction: column; min-height: 300px; padding: 18px;
     border: 1px solid var(--line); border-radius: 14px; background: rgba(18,17,16,.62);
   }
   .oto-choice.featured { border-color: rgba(201,162,39,.7); background: rgba(201,162,39,.08); }
   .oto-choice-label { color: var(--gold-soft); font-size: .67rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; }
   .oto-choice h3 { margin: 9px 0 8px; font-size: 1.16rem; line-height: 1.2; }
   .oto-choice p { color: #d8d3c8; font-size: .86rem; line-height: 1.55; }
+  .oto-choice ul { margin: 14px 0; padding: 0; list-style: none; }
+  .oto-choice li { margin: 7px 0; color: #d8d3c8; font-size: .8rem; line-height: 1.4; }
+  .oto-choice li::before { content: '◆'; margin-right: 8px; color: var(--gold-soft); font-size: .56rem; vertical-align: 1px; }
   .oto-choice .oto-price { margin: 14px 0 5px; color: var(--gold); font-size: 1.45rem; font-weight: 900; line-height: 1; }
   .oto-choice .oto-price s { margin-right: 5px; color: var(--muted); font-size: .78rem; font-weight: 500; }
   .oto-choice .btn-primary, .oto-choice .oto-free-cta { width: 100%; margin-top: auto; padding: 13px 14px; font-size: .9rem; }
@@ -1771,7 +1773,7 @@
     ann.className = 'announce announce-oto';
     ann.innerHTML = '<span class="ann-lbl">' +
                     (DARI_WEBINAR
-                      ? '<b>1 langkah lagi</b> buat amankan tempat lu, sisa'
+                      ? '<b>Sebelum lu join webinar</b>, ada harga khusus buat lu. Sisa'
                       : 'Potongan <b>' + HEMAT + '</b>, sisa') +
                     '</span>' +
                     '<span class="clock" id="clock">--:--</span>' +
@@ -1779,45 +1781,48 @@
                       '<small>voucher</small>' + VOUCHER +
                     '</span>';
 
-    // Dari form webinar, ini bukan sekadar halaman course biasa. Orang baru
-    // daftar dan harus bisa mengambil keputusan yang eksplisit: lanjut webinar
-    // gratis, atau ambil bundling webinar + course. Ditampilin sebelum LP
-    // panjang supaya dua jalurnya kebaca TANPA perlu scroll.
+    // Dari form webinar, bagian atas cuma ngenalin penawaran khususnya. Pilihan
+    // baru muncul di titik harga, supaya orang lihat konteks core offer dulu.
     if (DARI_WEBINAR) {
       var keputusan = document.createElement('section');
       keputusan.className = 'oto-decision';
       keputusan.id = 'pilihan-bundling';
       keputusan.innerHTML =
-        '<span class="oto-decision-kicker">Sebelum tempat lu dikunci</span>' +
-        '<h2>Belum selesai. Pilih akses yang lu mau buat amankan tempat di webinar.</h2>' +
-        '<p>Lu bisa lanjut ke webinar gratis. Atau sekalian ambil course lengkap dengan harga khusus yang aktif selama timer masih jalan.</p>' +
+        '<span class="oto-decision-kicker">Pilih akses lu</span>' +
+        '<h2>Mau ikut webinar aja, atau sekalian masuk ke course lengkapnya?</h2>' +
+        '<p>Dua-duanya bikin tempat lu di webinar aman. Bedanya, bundling ngasih lu akses langsung ke framework lengkapnya.</p>' +
         '<div class="oto-choices">' +
           '<article class="oto-choice">' +
             '<span class="oto-choice-label">Pilihan 1</span>' +
             '<h3>Webinar gratis</h3>' +
-            '<p>Amankan tempat lu, dapet reminder, dan masuk WA grup peserta tanggal 28 Oktober.</p>' +
+            '<ul><li>Live webinar 28 Oktober</li><li>Reminder webinar</li><li>Masuk WA grup peserta</li></ul>' +
             '<a class="oto-free-cta" href="webinar-thanks.html">Pilih webinar gratis</a>' +
           '</article>' +
           '<article class="oto-choice featured">' +
             '<span class="oto-choice-label">Pilihan 2 · Harga khusus</span>' +
             '<h3>Webinar + course lengkap</h3>' +
-            '<p>Langsung masuk ke framework utuh dan bisa mulai sebelum webinar dimulai.</p>' +
+            '<ul><li>Semua yang ada di webinar</li><li>16 video + mind map breakdown</li><li>3 workbook + 2 bonus PDF</li><li>Akses course seumur hidup</li></ul>' +
             '<div class="oto-price"><s>' + HARGA_ASLI + '</s>' + HARGA_OTO + '</div>' +
             '<p style="font-size:.74rem; color:var(--muted);">Voucher <b>' + VOUCHER + '</b> dipakai pas checkout.</p>' +
             '<a class="btn-primary" href="' + CHECKOUT_OTO + '">Ambil bundling sekarang</a>' +
           '</article>' +
         '</div>' +
         '<p class="oto-decision-note">Harga bundling ini cuma berlaku selama timer di atas masih jalan.</p>';
-      var brand = document.querySelector('.brand');
-      brand.insertAdjacentElement('afterend', keputusan);
+      var harga = document.getElementById('harga');
+      harga.insertAdjacentElement('beforebegin', keputusan);
 
-      // Hero setelah decision block berfungsi sebagai pintu buat yang mau baca
-      // detail course dulu, bukan ngulang CTA checkout yang sama.
+      // CTA di hero buka stack pilihan, bukan langsung paksa checkout.
       var heroCta = document.querySelector('.product-poster-cta');
       if (heroCta) {
-        heroCta.href = '#harga';
-        heroCta.textContent = 'Liat detail course lengkapnya';
+        heroCta.href = '#pilihan-bundling';
+        heroCta.textContent = 'Liat pilihan aksesnya';
       }
+
+      Array.prototype.forEach.call(document.querySelectorAll('a.btn-primary[href*="' + KODE_PROD + '"]'), function (a) {
+        if (a.closest('.oto-decision')) return;
+        a.href = '#pilihan-bundling';
+        a.textContent = 'Pilih akses webinar lu';
+      });
     }
 
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
@@ -1838,26 +1843,6 @@
     Array.prototype.forEach.call(document.querySelectorAll('a[href*="z6o2z34zn9vo"]'), function (a) {
       a.href = CHECKOUT_OTO;
     });
-
-    // Tombol webinar-only cuma relevan buat pendaftar webinar. Jalur PDF juga
-    // masuk mode OTO, tapi belum tentu pernah daftar webinar, jadi jangan kasih
-    // jalan ke halaman "lu udah terdaftar" buat mereka.
-    function buatLinkWebinar() {
-      var a = document.createElement('a');
-      a.className = 'btn-secondary';
-      a.href = 'webinar-thanks.html';
-      a.textContent = 'Ikut webinar aja';
-      a.style.display = 'block';
-      a.style.textAlign = 'center';
-      a.style.marginTop = '14px';
-      return a;
-    }
-    // Dipasang di 2 titik keputusan: #harga (breakdown harga lengkap) dan di
-    // hero (abis voucher box-nya, lihat di bawah).
-    var hargaCta = document.querySelector('#harga .btn-primary');
-    if (DARI_WEBINAR && hargaCta) {
-      hargaCta.closest('.n780').appendChild(buatLinkWebinar());
-    }
 
     // Kode voucher ditempel di bawah tiap tombol beli. Sengaja jujur soal
     // harga di halaman checkout, biar orang ga ngerasa dijebak pas mau bayar.
