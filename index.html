@@ -1773,7 +1773,7 @@
     ann.className = 'announce announce-oto';
     ann.innerHTML = '<span class="ann-lbl">' +
                     (DARI_WEBINAR
-                      ? '<b>Sebelum lu join webinar</b>, ada harga khusus buat lu. Sisa'
+                      ? '<b>Btw, sebelum lu join webinar</b>, gw punya penawaran khusus cuma buat kali ini aja. Sisa'
                       : 'Potongan <b>' + HEMAT + '</b>, sisa') +
                     '</span>' +
                     '<span class="clock" id="clock">--:--</span>' +
@@ -1788,9 +1788,9 @@
       keputusan.className = 'oto-decision';
       keputusan.id = 'pilihan-bundling';
       keputusan.innerHTML =
-        '<span class="oto-decision-kicker">Pilih akses lu</span>' +
-        '<h2>Mau ikut webinar aja, atau sekalian masuk ke course lengkapnya?</h2>' +
-        '<p>Dua-duanya bikin tempat lu di webinar aman. Bedanya, bundling ngasih lu akses langsung ke framework lengkapnya.</p>' +
+        '<span class="oto-decision-kicker">Penawaran khusus buat lu</span>' +
+        '<h2>Mau ikut webinar aja, atau sekalian ambil course lengkapnya?</h2>' +
+        '<p>Dua-duanya bikin tempat lu di webinar aman. Bedanya, bundling bikin lu bisa langsung dalemin framework lengkapnya.</p>' +
         '<div class="oto-choices">' +
           '<article class="oto-choice">' +
             '<span class="oto-choice-label">Pilihan 1</span>' +
@@ -1801,7 +1801,7 @@
           '<article class="oto-choice featured">' +
             '<span class="oto-choice-label">Pilihan 2 · Harga khusus</span>' +
             '<h3>Webinar + course lengkap</h3>' +
-            '<ul><li>Semua yang ada di webinar</li><li>16 video + mind map breakdown</li><li>3 workbook + 2 bonus PDF</li><li>Akses course seumur hidup</li></ul>' +
+            '<ul><li>Semua yang ada di webinar</li><li>16 video + mind map breakdown</li><li>3 workbook + 2 bonus PDF</li><li>Course bisa lu pelajarin kapan aja</li></ul>' +
             '<div class="oto-price"><s>' + HARGA_ASLI + '</s>' + HARGA_OTO + '</div>' +
             '<p style="font-size:.74rem; color:var(--muted);">Voucher <b>' + VOUCHER + '</b> dipakai pas checkout.</p>' +
             '<a class="btn-primary" href="' + CHECKOUT_OTO + '">Ambil bundling sekarang</a>' +
@@ -1815,13 +1815,13 @@
       var heroCta = document.querySelector('.product-poster-cta');
       if (heroCta) {
         heroCta.href = '#pilihan-bundling';
-        heroCta.textContent = 'Liat pilihan aksesnya';
+        heroCta.textContent = 'Liat penawaran khususnya';
       }
 
       Array.prototype.forEach.call(document.querySelectorAll('a.btn-primary[href*="' + KODE_PROD + '"]'), function (a) {
         if (a.closest('.oto-decision')) return;
         a.href = '#pilihan-bundling';
-        a.textContent = 'Pilih akses webinar lu';
+        a.textContent = 'Liat penawaran khususnya';
       });
     }
 
